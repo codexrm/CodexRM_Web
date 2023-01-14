@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CodexRM_Web:Web exploded" />
+    </artifacts-to-build>
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,21 +24,237 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="454352ff-b4ec-4fa4-a886-c8153c4dc11a" name="Default Changelist" comment="" />
+    <list default="true" id="454352ff-b4ec-4fa4-a886-c8153c4dc11a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CodexRM_Web_Web_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CodexRM_Web.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ArticleReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/BookLetReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/BookReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/BookSectionReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ConferencePaperReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ConferenceProceedingsReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ReferenceManagerBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ThesisReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/UserBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/beans/WebPageReferenceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ArticleReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/AuthorAndUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BookLetReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BookReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BookSectionReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ConferencePaperReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ConferenceProceedingsReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ReferenceLibraryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ThesisReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/TitleAndUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/WebPageReferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ArticleReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/BookLetReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/BookReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/BookSectionReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ConferencePaperReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ConferenceProceedingsReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Reference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ThesisReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/WebPageReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Format.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Export.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ExportBibTex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ExportFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ExportRis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Import.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ImportBibTex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ImportFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ImportRis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/rest/RestReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/rest/RestUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utils/DTOConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utils/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/index.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/pages/ReferenceManager.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/pages/client.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/pages/template.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/materialdesignicons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/materialdesignicons.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/styleError.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/css/vendor.bundle.base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/403.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/404.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/500.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/js/template.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/resources/js/vendor.bundle.base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="facelets" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
   <component name="ProjectId" id="2KIFH5rdZEn3jLhlz5NoN1QS5fL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="JPA.DatabaseSchemaImportDialog" value="d1017cce-c480-44b1-a1c6-3c174ad12d7f" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/resourses" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.3643678" />
+  </component>
+  <component name="RecentsManager">
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="entity" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Proyecto\CodexRM_Web\web\resourses" />
+      <recent name="D:\Proyecto\CodexRM_Web\web\pages" />
+      <recent name="D:\Proyecto\CodexRM_Web\src\main\java\utils" />
+      <recent name="D:\Proyecto\CodexRM_Web\src\main\java\rest" />
+      <recent name="D:\Proyecto\CodexRM_Web\src\main\java\model" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 9.0.41" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.41" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/CodexRM_Web_Web_exploded/" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="CodexRM_Web:Web exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/CodexRM_Web_Web_exploded" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_CodexRM_Web" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="57098" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="CodexRM_Web:Web exploded" />
+        </option>
+      </method>
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -45,9 +266,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673654098417</updated>
-      <workItem from="1673654100995" duration="3000" />
+      <workItem from="1673654100995" duration="5565000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -59,5 +283,79 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="163" y="0" key="#Project_Structure" timestamp="1673660271669">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1673660271669" />
+    <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1673656446024">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1673656446024" />
+    <state x="412" y="138" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1673656475505">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="412" y="138" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1673656475505" />
+    <state x="313" y="51" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1673656293958">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="313" y="51" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1366.728@0.0.1366.728" timestamp="1673656293958" />
+    <state x="353" y="0" width="659" height="728" key="#com.intellij.jpa.generation.ui.DatabaseSchemaImportDialog" timestamp="1673656553135">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="353" y="0" width="659" height="728" key="#com.intellij.jpa.generation.ui.DatabaseSchemaImportDialog/0.0.1366.728@0.0.1366.728" timestamp="1673656553135" />
+    <state width="904" height="269" key="GridCell.Tab.0.bottom" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.0.center" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.0.left" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.0.right" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.1.bottom" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.1.center" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.1.left" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.1.right" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.2.bottom" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.2.center" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.2.left" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.2.right" timestamp="1673660212353">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="904" height="269" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state x="498" y="140" key="chooseDestDirectoryDialog" timestamp="1673656474203">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="498" y="140" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1673656474203" />
   </component>
 </project>

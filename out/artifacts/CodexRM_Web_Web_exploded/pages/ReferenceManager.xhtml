@@ -1,0 +1,1426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: mary
+  Date: 9/22/2022
+  Time: 4:21 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Codex RM</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="template.xhtml">
+        <ui:define name="title"> Gestionar Referencias</ui:define>
+        <ui:define name="content">
+    #{referenceManagerBean.init()}
+    <h:form id="form">
+        <p:growl id="messages" showDetail="true"/>
+        <div>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                <p:menuButton value="Nuevo" icon="pi pi-plus" style="margin-right: .5rem">
+                    <p:menuitem value="Referencia de Libro" process="@this" actionListener="#{referenceManagerBean.bookReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addBookReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Artículo" process="@this" actionListener="#{referenceManagerBean.articleReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addArticleReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Sección de libro" process="@this" actionListener="#{referenceManagerBean.bookSectionReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addBookSectionReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Folleto" process="@this" actionListener="#{referenceManagerBean.bookLetReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addBookLetReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Acta de Congreso" process="@this" actionListener="#{referenceManagerBean.conferenceProceedingsReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addConferenceProceedingsReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Tesis" process="@this" actionListener="#{referenceManagerBean.thesisReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addThesisReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Documento de Sesión" process="@this" actionListener="#{referenceManagerBean.conferencePaperReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addConferencePaperReferenceDialog').show()"/>
+
+                    <p:menuitem value="Referencia de Página Web" process="@this" actionListener="#{referenceManagerBean.webPageReferenceBean.cleanVariables()}"
+                                oncomplete="PF('addWebPageReferenceDialog').show()"/>
+                </p:menuButton>
+
+                <p:commandButton value="Eliminar" icon="pi pi-trash" styleClass="ui-button-help" process="dt-reference" oncomplete="PF('deleteReferenceListDialog').show()"/>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+                    <p:commandButton value="Import" icon="pi pi-download" style="margin-right: .5rem"
+                    process="dt-reference" oncomplete="PF('deleteReferenceListDialog').show()"/>
+
+                    <p:menuButton value="Export" icon="pi pi-upload"  styleClass="ui-button-help" style="margin-right: .5rem">
+
+                        <p:menuitem value="Ris" process="dt-reference" oncomplete="PF('exportRisDialog').show()"/>
+                        <p:menuitem value="BibTex" process="dt-reference" oncomplete="PF('exportBibTexDialog').show()"/>
+                    </p:menuButton>
+                </p:toolbarGroup>
+
+            </p:toolbar>
+        </div>
+        <div class="card">
+            <p:dataTable tableStyleClass="table-striped" id="dt-reference" var="reference" value="#{referenceManagerBean.referenceList}"
+                         selection="#{referenceManagerBean.selectReferenceList}" rowKey="#{reference.id}"
+                         style="margin-bottom:0" paginator="true" rows="5" selectionPageOnly="false">
+
+                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+
+                <p:column headerText="Autor" filterBy="#{reference.author}" sortBy="#{reference.author}">
+                    <h:outputText value="#{reference.author}" />
+                </p:column>
+
+                <p:column headerText="Título" filterBy="#{reference.title}" sortBy="#{reference.title}">
+                    <h:outputText value="#{reference.title}" />
+                </p:column>
+
+                <p:column headerText="Fecha" filterBy="#{reference.date}" sortBy="#{reference.date}">
+                    <div class="field col-12 md:col-4">
+                        <p:datePicker  value="#{reference.date}" showButtonBar="true"/>
+                    </div>
+                </p:column>
+
+                <p:column headerText="Nota" filterBy="#{reference.note}" sortBy="#{reference.note}">
+                    <h:outputText value="#{reference.note}" />
+                </p:column>
+
+                <p:column exportable="false">
+                    <p:commandButton icon="pi pi-info" actionListener="#{referenceManagerBean.info(reference)}"
+                                     styleClass="info-button rounded-button ui-button-text-icon-primary"
+                                     process="@this">
+                    </p:commandButton>
+                    <p:commandButton icon="pi pi-pencil" actionListener="#{referenceManagerBean.edit(reference)}"
+                                     styleClass="edit-button rounded-button ui-button-secondary"
+                                     process="dt-reference">
+                    </p:commandButton>
+
+                    <p:commandButton class="ui-button-primary rounded-button" icon="pi pi-trash"
+                                     oncomplete="PF('deleteReferenceDialog').show()" process="@this" >
+                        <f:setPropertyActionListener value="#{reference}" target="#{referenceManagerBean.reference}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </div>
+
+        <!--Add Book Reference dialog-->
+        <p:dialog header="Crear Referencia de Libro" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addBookReferenceDialog"
+                  id="addBookReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-bookRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.bookReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorB">Autor</p:outputLabel>
+                        <p:inputText id="authorB" value="#{referenceManagerBean.bookReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleB">Título</p:outputLabel>
+                        <p:inputText id="titleB" value="#{referenceManagerBean.bookReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteB">Nota</p:outputLabel>
+                        <p:inputText id="noteB" value="#{referenceManagerBean.bookReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateB">Fecha</p:outputLabel>
+                        <p:datePicker id="dateB" value="#{referenceManagerBean.bookReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="publisherB">Editor</p:outputLabel>
+                        <p:inputText id="publisherB" value="#{referenceManagerBean.bookReferenceBean.publisher}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressB">Dirección</p:outputLabel>
+                        <p:inputText id="addressB" value="#{referenceManagerBean.bookReferenceBean.address}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="editionB">Edición</p:outputLabel>
+                        <p:inputText id="editionB" value="#{referenceManagerBean.bookReferenceBean.edition}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="seriesB">Serie</p:outputLabel>
+                        <p:inputText id="seriesB" value="#{referenceManagerBean.bookReferenceBean.series}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeB">Volumen</p:outputLabel>
+                        <p:inputText id="volumeB" value="#{referenceManagerBean.bookReferenceBean.volume}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createBookReference}"
+                                 update="manage-bookRefrence-content" process="manage-bookRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addBookReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Article Reference dialog-->
+        <p:dialog header="Crear Referencia de Artículo" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addArticleReferenceDialog"
+                  id="addArticleReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-articleRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.articleReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorA">Autor</p:outputLabel>
+                        <p:inputText id="authorA" value="#{referenceManagerBean.articleReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleA">Título</p:outputLabel>
+                        <p:inputText id="titleA" value="#{referenceManagerBean.articleReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteA">Nota</p:outputLabel>
+                        <p:inputText id="noteA" value="#{referenceManagerBean.articleReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateA">Fecha</p:outputLabel>
+                        <p:datePicker id="dateA" value="#{referenceManagerBean.articleReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="journalA">Revista</p:outputLabel>
+                        <p:inputText id="journalA" value="#{referenceManagerBean.articleReferenceBean.journal}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeA">Volumen</p:outputLabel>
+                        <p:inputText id="volumeA" value="#{referenceManagerBean.articleReferenceBean.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="numberA">Número</p:outputLabel>
+                        <p:inputText id="numberA" value="#{referenceManagerBean.articleReferenceBean.number}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="pagesA">Páginas</p:outputLabel>
+                        <p:inputText id="pagesA" value="#{referenceManagerBean.articleReferenceBean.pages}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createArticleReference}"
+                                 update="manage-articleRefrence-content" process="manage-articleRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addArticleReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Book Section Reference dialog-->
+        <p:dialog header="Crear Referencia de Sección de libro" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addBookSectionReferenceDialog"
+                  id="addBookSectionReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-bookSectionRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.bookSectionReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorBS">Autor</p:outputLabel>
+                        <p:inputText id="authorBS" value="#{referenceManagerBean.bookSectionReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleBS">Título</p:outputLabel>
+                        <p:inputText id="titleBS" value="#{referenceManagerBean.bookSectionReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteBS">Nota</p:outputLabel>
+                        <p:inputText id="noteBS" value="#{referenceManagerBean.bookSectionReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateBS">Fecha</p:outputLabel>
+                        <p:datePicker id="dateBS" value="#{referenceManagerBean.bookSectionReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="publisherBS">Editor</p:outputLabel>
+                        <p:inputText id="publisherBS" value="#{referenceManagerBean.bookSectionReferenceBean.publisher}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressBS">Dirección</p:outputLabel>
+                        <p:inputText id="addressBS" value="#{referenceManagerBean.bookSectionReferenceBean.address}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="editionBS">Edición</p:outputLabel>
+                        <p:inputText id="editionBS" value="#{referenceManagerBean.bookSectionReferenceBean.edition}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="seriesBS">Serie</p:outputLabel>
+                        <p:inputText id="seriesBS" value="#{referenceManagerBean.bookSectionReferenceBean.series}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeBS">Volumen</p:outputLabel>
+                        <p:inputText id="volumeBS" value="#{referenceManagerBean.bookSectionReferenceBean.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="chapterBS">Capítulo</p:outputLabel>
+                        <p:inputText id="chapterBS" value="#{referenceManagerBean.bookSectionReferenceBean.chapter}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="pagesBS">Páginas</p:outputLabel>
+                        <p:inputText id="pagesBS" value="#{referenceManagerBean.bookSectionReferenceBean.pages}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createBookSectionReference}"
+                                 update="manage-bookSectionRefrence-content" process="manage-bookSectionRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addBookSectionReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Book Let Reference dialog-->
+        <p:dialog header="Crear Referencia de Folleto" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addBookLetReferenceDialog"
+                  id="addBookLetReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-bookLetRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.bookLetReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorBL">Autor</p:outputLabel>
+                        <p:inputText id="authorBL" value="#{referenceManagerBean.bookLetReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleBL">Título</p:outputLabel>
+                        <p:inputText id="titleBL" value="#{referenceManagerBean.bookLetReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteBL">Nota</p:outputLabel>
+                        <p:inputText id="noteBL" value="#{referenceManagerBean.bookLetReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateBL">Fecha</p:outputLabel>
+                        <p:datePicker id="dateBL" value="#{referenceManagerBean.bookLetReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="howpublishedBL">Publicación</p:outputLabel>
+                        <p:inputText id="howpublishedBL" value="#{referenceManagerBean.bookLetReferenceBean.howpublished}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressBL">Dirección</p:outputLabel>
+                        <p:inputText id="addressBL" value="#{referenceManagerBean.bookLetReferenceBean.address}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createBookLetReference}"
+                                 update="manage-bookLetRefrence-content" process="manage-bookLetRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addBookLetReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Conference Proceedings Reference dialog-->
+        <p:dialog header="Crear Referencia de Acta de Congreso" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addConferenceProceedingsReferenceDialog"
+                  id="addConferenceProceedingsReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-conferenceProceedingsRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.conferenceProceedingsReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorCP">Autor</p:outputLabel>
+                        <p:inputText id="authorCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleCP">Título</p:outputLabel>
+                        <p:inputText id="titleCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteCP">Nota</p:outputLabel>
+                        <p:inputText id="noteCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateCP">Fecha</p:outputLabel>
+                        <p:datePicker id="dateCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeCP">Volumen</p:outputLabel>
+                        <p:inputText id="volumeCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="seriesCP">Serie</p:outputLabel>
+                        <p:inputText id="seriesCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.series}"/>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="addressCP">Dirección</p:outputLabel>
+                        <p:inputText id="addressCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.address}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createConferenceProceedingsReference}"
+                                 update="manage-conferenceProceedingsRefrence-content" process="manage-conferenceProceedingsRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addConferenceProceedingsReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Thesis Reference dialog-->
+        <p:dialog header="Crear Referencia de Tesis" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addThesisReferenceDialog"
+                  id="addThesisReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-thesisRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.thesisReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorT">Autor</p:outputLabel>
+                        <p:inputText id="authorT" value="#{referenceManagerBean.thesisReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleT">Título</p:outputLabel>
+                        <p:inputText id="titleT" value="#{referenceManagerBean.thesisReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteT">Nota</p:outputLabel>
+                        <p:inputText id="noteT" value="#{referenceManagerBean.thesisReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateT">Fecha</p:outputLabel>
+                        <p:datePicker id="dateT" value="#{referenceManagerBean.thesisReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="schoolT">Escuela</p:outputLabel>
+                        <p:inputText id="schoolT" value="#{referenceManagerBean.thesisReferenceBean.school}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="typeT">Tipo</p:outputLabel>
+                        <p:selectOneMenu id="typeT" value="#{referenceManagerBean.thesisReferenceBean.type}">
+                        <f:selectItem itemLabel="Select One" itemValue=""/>
+                        <f:selectItem itemLabel="Maestría" itemValue="MASTERS"/>
+                            <f:selectItem itemLabel="Doctorado" itemValue="PHD"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="addressT">Dirección</p:outputLabel>
+                        <p:inputText id="addressT" value="#{referenceManagerBean.thesisReferenceBean.address}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createThesisReference}"
+                                 update="manage-thesisRefrence-content" process="manage-thesisRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addThesisReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Conference Paper Reference dialog-->
+        <p:dialog header="Crear Referencia de Documento de Sesión" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addConferencePaperReferenceDialog"
+                  id="addConferencePaperReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-conferencePaperRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.conferencePaperReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorCPR">Autor</p:outputLabel>
+                        <p:inputText id="authorCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleCPR">Título</p:outputLabel>
+                        <p:inputText id="titleCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteCPR">Nota</p:outputLabel>
+                        <p:inputText id="noteCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateCPR">Fecha</p:outputLabel>
+                        <p:datePicker id="dateCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="publisherCPR">Editor</p:outputLabel>
+                        <p:inputText id="publisherCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.publisher}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeCPR">Volumen</p:outputLabel>
+                        <p:inputText id="volumeCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressCPR">Dirección</p:outputLabel>
+                        <p:inputText id="addressCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.address}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="pagesCPR">Páginas</p:outputLabel>
+                        <p:inputText id="pagesCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.pages}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createConferencePaperReference}"
+                                 update="manage-conferencePaperRefrence-content" process="manage-conferencePaperRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addConferencePaperReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Add Web Page Reference dialog-->
+        <p:dialog header="Crear Referencia de Página Web" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="addWebPageReferenceDialog"
+                  id="addWebPageReferenceDialog" resposive="true">
+            <p:outputPanel id="manage-webPageRefrence-content" class="ui-fluid">
+                #{referenceManagerBean.webPageReferenceBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorWP">Autor</p:outputLabel>
+                        <p:inputText id="authorWP" value="#{referenceManagerBean.webPageReferenceBean.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleWP">Título</p:outputLabel>
+                        <p:inputText id="titleWP" value="#{referenceManagerBean.webPageReferenceBean.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteWP">Nota</p:outputLabel>
+                        <p:inputText id="noteWP" value="#{referenceManagerBean.webPageReferenceBean.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateWP">Fecha</p:outputLabel>
+                        <p:datePicker id="dateWP" value="#{referenceManagerBean.webPageReferenceBean.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="urlWP">Url</p:outputLabel>
+                        <p:inputText id="urlWP" value="#{referenceManagerBean.webPageReferenceBean.url}"/>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="accessDateWP">Fecha de acceso</p:outputLabel>
+                        <p:datePicker id="accessDateWP" value="#{referenceManagerBean.webPageReferenceBean.accessDate}" showButtonBar="true"/>
+                    </div>
+
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.createWebPageReference}"
+                                 update="manage-webPageRefrence-content" process="manage-webPageRefrence-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('addWebPageReferenceDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+
+        <!--Delete dialog-->
+        <p:confirmDialog widgetVar="deleteReferenceDialog" showEffect="fade" width="300"
+                         message="Eliminar la Referencia"
+                         header="Confirmar" severity="warn">
+            <p:commandButton value="Sí" icon="ui-icon-check" actionListener="#{referenceManagerBean.delete()}"
+                             process="@this" oncomplete="PF('deleteReferenceDialog').hide()"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="ui-icon-times"
+                             onclick="PF('deleteReferenceListDialog').hide()"/>
+        </p:confirmDialog>
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="ui-icon-times"/>
+        </p:confirmDialog>
+
+        <!--Delete list dialog-->
+        <p:confirmDialog widgetVar="deleteReferenceListDialog" showEffect="fade" width="300"
+                         message="Eliminar el conjunto de referencias seleccionadas"
+                         header="Confirmar" severity="warn">
+            <p:commandButton value="Sí" icon="ui-icon-check" actionListener="#{referenceManagerBean.deleteSelectedReference}"
+                             process="@this" oncomplete="PF('deleteReferenceListDialog').hide()"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="ui-icon-times"
+                             onclick="PF('deleteReferenceListDialog').hide()"/>
+        </p:confirmDialog>
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="ui-icon-times"/>
+        </p:confirmDialog>
+
+        <!--Export to Ris dialog-->
+        <p:confirmDialog widgetVar="exportRisDialog" showEffect="fade" width="300"
+                         message="Exportar en le formato Ris el conjunto de referencias seleccionadas"
+                         header="Confirmar" severity="warn">
+            <p:commandButton value="Sí" icon="ui-icon-check" actionListener="#{referenceManagerBean.exportRis}"
+                             process="@this" oncomplete="PF('exportRisDialog').hide()"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="ui-icon-times"
+                             onclick="PF('exportRisDialog').hide()"/>
+        </p:confirmDialog>
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="ui-icon-times"/>
+        </p:confirmDialog>
+
+        <!--Export to BibTex dialog-->
+        <p:confirmDialog widgetVar="exportBibTexDialog" showEffect="fade" width="300"
+                         message="Exportar en le formato BibTex el conjunto de referencias seleccionadas"
+                         header="Confirmar" severity="warn">
+            <p:commandButton value="Sí" icon="ui-icon-check" actionListener="#{referenceManagerBean.exportBibTex}"
+                             process="@this" oncomplete="PF('exportBibTexDialog').hide()"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="ui-icon-times"
+                             onclick="PF('exportBibTexDialog').hide()"/>
+        </p:confirmDialog>
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="ui-icon-times"/>
+        </p:confirmDialog>
+
+        <!--Info Book Reference dialog-->
+        <p:dialog header="Información de la Referencia de Libro" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoBookReferenceDialog"
+                  id="infoBookReferenceDialog" resposive="true">
+            <p:outputPanel id="info-bookReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Editor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.publisher}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Dirección: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.address}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Edición: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.edition}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Serie: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.series}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Volumen: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.volume}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoBookReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-bookReference-content"
+                                 process="info-bookReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Article Reference dialog-->
+        <p:dialog header="Información de la Referencia de Artículo" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoArticleReferenceDialog"
+                  id="infoArticleReferenceDialog" resposive="true">
+            <p:outputPanel id="info-articleReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Revista: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.journal}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Volumen: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.volume}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Número: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.number}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Páginas: </strong>
+                        <p:outputLabel>#{referenceManagerBean.articleReferenceBean.articleReference.pages}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoArticleReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-articleReference-content"
+                                 process="info-articleReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Book Let Reference dialog-->
+        <p:dialog header="Información de la Referencia de Folleto" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoBookLetReferenceDialog"
+                  id="infoBookLetReferenceDialog" resposive="true">
+            <p:outputPanel id="info-bookLetReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookLetReferenceBean.bookLetReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookLetReferenceBean.bookLetReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookLetReferenceBean.bookLetReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookLetReferenceBean.bookLetReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Publicación: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookLetReferenceBean.bookLetReference.howpublished}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Dirección: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookLetReferenceBean.bookLetReference.address}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoBookLetReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-bookLetReference-content"
+                                 process="info-bookLetReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Book Section Reference dialog-->
+        <p:dialog header="Información de la Referencia de Sección de libro" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoBookSectionReferenceDialog"
+                  id="infoBookSectionReferenceDialog" resposive="true">
+            <p:outputPanel id="info-bookSectionReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Editor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Dirección: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.address}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Edición: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.edition}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Serie: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.series}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Volumen: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.volume}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Capítulo: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.chapter}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Páginas: </strong>
+                        <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.pages}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoBookSectionReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-bookSectionReference-content"
+                                 process="info-bookSectionReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Conference Proceedings Reference dialog-->
+        <p:dialog header="Información de la Referencia de Acta de Congreso" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoConferenceProceedingsReferenceDialog"
+                  id="infoConferenceProceedingsReferenceDialog" resposive="true">
+            <p:outputPanel id="info-conferenceProceedingsReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Volumen: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.volume}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Serie: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.series}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Dirección: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.address}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoConferenceProceedingsReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-conferenceProceedingsReference-content"
+                                 process="info-conferenceProceedingsReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Thesis Reference dialog-->
+        <p:dialog header="Información de la Referencia de Tesis" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoThesisReferenceDialog"
+                  id="infoThesisReferenceDialog" resposive="true">
+            <p:outputPanel id="info-thesisReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Escuela: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.school}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Tipo: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.type}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Dirección: </strong>
+                        <p:outputLabel>#{referenceManagerBean.thesisReferenceBean.thesisReference.address}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoThesisReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-thesisReference-content"
+                                 process="info-thesisReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Conference Paper Reference dialog-->
+        <p:dialog header="Información de la Referencia de Documento de Sesión" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoConferencePaperReferenceDialog"
+                  id="infoConferencePaperReferenceDialog" resposive="true">
+            <p:outputPanel id="info-conferencePaperReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Editor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Volumen: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.volume}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Dirección: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.address}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Páginas: </strong>
+                        <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.pages}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoConferencePaperReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-conferencePaperReference-content"
+                                 process="info-conferencePaperReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Info Web Page Reference dialog-->
+        <p:dialog header="Información de la Referencia de Página Web" width="300" showEffect="fade" modal="true"
+                  widgetVar="infoWebPageReferenceDialog"
+                  id="infoWebPageReferenceDialog" resposive="true">
+            <p:outputPanel id="info-webPageReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <strong>Autor: </strong>
+                        <p:outputLabel>#{referenceManagerBean.webPageReferenceBean.webPageReference.author}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Título: </strong>
+                        <p:outputLabel>#{referenceManagerBean.webPageReferenceBean.webPageReference.title}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Nota: </strong>
+                        <p:outputLabel>#{referenceManagerBean.webPageReferenceBean.webPageReference.note}</p:outputLabel></div>
+                    <div class="p-field">
+                        <strong>Fecha: </strong>
+                        <p:outputLabel>#{referenceManagerBean.webPageReferenceBean.webPageReference.date}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Fecha de acceso: </strong>
+                        <p:outputLabel>#{referenceManagerBean.webPageReferenceBean.webPageReference.accessDate}</p:outputLabel>
+                    </div>
+                    <div class="p-field">
+                        <strong>Url: </strong>
+                        <p:outputLabel>#{referenceManagerBean.webPageReferenceBean.webPageReference.url}</p:outputLabel>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Cerrar" icon="pi pi-times" onclick="PF('infoWebPageReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="info-webPageReference-content"
+                                 process="info-webPageReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+
+        <!--Edit Book Reference dialog-->
+        <p:dialog header="Editar la Referencia de Libro" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editBookReferenceDialog" id="editBookReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-bookReference-content" class="ui-fluid">
+                    <p:outputPanel>
+                        <div class="p-field">
+                            <p:outputLabel for="authorBE">Autor</p:outputLabel>
+                            <p:inputText id="authorBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.author}"/>
+
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="titleBE">Título</p:outputLabel>
+                            <p:inputText id="titleBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.title}"/>
+
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="noteBE">Nota</p:outputLabel>
+                            <p:inputText id="noteBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.note}"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="dateBE">Fecha</p:outputLabel>
+                            <p:datePicker id="dateBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.date}" showButtonBar="true"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="publisherBE">Editor</p:outputLabel>
+                            <p:inputText id="publisherBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.publisher}"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="addressBE">Dirección</p:outputLabel>
+                            <p:inputText id="addressBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.address}"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="editionBE">Edición</p:outputLabel>
+                            <p:inputText id="editionBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.edition}"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="seriesBE">Serie</p:outputLabel>
+                            <p:inputText id="seriesBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.series}"/>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="volumeBE">Volumen</p:outputLabel>
+                            <p:inputText id="volumeBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.volume}"/>
+                        </div>
+                    </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editBookReference}"
+                                 update="edit-bookReference-content" process="edit-bookReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editBookReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-bookReference-content"
+                                 process="edit-bookReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Article Reference dialog-->
+        <p:dialog header="Editar la Referencia de Artículo" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editArticleReferenceDialog" id="editArticleReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-articleReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorAE">Autor</p:outputLabel>
+                        <p:inputText id="authorAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleAE">Título</p:outputLabel>
+                        <p:inputText id="titleAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteAE">Nota</p:outputLabel>
+                        <p:inputText id="noteAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateAE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="journalAE">Revista</p:outputLabel>
+                        <p:inputText id="journalAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.journal}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeAE">Volumen</p:outputLabel>
+                        <p:inputText id="volumeAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="numberAE">Número</p:outputLabel>
+                        <p:inputText id="numberAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.number}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="pagesAE">Páginas</p:outputLabel>
+                        <p:inputText id="pagesAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.pages}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editArticleReference}"
+                                 update="edit-articleReference-content" process="edit-articleReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editArticleReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-articleReference-content"
+                                 process="edit-articleReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Book Let Reference dialog-->
+        <p:dialog header="Editar la Referencia de Folleto" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editBookLetReferenceDialog" id="editBookLetReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-bookLetReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorBLE">Autor</p:outputLabel>
+                        <p:inputText id="authorBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleBLE">Título</p:outputLabel>
+                        <p:inputText id="titleBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteBLE">Nota</p:outputLabel>
+                        <p:inputText id="noteBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateBLE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="howpublishedBLE">Publicación</p:outputLabel>
+                        <p:inputText id="howpublishedBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.howpublished}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressBLE">Dirección</p:outputLabel>
+                        <p:inputText id="addressBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.address}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editBookLetReference}"
+                                 update="edit-bookLetReference-content" process="edit-bookLetReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editBookLetReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-bookLetReference-content"
+                                 process="edit-bookLetReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Book Section Reference dialog-->
+        <p:dialog header="Editar la Referencia de Sección de libro" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editBookSectionReferenceDialog" id="editBookSectionReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-bookSectionReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorBSE">Autor</p:outputLabel>
+                        <p:inputText id="authorBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleBSE">Título</p:outputLabel>
+                        <p:inputText id="titleBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteBSE">Nota</p:outputLabel>
+                        <p:inputText id="noteBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateBSE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="publisherBSE">Editor</p:outputLabel>
+                        <p:inputText id="publisherBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressBSE">Dirección</p:outputLabel>
+                        <p:inputText id="addressBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.address}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="editionBSE">Edición</p:outputLabel>
+                        <p:inputText id="editionBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.edition}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="seriesBSE">Serie</p:outputLabel>
+                        <p:inputText id="seriesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.series}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeBSE">Volumen</p:outputLabel>
+                        <p:inputText id="volumeBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="chapterBSE">Capítulo</p:outputLabel>
+                        <p:inputText id="chapterBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.chapter}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="pagesBSE">Páginas</p:outputLabel>
+                        <p:inputText id="pagesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.pages}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editBookSectionReference}"
+                                 update="edit-bookSectionReference-content" process="edit-bookSectionReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editBookSectionReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-bookSectionReference-content"
+                                 process="edit-bookSectionReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Conference Proceedings Reference dialog-->
+        <p:dialog header="Editar la Referencia de Actas de Congreso" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editConferenceProceedingsReferenceDialog" id="editConferenceProceedingsReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-conferenceProceedingsReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorCPE">Autor</p:outputLabel>
+                        <p:inputText id="authorCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleCPE">Título</p:outputLabel>
+                        <p:inputText id="titleCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteCPE">Nota</p:outputLabel>
+                        <p:inputText id="noteCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateCPE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeCPE">Volumen</p:outputLabel>
+                        <p:inputText id="volumeCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="seriesCPE">Serie</p:outputLabel>
+                        <p:inputText id="seriesCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.series}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressCPE">Dirección</p:outputLabel>
+                        <p:inputText id="addressCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.address}"/>
+                    </div>
+
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editConferenceProceedingsReference}"
+                                 update="edit-conferenceProceedingsReference-content" process="edit-conferenceProceedingsReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('ediConferenceProceedingsReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-conferenceProceedingsReference-content"
+                                 process="edit-conferenceProceedingsReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Thesis Reference dialog-->
+        <p:dialog header="Editar la Referencia de Tesis" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editThesisReferenceDialog" id="editThesisReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-thesisReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorTE">Autor</p:outputLabel>
+                        <p:inputText id="authorTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleTE">Título</p:outputLabel>
+                        <p:inputText id="titleTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteTE">Nota</p:outputLabel>
+                        <p:inputText id="noteTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateTE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="schoolTE">Escuela</p:outputLabel>
+                        <p:inputText id="schoolTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.school}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="typeTE">Tipo</p:outputLabel>
+                        <p:selectOneMenu id="typeTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.type}">
+                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                            <f:selectItem itemLabel="Maestría" itemValue="MASTERS"/>
+                            <f:selectItem itemLabel="Doctorado" itemValue="PHD"/>
+                        </p:selectOneMenu> </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressTE">Dirección</p:outputLabel>
+                        <p:inputText id="addressTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.address}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editThesisReference}"
+                                 update="edit-thesisReference-content" process="edit-thesisReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editThesisReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-thesisReference-content"
+                                 process="edit-thesisReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Conference Paper Reference dialog-->
+        <p:dialog header="Editar la Referencia de Documento de Sesión" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editConferencePaperReferenceDialog" id="editConferencePaperReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-conferencePaperReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorCPRE">Autor</p:outputLabel>
+                        <p:inputText id="authorCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleCPRE">Título</p:outputLabel>
+                        <p:inputText id="titleCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteCPRE">Nota</p:outputLabel>
+                        <p:inputText id="noteCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateCPRE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="PublisherCPRE">Editor</p:outputLabel>
+                        <p:inputText id="PublisherCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="volumeCPRE">Volumen</p:outputLabel>
+                        <p:inputText id="volumeCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.volume}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="addressCPRE">Dirección</p:outputLabel>
+                        <p:inputText id="addressCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.address}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="pagesCPRE">Páginas</p:outputLabel>
+                        <p:inputText id="pagesCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.pages}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editConferencePaperReference}"
+                                 update="edit-conferencePaperReference-content" process="edit-conferencePaperReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editConferencePaperReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-conferencePaperReference-content"
+                                 process="edit-conferencePaperReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+        <!--Edit Web Page Reference dialog-->
+        <p:dialog header="Editar la Referencia de Página Web" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="editWebPageReferenceDialog" id="editWebPageReferenceDialog" resposive="true">
+            <p:outputPanel id="edit-webPageReference-content" class="ui-fluid">
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="authorWPE">Autor</p:outputLabel>
+                        <p:inputText id="authorWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.author}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="titleWPE">Título</p:outputLabel>
+                        <p:inputText id="titleWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.title}"/>
+
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="noteWPE">Nota</p:outputLabel>
+                        <p:inputText id="noteWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.note}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="dateWPE">Fecha</p:outputLabel>
+                        <p:datePicker id="dateWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.date}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="accessDateWPE">Fecha de acceso</p:outputLabel>
+                        <p:datePicker id="accessDateWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.accessDate}" showButtonBar="true"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="urlWPE">Url</p:outputLabel>
+                        <p:inputText id="urlWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.url}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{referenceManagerBean.editWebPageReference}"
+                                 update="edit-webPageReference-content" process="edit-webPageReference-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editWebPageReferenceDialog').hide()"
+                                 class="ui-button-secondary" update="edit-webPageReference-content"
+                                 process="edit-webPageReference-content @this"/>
+            </f:facet>
+        </p:dialog>
+
+    </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
