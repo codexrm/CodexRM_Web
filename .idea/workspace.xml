@@ -24,108 +24,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="454352ff-b4ec-4fa4-a886-c8153c4dc11a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CodexRM_Web_Web_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CodexRM_Web.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ArticleReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/BookLetReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/BookReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/BookSectionReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ConferencePaperReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ConferenceProceedingsReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ReferenceManagerBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/ThesisReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/UserBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/beans/WebPageReferenceBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ArticleReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/AuthorAndUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BookLetReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BookReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BookSectionReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ConferencePaperReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ConferenceProceedingsReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ReferenceLibraryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/ThesisReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/TitleAndUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/WebPageReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ArticleReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/BookLetReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/BookReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/BookSectionReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ConferencePaperReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ConferenceProceedingsReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Reference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ThesisReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/WebPageReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Format.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Export.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/ExportBibTex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/ExportFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/ExportRis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Import.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/ImportBibTex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/ImportFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/ImportRis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rest/RestReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rest/RestUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/DTOConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/JsonUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/index.xhtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/pages/ReferenceManager.xhtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/pages/client.xhtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/pages/template.xhtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/materialdesignicons.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/materialdesignicons.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/styleError.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/css/vendor.bundle.base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/materialdesignicons-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Black.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Bold.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-ExtraLight.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Light.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-Regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/fonts/sourcesanspro/SourceSansPro-SemiBold.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/403.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/404.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/500.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/imagenes/logo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/js/template.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/resources/js/vendor.bundle.base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="454352ff-b4ec-4fa4-a886-c8153c4dc11a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -266,7 +165,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673654098417</updated>
-      <workItem from="1673654100995" duration="5565000" />
+      <workItem from="1673654100995" duration="6097000" />
     </task>
     <servers />
   </component>
@@ -305,54 +204,54 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="353" y="0" width="659" height="728" key="#com.intellij.jpa.generation.ui.DatabaseSchemaImportDialog/0.0.1366.728@0.0.1366.728" timestamp="1673656553135" />
-    <state width="904" height="269" key="GridCell.Tab.0.bottom" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.0.bottom" timestamp="1673660360574">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.0.center" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660360574" />
+    <state width="904" height="269" key="GridCell.Tab.0.center" timestamp="1673660360574">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.0.left" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1673660360574" />
+    <state width="904" height="269" key="GridCell.Tab.0.left" timestamp="1673660360574">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.0.right" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1673660360574" />
+    <state width="904" height="269" key="GridCell.Tab.0.right" timestamp="1673660360574">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.1.bottom" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1673660360574" />
+    <state width="904" height="269" key="GridCell.Tab.1.bottom" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.1.center" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.1.center" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.1.left" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.1.left" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.1.right" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.1.right" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.2.bottom" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.2.bottom" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.2.center" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.2.center" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.2.left" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.2.left" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
-    <state width="904" height="269" key="GridCell.Tab.2.right" timestamp="1673660212353">
+    <state width="904" height="269" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
+    <state width="904" height="269" key="GridCell.Tab.2.right" timestamp="1673660360575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="904" height="269" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1673660212353" />
+    <state width="904" height="269" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1673660360575" />
     <state x="498" y="140" key="chooseDestDirectoryDialog" timestamp="1673656474203">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
