@@ -140,23 +140,11 @@ public class RestReference {
 
     //sending request to add all Reference details.
     public boolean addReferenceGroup(ArrayList<Reference> referenceList) {
-        String inputJson = null;
-        inputJson = JsonUtils.convertFromObjectToJson(dtoConverter.toReferenceDTOList(referenceList));
-        HttpRequest req = HttpRequest.newBuilder(URI.create(serviceURL + "addGroup"))
-                .header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
-        CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
-        try {
-            if (response.get().statusCode() == 500){
-                return false;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        Boolean isAdd = false;
+       for(Reference reference: referenceList){
+           isAdd = addReference(reference);
+       }
+       return isAdd;
     }
 
     //sending request to update a Reference details.

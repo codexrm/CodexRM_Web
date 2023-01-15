@@ -40,7 +40,7 @@ public class ReferenceManagerBean {
     private static ExportFactory exportFactory = new ExportFactory();
     private static ImportFactory importFactory = new ImportFactory();
     private static File exportFile = new File(System.getProperty("user.home") + File. separator +"Desktop" + File. separator + "exported References.txt" );
-    private static File importFile;
+    private static String path = "";
     private static String format = "";
 
 
@@ -50,6 +50,7 @@ public class ReferenceManagerBean {
         referenceList = restReference.getAllReference(userBean.getUser());
     }
     public void cleanVariables(){
+        path = "";
         format = "";
     }
 
@@ -117,13 +118,13 @@ public class ReferenceManagerBean {
 
     public void setExportFile(File exportFile) { ReferenceManagerBean.exportFile = exportFile; }
 
-    public File getImportFile() { return importFile; }
+    public String getFormat() { return format; }
 
-    public void setImportFile(File importFile) { ReferenceManagerBean.importFile = importFile; }
+    public void setFormat(String format) { ReferenceManagerBean.format = format; }
 
-    public static String getFormat() { return format; }
+    public String getPath() { return path; }
 
-    public static void setFormat(String format) { ReferenceManagerBean.format = format; }
+    public void setPath(String path) { ReferenceManagerBean.path = path; }
 
     public void createArticleReference() {
 
@@ -601,23 +602,38 @@ public class ReferenceManagerBean {
         Export export = exportFactory.getExport(format);
         export.writeValue((ArrayList<Reference>) selectReferenceList, exportFile.getPath());
         addMessage(FacesMessage.SEVERITY_INFO, "Las Referencias seleccionadas han sido exportadas", "");
+
         PrimeFaces.current().ajax().update("form:messages");
     }
 
-    public void importRis() throws IOException, ParseException { importReferences(Format.RIS); }
+    public void importReferences() throws IOException, TokenMgrException, ParseException {
 
-    public void importBibTex() throws IOException, ParseException { importReferences(Format.BIBTEX); }
+        File importFile = new File(path);
+        Import importer;
 
-    private void importReferences(Format format) throws IOException, TokenMgrException, ParseException {
+        if(importFile.exists() && importFile.isFile()){
+            if(format.equals("Ris")){
+                importer = importFactory.getImport(Format.RIS);
+            }else{
+                importer = importFactory.getImport(Format.BIBTEX);
+            }
 
-        Import importer = importFactory.getImport(format);
-        if(restReference.addReferenceGroup(importer.readFile(importFile.getPath()))){
-            addMessage(FacesMessage.SEVERITY_INFO, "Referencias Importadas", "");
+            ArrayList<Reference> importerReferenceList = importer.readFile(importFile.getPath());
+            for (Reference reference: importerReferenceList ) {
+                reference.setUser(userBean.getUser());
+            }
+
+            if(restReference.addReferenceGroup(importerReferenceList)){
+                addMessage(FacesMessage.SEVERITY_INFO, "Referencias Importadas", "");
+            }
+        }
+        else{
+            addMessage(FacesMessage.SEVERITY_ERROR, "El fichero seleccionado no es valido", "Debe seleccionar un fichero *.txt");
         }
 
         init();
+        PrimeFaces.current().executeScript("PF('importReferencesDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
-
     }
 
     private void addMessage(FacesMessage.Severity severity, String summary, String detail) {

@@ -60,7 +60,7 @@
 
                 <p:toolbarGroup align="right">
                     <p:commandButton value="Import" icon="pi pi-download" style="margin-right: .5rem"
-                    process="dt-reference" oncomplete="PF('deleteReferenceListDialog').show()"/>
+                    process="@this" oncomplete="PF('importReferencesDialog').show()"/>
 
                     <p:menuButton value="Export" icon="pi pi-upload"  styleClass="ui-button-help" style="margin-right: .5rem">
 
@@ -601,6 +601,7 @@
                              icon="ui-icon-times"/>
         </p:confirmDialog>
 
+
         <!--Export to Ris dialog-->
         <p:confirmDialog widgetVar="exportRisDialog" showEffect="fade" width="300"
                          message="Exportar en le formato Ris el conjunto de referencias seleccionadas"
@@ -630,6 +631,38 @@
             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
                              icon="ui-icon-times"/>
         </p:confirmDialog>
+
+        <!-- Import References dialog-->
+        <p:dialog header="Importar Referencias" height="400" width="450" showEffect="fade" modal="true"
+                  widgetVar="importReferencesDialog"
+                  id="importReferencesDialog" resposive="true">
+            <p:outputPanel id="manage-importReferences-content" class="ui-fluid">
+                #{referenceManagerBean.cleanVariables()}
+                <p:outputPanel>
+                    <div class="p-field">
+                        <p:outputLabel for="path">Dirección del Fichero</p:outputLabel>
+                        <p:inputText id="path" value="#{referenceManagerBean.path}"/>
+                    </div>
+
+                    <div class="p-field">
+                        <p:outputLabel for="format">Formato</p:outputLabel>
+                        <p:selectOneMenu id="format" value="#{referenceManagerBean.format}">
+                            <f:selectItem itemLabel="Ris" itemValue="Ris"/>
+                            <f:selectItem itemLabel="BibTex" itemValue="BibTex"/>
+                        </p:selectOneMenu>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="Importar" icon="pi pi-check"
+                                 actionListener="#{referenceManagerBean.importReferences()}"
+                                 update="manage-importReferences-content" process="manage-importReferences-content @this"/>
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('importReferencesDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
 
         <!--Info Book Reference dialog-->
         <p:dialog header="Información de la Referencia de Libro" width="300" showEffect="fade" modal="true"
