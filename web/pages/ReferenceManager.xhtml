@@ -123,12 +123,19 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorB">Autor</p:outputLabel>
-                        <p:inputText id="authorB" value="#{referenceManagerBean.bookReferenceBean.author}"/>
-
+                        <p:inputText id="authorB" value="#{referenceManagerBean.bookReferenceBean.author}"
+                        required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleB">Título</p:outputLabel>
-                        <p:inputText id="titleB" value="#{referenceManagerBean.bookReferenceBean.title}"/>
+                        <p:inputText id="titleB" value="#{referenceManagerBean.bookReferenceBean.title}"
+                        required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -138,32 +145,46 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateB">Fecha</p:outputLabel>
-                        <p:datePicker id="dateB" value="#{referenceManagerBean.bookReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateB" value="#{referenceManagerBean.bookReferenceBean.date}" showButtonBar="true"
+                        maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                     </div>
 
                     <div class="p-field">
-                        <p:outputLabel for="publisherB">Editor</p:outputLabel>
-                        <p:inputText id="publisherB" value="#{referenceManagerBean.bookReferenceBean.publisher}"/>
+                        <p:outputLabel for="publisherB">Editorial</p:outputLabel>
+                        <p:inputText id="publisherB" value="#{referenceManagerBean.bookReferenceBean.publisher}"
+                                     required="true">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="addressB">Dirección</p:outputLabel>
-                        <p:inputText id="addressB" value="#{referenceManagerBean.bookReferenceBean.address}"/>
+                        <p:inputText id="addressB" value="#{referenceManagerBean.bookReferenceBean.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="editionB">Edición</p:outputLabel>
-                        <p:inputText id="editionB" value="#{referenceManagerBean.bookReferenceBean.edition}"/>
+                        <p:inputText id="editionB" value="#{referenceManagerBean.bookReferenceBean.edition}">
+                        <f:validateRegex
+                                pattern="[a-zA-Z0-9 áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                    </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="seriesB">Serie</p:outputLabel>
-                        <p:inputText id="seriesB" value="#{referenceManagerBean.bookReferenceBean.series}"/>
+                        <p:inputText id="seriesB" value="#{referenceManagerBean.bookReferenceBean.series}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeB">Volumen</p:outputLabel>
-                        <p:inputText id="volumeB" value="#{referenceManagerBean.bookReferenceBean.volume}"/>
+                        <p:inputNumber id="volumeB" value="#{referenceManagerBean.bookReferenceBean.volume}" minValue="1" decimalPlaces="0" />
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -186,12 +207,20 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorA">Autor</p:outputLabel>
-                        <p:inputText id="authorA" value="#{referenceManagerBean.articleReferenceBean.author}"/>
+                        <p:inputText id="authorA" value="#{referenceManagerBean.articleReferenceBean.author}"
+                        required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleA">Título</p:outputLabel>
-                        <p:inputText id="titleA" value="#{referenceManagerBean.articleReferenceBean.title}"/>
+                        <p:inputText id="titleA" value="#{referenceManagerBean.articleReferenceBean.title}"
+                                     required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -201,27 +230,39 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateA">Fecha</p:outputLabel>
-                        <p:datePicker id="dateA" value="#{referenceManagerBean.articleReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateA" value="#{referenceManagerBean.articleReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"
+                                      required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="journalA">Revista</p:outputLabel>
-                        <p:inputText id="journalA" value="#{referenceManagerBean.articleReferenceBean.journal}"/>
+                        <p:inputText id="journalA" value="#{referenceManagerBean.articleReferenceBean.journal}"
+                                     required="true">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,;-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeA">Volumen</p:outputLabel>
-                        <p:inputText id="volumeA" value="#{referenceManagerBean.articleReferenceBean.volume}"/>
+                        <p:inputNumber id="volumeA" value="#{referenceManagerBean.articleReferenceBean.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="numberA">Número</p:outputLabel>
-                        <p:inputText id="numberA" value="#{referenceManagerBean.articleReferenceBean.number}"/>
+                        <p:inputText id="numberA" value="#{referenceManagerBean.articleReferenceBean.number}">
+                            <f:validateRegex
+                                    pattern="[0-9a-zA-Z áéíóúüñÁÉÍÓÚÜÑ-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="pagesA">Páginas</p:outputLabel>
-                        <p:inputText id="pagesA" value="#{referenceManagerBean.articleReferenceBean.pages}"/>
+                        <p:inputText id="pagesA" value="#{referenceManagerBean.articleReferenceBean.pages}">
+                            <f:validateRegex
+                                    pattern="[0-9,-IVXMCLD]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -244,12 +285,20 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorBS">Autor</p:outputLabel>
-                        <p:inputText id="authorBS" value="#{referenceManagerBean.bookSectionReferenceBean.author}"/>
+                        <p:inputText id="authorBS" value="#{referenceManagerBean.bookSectionReferenceBean.author}"
+                        required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleBS">Título</p:outputLabel>
-                        <p:inputText id="titleBS" value="#{referenceManagerBean.bookSectionReferenceBean.title}"/>
+                        <p:inputText id="titleBS" value="#{referenceManagerBean.bookSectionReferenceBean.title}"
+                                     required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -259,42 +308,62 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateBS">Fecha</p:outputLabel>
-                        <p:datePicker id="dateBS" value="#{referenceManagerBean.bookSectionReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateBS" value="#{referenceManagerBean.bookSectionReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                     </div>
 
                     <div class="p-field">
-                        <p:outputLabel for="publisherBS">Editor</p:outputLabel>
-                        <p:inputText id="publisherBS" value="#{referenceManagerBean.bookSectionReferenceBean.publisher}"/>
+                        <p:outputLabel for="publisherBS">Editorial</p:outputLabel>
+                        <p:inputText id="publisherBS" value="#{referenceManagerBean.bookSectionReferenceBean.publisher}"
+                                     required="true">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="addressBS">Dirección</p:outputLabel>
-                        <p:inputText id="addressBS" value="#{referenceManagerBean.bookSectionReferenceBean.address}"/>
+                        <p:inputText id="addressBS" value="#{referenceManagerBean.bookSectionReferenceBean.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="editionBS">Edición</p:outputLabel>
-                        <p:inputText id="editionBS" value="#{referenceManagerBean.bookSectionReferenceBean.edition}"/>
+                        <p:inputText id="editionBS" value="#{referenceManagerBean.bookSectionReferenceBean.edition}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z0-9 áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="seriesBS">Serie</p:outputLabel>
-                        <p:inputText id="seriesBS" value="#{referenceManagerBean.bookSectionReferenceBean.series}"/>
+                        <p:inputText id="seriesBS" value="#{referenceManagerBean.bookSectionReferenceBean.series}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeBS">Volumen</p:outputLabel>
-                        <p:inputText id="volumeBS" value="#{referenceManagerBean.bookSectionReferenceBean.volume}"/>
+                        <p:inputNumber id="volumeBS" value="#{referenceManagerBean.bookSectionReferenceBean.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="chapterBS">Capítulo</p:outputLabel>
-                        <p:inputText id="chapterBS" value="#{referenceManagerBean.bookSectionReferenceBean.chapter}"/>
+                        <p:inputNumber id="chapterBS" value="#{referenceManagerBean.bookSectionReferenceBean.chapter}"
+                                     required="true" minValue="1" decimalPlaces="0"/>
+
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="pagesBS">Páginas</p:outputLabel>
-                        <p:inputText id="pagesBS" value="#{referenceManagerBean.bookSectionReferenceBean.pages}"/>
+                        <p:inputText id="pagesBS" value="#{referenceManagerBean.bookSectionReferenceBean.pages}"
+                                     required="true">
+                            <f:validateRegex
+                                    pattern="[0-9,-IVXCDML]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -317,12 +386,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorBL">Autor</p:outputLabel>
-                        <p:inputText id="authorBL" value="#{referenceManagerBean.bookLetReferenceBean.author}"/>
+                        <p:inputText id="authorBL" value="#{referenceManagerBean.bookLetReferenceBean.author}">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleBL">Título</p:outputLabel>
-                        <p:inputText id="titleBL" value="#{referenceManagerBean.bookLetReferenceBean.title}"/>
+                        <p:inputText id="titleBL" value="#{referenceManagerBean.bookLetReferenceBean.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -332,7 +407,8 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateBL">Fecha</p:outputLabel>
-                        <p:datePicker id="dateBL" value="#{referenceManagerBean.bookLetReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateBL" value="#{referenceManagerBean.bookLetReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
@@ -342,7 +418,10 @@
 
                     <div class="p-field">
                         <p:outputLabel for="addressBL">Dirección</p:outputLabel>
-                        <p:inputText id="addressBL" value="#{referenceManagerBean.bookLetReferenceBean.address}"/>
+                        <p:inputText id="addressBL" value="#{referenceManagerBean.bookLetReferenceBean.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -365,12 +444,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorCP">Autor</p:outputLabel>
-                        <p:inputText id="authorCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.author}"/>
+                        <p:inputText id="authorCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.author}">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleCP">Título</p:outputLabel>
-                        <p:inputText id="titleCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.title}"/>
+                        <p:inputText id="titleCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -380,21 +465,28 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateCP">Fecha</p:outputLabel>
-                        <p:datePicker id="dateCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeCP">Volumen</p:outputLabel>
-                        <p:inputText id="volumeCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.volume}"/>
+                        <p:inputNumber id="volumeCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="seriesCP">Serie</p:outputLabel>
-                        <p:inputText id="seriesCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.series}"/>
+                        <p:inputText id="seriesCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.series}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                        </p:inputText>
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="addressCP">Dirección</p:outputLabel>
-                        <p:inputText id="addressCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.address}"/>
+                        <p:inputText id="addressCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -417,12 +509,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorT">Autor</p:outputLabel>
-                        <p:inputText id="authorT" value="#{referenceManagerBean.thesisReferenceBean.author}"/>
+                        <p:inputText id="authorT" value="#{referenceManagerBean.thesisReferenceBean.author}" required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleT">Título</p:outputLabel>
-                        <p:inputText id="titleT" value="#{referenceManagerBean.thesisReferenceBean.title}"/>
+                        <p:inputText id="titleT" value="#{referenceManagerBean.thesisReferenceBean.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -432,12 +530,16 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateT">Fecha</p:outputLabel>
-                        <p:datePicker id="dateT" value="#{referenceManagerBean.thesisReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateT" value="#{referenceManagerBean.thesisReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="schoolT">Escuela</p:outputLabel>
-                        <p:inputText id="schoolT" value="#{referenceManagerBean.thesisReferenceBean.school}"/>
+                        <p:inputText id="schoolT" value="#{referenceManagerBean.thesisReferenceBean.school}" required="true">
+                        <f:validateRegex
+                                pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
@@ -450,7 +552,10 @@
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="addressT">Dirección</p:outputLabel>
-                        <p:inputText id="addressT" value="#{referenceManagerBean.thesisReferenceBean.address}"/>
+                        <p:inputText id="addressT" value="#{referenceManagerBean.thesisReferenceBean.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -473,12 +578,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorCPR">Autor</p:outputLabel>
-                        <p:inputText id="authorCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.author}"/>
+                        <p:inputText id="authorCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.author}" required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleCPR">Título</p:outputLabel>
-                        <p:inputText id="titleCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.title}"/>
+                        <p:inputText id="titleCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -488,27 +599,37 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateCPR">Fecha</p:outputLabel>
-                        <p:datePicker id="dateCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
-                        <p:outputLabel for="publisherCPR">Editor</p:outputLabel>
-                        <p:inputText id="publisherCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.publisher}"/>
+                        <p:outputLabel for="publisherCPR">Editorial</p:outputLabel>
+                        <p:inputText id="publisherCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.publisher}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeCPR">Volumen</p:outputLabel>
-                        <p:inputText id="volumeCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.volume}"/>
+                        <p:inputNumber id="volumeCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="addressCPR">Dirección</p:outputLabel>
-                        <p:inputText id="addressCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.address}"/>
+                        <p:inputText id="addressCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="pagesCPR">Páginas</p:outputLabel>
-                        <p:inputText id="pagesCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.pages}"/>
+                        <p:inputText id="pagesCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.pages}">
+                            <f:validateRegex
+                                    pattern="[0-9,-IVXMLCD]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -531,12 +652,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorWP">Autor</p:outputLabel>
-                        <p:inputText id="authorWP" value="#{referenceManagerBean.webPageReferenceBean.author}"/>
+                        <p:inputText id="authorWP" value="#{referenceManagerBean.webPageReferenceBean.author}">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleWP">Título</p:outputLabel>
-                        <p:inputText id="titleWP" value="#{referenceManagerBean.webPageReferenceBean.title}"/>
+                        <p:inputText id="titleWP" value="#{referenceManagerBean.webPageReferenceBean.title}">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -546,16 +673,21 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateWP">Fecha</p:outputLabel>
-                        <p:datePicker id="dateWP" value="#{referenceManagerBean.webPageReferenceBean.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateWP" value="#{referenceManagerBean.webPageReferenceBean.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="urlWP">Url</p:outputLabel>
-                        <p:inputText id="urlWP" value="#{referenceManagerBean.webPageReferenceBean.url}"/>
+                        <p:inputText id="urlWP" value="#{referenceManagerBean.webPageReferenceBean.url}" required="true">
+                            <f:validateRegex
+                                    pattern="^https://.*"/>
+                        </p:inputText>
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="accessDateWP">Fecha de acceso</p:outputLabel>
-                        <p:datePicker id="accessDateWP" value="#{referenceManagerBean.webPageReferenceBean.accessDate}" showButtonBar="true"/>
+                        <p:datePicker id="accessDateWP" value="#{referenceManagerBean.webPageReferenceBean.accessDate}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                 </p:outputPanel>
@@ -685,7 +817,7 @@
                         <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.date}</p:outputLabel>
                     </div>
                     <div class="p-field">
-                        <strong>Editor: </strong>
+                        <strong>Editorial: </strong>
                         <p:outputLabel>#{referenceManagerBean.bookReferenceBean.bookReference.publisher}</p:outputLabel>
                     </div>
                     <div class="p-field">
@@ -816,7 +948,7 @@
                         <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.date}</p:outputLabel>
                     </div>
                     <div class="p-field">
-                        <strong>Editor: </strong>
+                        <strong>Editorial: </strong>
                         <p:outputLabel>#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}</p:outputLabel>
                     </div>
                     <div class="p-field">
@@ -955,7 +1087,7 @@
                         <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.date}</p:outputLabel>
                     </div>
                     <div class="p-field">
-                        <strong>Editor: </strong>
+                        <strong>Editorial: </strong>
                         <p:outputLabel>#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}</p:outputLabel>
                     </div>
                     <div class="p-field">
@@ -1024,12 +1156,18 @@
                     <p:outputPanel>
                         <div class="p-field">
                             <p:outputLabel for="authorBE">Autor</p:outputLabel>
-                            <p:inputText id="authorBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.author}"/>
+                            <p:inputText id="authorBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.author}" required="true">
+                                <f:validateRegex
+                                        pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                            </p:inputText>
 
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="titleBE">Título</p:outputLabel>
-                            <p:inputText id="titleBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.title}"/>
+                            <p:inputText id="titleBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.title}" required="true">
+                                <f:validateRegex
+                                        pattern="^[A-Z].*"/>
+                            </p:inputText>
 
                         </div>
                         <div class="p-field">
@@ -1039,32 +1177,45 @@
 
                         <div class="p-field">
                             <p:outputLabel for="dateBE">Fecha</p:outputLabel>
-                            <p:datePicker id="dateBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.date}" showButtonBar="true"/>
+                            <p:datePicker id="dateBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.date}"
+                                          showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                         </div>
 
                         <div class="p-field">
-                            <p:outputLabel for="publisherBE">Editor</p:outputLabel>
-                            <p:inputText id="publisherBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.publisher}"/>
+                            <p:outputLabel for="publisherBE">Editorial</p:outputLabel>
+                            <p:inputText id="publisherBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.publisher}" required="true">
+                                <f:validateRegex
+                                        pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                            </p:inputText>
                         </div>
 
                         <div class="p-field">
                             <p:outputLabel for="addressBE">Dirección</p:outputLabel>
-                            <p:inputText id="addressBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.address}"/>
+                            <p:inputText id="addressBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.address}">
+                                <f:validateRegex
+                                        pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                            </p:inputText>
                         </div>
 
                         <div class="p-field">
                             <p:outputLabel for="editionBE">Edición</p:outputLabel>
-                            <p:inputText id="editionBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.edition}"/>
+                            <p:inputText id="editionBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.edition}">
+                                <f:validateRegex
+                                        pattern="[a-zA-Z0-9 áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                            </p:inputText>
                         </div>
 
                         <div class="p-field">
                             <p:outputLabel for="seriesBE">Serie</p:outputLabel>
-                            <p:inputText id="seriesBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.series}"/>
+                            <p:inputText id="seriesBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.series}">
+                                <f:validateRegex
+                                        pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                            </p:inputText>
                         </div>
 
                         <div class="p-field">
                             <p:outputLabel for="volumeBE">Volumen</p:outputLabel>
-                            <p:inputText id="volumeBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.volume}"/>
+                            <p:inputNumber id="volumeBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.volume}" minValue="1" decimalPlaces="0" />
                         </div>
                     </p:outputPanel>
             </p:outputPanel>
@@ -1084,12 +1235,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorAE">Autor</p:outputLabel>
-                        <p:inputText id="authorAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.author}"/>
+                        <p:inputText id="authorAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.author}" required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleAE">Título</p:outputLabel>
-                        <p:inputText id="titleAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.title}"/>
+                        <p:inputText id="titleAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -1099,27 +1256,37 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateAE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="journalAE">Revista</p:outputLabel>
-                        <p:inputText id="journalAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.journal}"/>
+                        <p:inputText id="journalAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.journal}" required="true">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ.,;-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeAE">Volumen</p:outputLabel>
-                        <p:inputText id="volumeAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.volume}"/>
+                        <p:inputNumber id="volumeAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="numberAE">Número</p:outputLabel>
-                        <p:inputText id="numberAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.number}"/>
+                        <p:inputText id="numberAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.number}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z0-9 áéíóúüñÁÉÍÓÚÜÑ-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="pagesAE">Páginas</p:outputLabel>
-                        <p:inputText id="pagesAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.pages}"/>
+                        <p:inputText id="pagesAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.pages}">
+                            <f:validateRegex
+                                    pattern="[0-9,-IVXMCDL]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -1139,12 +1306,19 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorBLE">Autor</p:outputLabel>
-                        <p:inputText id="authorBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.author}"/>
+                        <p:inputText id="authorBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.author}">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleBLE">Título</p:outputLabel>
-                        <p:inputText id="titleBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.title}"/>
+                        <p:inputText id="titleBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.title}"
+                        required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -1154,7 +1328,8 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateBLE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
@@ -1164,7 +1339,10 @@
 
                     <div class="p-field">
                         <p:outputLabel for="addressBLE">Dirección</p:outputLabel>
-                        <p:inputText id="addressBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.address}"/>
+                        <p:inputText id="addressBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -1184,12 +1362,17 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorBSE">Autor</p:outputLabel>
-                        <p:inputText id="authorBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.author}"/>
-
+                        <p:inputText id="authorBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.author}" required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleBSE">Título</p:outputLabel>
-                        <p:inputText id="titleBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.title}"/>
+                        <p:inputText id="titleBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -1199,42 +1382,58 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateBSE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.date}" required="true"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
-                        <p:outputLabel for="publisherBSE">Editor</p:outputLabel>
-                        <p:inputText id="publisherBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}"/>
+                        <p:outputLabel for="publisherBSE">Editorial</p:outputLabel>
+                        <p:inputText id="publisherBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}" required="true">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="addressBSE">Dirección</p:outputLabel>
-                        <p:inputText id="addressBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.address}"/>
+                        <p:inputText id="addressBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="editionBSE">Edición</p:outputLabel>
-                        <p:inputText id="editionBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.edition}"/>
+                        <p:inputText id="editionBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.edition}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z0-9 áéíóúüñÁÉÍÓÚÜÑ.]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="seriesBSE">Serie</p:outputLabel>
-                        <p:inputText id="seriesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.series}"/>
+                        <p:inputText id="seriesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.series}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeBSE">Volumen</p:outputLabel>
-                        <p:inputText id="volumeBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.volume}"/>
+                        <p:inputNumber id="volumeBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="chapterBSE">Capítulo</p:outputLabel>
-                        <p:inputText id="chapterBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.chapter}"/>
+                        <p:inputNumber id="chapterBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.chapter}" required="true" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="pagesBSE">Páginas</p:outputLabel>
-                        <p:inputText id="pagesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.pages}"/>
+                        <p:inputText id="pagesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.pages}" required="true">
+                            <f:validateRegex
+                                    pattern="[0-9,-IVXMLCD]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -1254,12 +1453,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorCPE">Autor</p:outputLabel>
-                        <p:inputText id="authorCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.author}"/>
+                        <p:inputText id="authorCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.author}">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleCPE">Título</p:outputLabel>
-                        <p:inputText id="titleCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.title}"/>
+                        <p:inputText id="titleCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -1269,22 +1474,29 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateCPE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeCPE">Volumen</p:outputLabel>
-                        <p:inputText id="volumeCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.volume}"/>
+                        <p:inputNumber id="volumeCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="seriesCPE">Serie</p:outputLabel>
-                        <p:inputText id="seriesCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.series}"/>
+                        <p:inputText id="seriesCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.series}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="addressCPE">Dirección</p:outputLabel>
-                        <p:inputText id="addressCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.address}"/>
+                        <p:inputText id="addressCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                 </p:outputPanel>
@@ -1305,13 +1517,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorTE">Autor</p:outputLabel>
-                        <p:inputText id="authorTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.author}"/>
+                        <p:inputText id="authorTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.author}" required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleTE">Título</p:outputLabel>
-                        <p:inputText id="titleTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.title}"/>
-
+                        <p:inputText id="titleTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="noteTE">Nota</p:outputLabel>
@@ -1320,12 +1537,16 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateTE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.date}" required="true"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="schoolTE">Escuela</p:outputLabel>
-                        <p:inputText id="schoolTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.school}"/>
+                        <p:inputText id="schoolTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.school}" required="true">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
@@ -1338,7 +1559,10 @@
 
                     <div class="p-field">
                         <p:outputLabel for="addressTE">Dirección</p:outputLabel>
-                        <p:inputText id="addressTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.address}"/>
+                        <p:inputText id="addressTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -1358,12 +1582,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorCPRE">Autor</p:outputLabel>
-                        <p:inputText id="authorCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.author}"/>
+                        <p:inputText id="authorCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.author}" required="true">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleCPRE">Título</p:outputLabel>
-                        <p:inputText id="titleCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.title}"/>
+                        <p:inputText id="titleCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.title}" required="true">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -1373,27 +1603,37 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateCPRE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
-                        <p:outputLabel for="PublisherCPRE">Editor</p:outputLabel>
-                        <p:inputText id="PublisherCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}"/>
+                        <p:outputLabel for="PublisherCPRE">Editorial</p:outputLabel>
+                        <p:inputText id="PublisherCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="volumeCPRE">Volumen</p:outputLabel>
-                        <p:inputText id="volumeCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.volume}"/>
+                        <p:inputNumber id="volumeCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.volume}" minValue="1" decimalPlaces="0" />
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="addressCPRE">Dirección</p:outputLabel>
-                        <p:inputText id="addressCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.address}"/>
+                        <p:inputText id="addressCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.address}">
+                            <f:validateRegex
+                                    pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ,-]+$"/>
+                        </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="pagesCPRE">Páginas</p:outputLabel>
-                        <p:inputText id="pagesCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.pages}"/>
+                        <p:inputText id="pagesCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.pages}">
+                            <f:validateRegex
+                                    pattern="[0-9,-IVXMLDC]+$"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>
@@ -1413,12 +1653,18 @@
                 <p:outputPanel>
                     <div class="p-field">
                         <p:outputLabel for="authorWPE">Autor</p:outputLabel>
-                        <p:inputText id="authorWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.author}"/>
+                        <p:inputText id="authorWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.author}">
+                            <f:validateRegex
+                                    pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleWPE">Título</p:outputLabel>
-                        <p:inputText id="titleWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.title}"/>
+                        <p:inputText id="titleWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.title}">
+                            <f:validateRegex
+                                    pattern="^[A-Z].*"/>
+                        </p:inputText>
 
                     </div>
                     <div class="p-field">
@@ -1428,17 +1674,22 @@
 
                     <div class="p-field">
                         <p:outputLabel for="dateWPE">Fecha</p:outputLabel>
-                        <p:datePicker id="dateWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.date}" showButtonBar="true"/>
+                        <p:datePicker id="dateWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.date}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="accessDateWPE">Fecha de acceso</p:outputLabel>
-                        <p:datePicker id="accessDateWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.accessDate}" showButtonBar="true"/>
+                        <p:datePicker id="accessDateWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.accessDate}"
+                                      showButtonBar="true" maxdate="#{referenceManagerBean.actualDate}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="urlWPE">Url</p:outputLabel>
-                        <p:inputText id="urlWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.url}"/>
+                        <p:inputText id="urlWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.url}" required="true">
+                            <f:validateRegex
+                                    pattern="^https://.*"/>
+                        </p:inputText>
                     </div>
                 </p:outputPanel>
             </p:outputPanel>

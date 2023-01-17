@@ -17,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ReferenceManagerBean {
     private static File exportFile = new File(System.getProperty("user.home") + File. separator +"Desktop" + File. separator + "exported References.txt" );
     private static String path = "";
     private static String format = "";
-
+    private static LocalDate ActualDate = LocalDate.now();
 
     public void init() {
         referenceList.clear();
@@ -125,6 +126,10 @@ public class ReferenceManagerBean {
     public String getPath() { return path; }
 
     public void setPath(String path) { ReferenceManagerBean.path = path; }
+
+    public LocalDate getActualDate() { return ActualDate; }
+
+    public void setActualDate(LocalDate actualDate) { ActualDate = actualDate; }
 
     public void createArticleReference() {
 
