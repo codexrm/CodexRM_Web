@@ -14,11 +14,24 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Title</title>
+    <title>Index</title>
 </h:head>
 
 <h:body>
-    
+    <ui:composition template="/pages/template.xhtml">
+        <ui:define name="title">Index</ui:define>
+        <ui:define name="content">
+
+            <h:form>
+                <h6 align="center"> Welcome back!!!</h6>
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
 </h:body>
 
 </html>

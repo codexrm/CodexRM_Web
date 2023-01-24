@@ -350,7 +350,8 @@ public class ReferenceManagerBean {
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia eliminada", "");
         }
         else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar la referencia", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Existen errores al eliminar la referencia", ""));
         }
 
         init();

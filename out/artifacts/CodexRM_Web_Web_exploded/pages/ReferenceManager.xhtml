@@ -29,7 +29,7 @@
         <div>
             <p:toolbar>
                 <p:toolbarGroup align="left">
-                <p:menuButton value="Nuevo" icon="pi pi-plus" style="margin-right: .5rem">
+                <p:menuButton value="Adicionar" icon="pi pi-plus" style="margin-right: .5rem">
                     <p:menuitem value="Referencia de Libro" process="@this" actionListener="#{referenceManagerBean.bookReferenceBean.cleanVariables()}"
                                 oncomplete="PF('addBookReferenceDialog').show()"/>
 
@@ -59,13 +59,13 @@
                 </p:toolbarGroup>
 
                 <p:toolbarGroup align="right">
-                    <p:commandButton value="Import" icon="pi pi-download" style="margin-right: .5rem"
+                    <p:commandButton value="Importar" icon="pi pi-download" style="margin-right: .5rem"
                     process="@this" oncomplete="PF('importReferencesDialog').show()"/>
 
-                    <p:menuButton value="Export" icon="pi pi-upload"  styleClass="ui-button-help" style="margin-right: .5rem">
+                    <p:menuButton value="Exportar" icon="pi pi-upload"  styleClass="ui-button-help" style="margin-right: .5rem">
 
                         <p:menuitem value="Ris" process="dt-reference" oncomplete="PF('exportRisDialog').show()"/>
-                        <p:menuitem value="BibTex" process="dt-reference" oncomplete="PF('exportBibTexDialog').show()"/>
+                        <p:menuitem value="BibTeX" process="dt-reference" oncomplete="PF('exportBibTexDialog').show()"/>
                     </p:menuButton>
                 </p:toolbarGroup>
 
@@ -128,8 +128,6 @@
                             <f:validateRegex
                                     pattern="[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*,[A-ZÁÉÍÓÚÜÑ]+[a-záéíóúüñ-]*"/>
                         </p:inputText>
-                        <p:outputLabel for="@previous" value="Apellido,Nombre"/>
-
                     </div>
                     <div class="p-field">
                         <p:outputLabel for="titleB">Título</p:outputLabel>
@@ -782,7 +780,7 @@
                         <p:outputLabel for="format">Formato</p:outputLabel>
                         <p:selectOneMenu id="format" value="#{referenceManagerBean.format}">
                             <f:selectItem itemLabel="Ris" itemValue="Ris"/>
-                            <f:selectItem itemLabel="BibTex" itemValue="BibTex"/>
+                            <f:selectItem itemLabel="BibTeX" itemValue="BibTex"/>
                         </p:selectOneMenu>
                     </div>
                 </p:outputPanel>
@@ -1703,7 +1701,9 @@
                                  process="edit-webPageReference-content @this"/>
             </f:facet>
         </p:dialog>
-
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
     </h:form>
         </ui:define>
     </ui:composition>
