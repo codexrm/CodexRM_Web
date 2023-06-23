@@ -4,7 +4,6 @@ import entity.ConferencePaperReference;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.time.LocalDate;
 
 @ManagedBean
 @SessionScoped
@@ -12,13 +11,19 @@ public class ConferencePaperReferenceBean {
 
     private static ConferencePaperReference conferencePaperReference = new ConferencePaperReference();
     private static String author = "";
-    private static LocalDate date = null;
-    private static String note = "";
     private static String title = "";
-    private static String publisher = "";
+    private static String bookTitle = "";
+    private static String year = "";
+    private static String editor = "";
     private static String volume = "";
-    private static String address = "";
+    private static String number = "";
+    private static String series = "";
     private static String pages = "";
+    private static String address = "";
+    private static String month = "";
+    private static String organization = "";
+    private static String publisher = "";
+    private static String note = "";
 
     public ConferencePaperReference getConferencePaperReference() { return conferencePaperReference; }
 
@@ -28,49 +33,79 @@ public class ConferencePaperReferenceBean {
 
     public void setAuthor(String author) { ConferencePaperReferenceBean.author = author; }
 
-    public LocalDate getDate() { return date; }
-
-    public void setDate(LocalDate date) { ConferencePaperReferenceBean.date = date; }
-
-    public String getNote() { return note; }
-
-    public void setNote(String note) { ConferencePaperReferenceBean.note = note; }
-
     public String getTitle() { return title; }
 
     public void setTitle(String title) { ConferencePaperReferenceBean.title = title; }
 
-    public String getPublisher() { return publisher; }
+    public String getBookTitle() { return bookTitle; }
 
-    public void setPublisher(String publisher) { ConferencePaperReferenceBean.publisher = publisher; }
+    public void setBookTitle(String bookTitle) { ConferencePaperReferenceBean.bookTitle = bookTitle; }
+
+    public String getYear() { return year; }
+
+    public void setYear(String year) { ConferencePaperReferenceBean.year = year; }
+
+    public String getEditor() { return editor; }
+
+    public void setEditor(String editor) { ConferencePaperReferenceBean.editor = editor; }
 
     public String getVolume() { return volume; }
 
     public void setVolume(String volume) { ConferencePaperReferenceBean.volume = volume; }
 
-    public String getAddress() { return address; }
+    public String getNumber() { return number; }
 
-    public void setAddress(String address) { ConferencePaperReferenceBean.address = address; }
+    public void setNumber(String number) { ConferencePaperReferenceBean.number = number; }
+
+    public String getSeries() { return series; }
+
+    public void setSeries(String series) { ConferencePaperReferenceBean.series = series; }
 
     public String getPages() { return pages; }
 
     public void setPages(String pages) { ConferencePaperReferenceBean.pages = pages; }
 
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { ConferencePaperReferenceBean.address = address; }
+
+    public String getMonth() { return month; }
+
+    public void setMonth(String month) { ConferencePaperReferenceBean.month = month; }
+
+    public String getOrganization() { return organization;}
+
+    public void setOrganization(String organization) { ConferencePaperReferenceBean.organization = organization; }
+
+    public String getPublisher() { return publisher; }
+
+    public void setPublisher(String publisher) { ConferencePaperReferenceBean.publisher = publisher; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { ConferencePaperReferenceBean.note = note; }
+
     public void cleanVariables(){
         author = "";
-        date = null;
-        note = "";
         title = "";
-        publisher = "";
+        bookTitle = "";
+        year = "";
+        editor = "";
         volume = "";
-        address = "";
+        number = "";
+        series = "";
         pages = "";
+        address = "";
+        month = "";
+        organization = "";
+        publisher = "";
+        note = "";
+
     }
 
     public void copyEdit(ConferencePaperReference paper){
         if(paper != null)
-            conferencePaperReference = new ConferencePaperReference(paper.getId(), paper.getAuthor(),
-                    paper.getDate(), paper.getNote(), paper.getTitle(), paper.getUser(), paper.getAddress(),
-                    paper.getPages(), paper.getPublisher(), paper.getVolume());
+            conferencePaperReference = new ConferencePaperReference(paper.getTitle(), paper.getYear(), paper.getMonth(), paper.getNote(), paper.getUser(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(), paper.getNumber(), paper.getSeries(),
+                    paper.getPublisher(), paper.getVolume(), paper.getAddress(), paper.getPages(), paper.getOrganization());
     }
 }

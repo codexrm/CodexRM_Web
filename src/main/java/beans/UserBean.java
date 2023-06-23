@@ -13,17 +13,38 @@ import javax.faces.context.FacesContext;
 public class UserBean {
 
     private static String username = "";
+    private static String name = "";
+    private static String lastName = "";
+    private static String email = "";
+    private static boolean enabled = false;
     private static String password = "";
     private static User user = new User();
     private static RestUser restUser = new RestUser();
+
 
     public String getUsername() { return username; }
 
     public void setUsername(String username) { UserBean.username = username; }
 
+    public String getName() { return name; }
+
+    public void setName(String name) { UserBean.name = name; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { UserBean.lastName = lastName; }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { UserBean.email = email; }
+
+    public boolean isEnabled() { return enabled; }
+
+    public void setEnabled(boolean enabled) { UserBean.enabled = enabled; }
+
     public String getPassword() { return password; }
 
-    public void setPassword(String password) { password = password; }
+    public void setPassword(String password) { UserBean.password = password; }
 
     public User getUser() { return user; }
 
@@ -35,16 +56,20 @@ public class UserBean {
 
     public void cleanVariables(){
         username = "";
+        name = "";
+        lastName = "";
+        email = "";
+        enabled = false;
         password = "";
     }
 
     public void createUser() {
 
-        User userCodex = new User( password,username);
+        User userCodex = new User( username, name, lastName, email, enabled, password);
 
         if(userCodex != null){
 
-            addMessage(FacesMessage.SEVERITY_INFO, "usuario add", "");
+            addMessage(FacesMessage.SEVERITY_INFO, "Usuario adicionado", "");
         }else{
             addMessage( FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
@@ -54,17 +79,17 @@ public class UserBean {
 
     public void copyEdit(User UserCodex){
         if(UserCodex != null)
-            user = new User( UserCodex.getPassword(), UserCodex.getUsername());
+            user = new User( UserCodex.getUsername(), UserCodex.getName(), UserCodex.getLastName(), UserCodex.getEmail(), UserCodex.isEnabled(), UserCodex.getPassword());
     }
     public void editUser() {
         if (user != null){
             //referenceList.remove(thesisReferenceBean.getThesisReference().getId());
 
            // referenceList.add(thesisReferenceBean.getThesisReference());
-            addMessage(FacesMessage.SEVERITY_INFO, "user Update", "");
+            addMessage(FacesMessage.SEVERITY_INFO, "Usuario Actualizado", "");
         }
         else{
-            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuari", "User Inexistente");
+            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuario", "Usuario Inexistente");
         }
 
         //PrimeFaces.current().executeScript("PF('editThesisReferenceDialog').hide()");
@@ -74,7 +99,7 @@ public class UserBean {
     public void delete() {
         if (user != null) {
             //referenceList.remove(reference);
-            addMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminadas", "");
+            addMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado", "");
         }
        // PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }

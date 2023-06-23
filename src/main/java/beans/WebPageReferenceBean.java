@@ -4,7 +4,6 @@ import entity.WebPageReference;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.time.LocalDate;
 
 @ManagedBean
 @SessionScoped
@@ -12,11 +11,11 @@ public class WebPageReferenceBean {
 
     private static WebPageReference webPageReference = new WebPageReference();
     private static String author = "";
-    private static LocalDate date = null;
-    private static String note = "";
     private static String title = "";
     private static String url = "";
-    private static LocalDate accessDate = null;
+    private static String month = "";
+    private static String year = "";
+    private static String note = "";
 
     public WebPageReference getWebPageReference() { return webPageReference; }
 
@@ -26,14 +25,6 @@ public class WebPageReferenceBean {
 
     public void setAuthor(String author) { WebPageReferenceBean.author = author; }
 
-    public LocalDate getDate() { return date; }
-
-    public void setDate(LocalDate date) { WebPageReferenceBean.date = date; }
-
-    public String getNote() { return note; }
-
-    public void setNote(String note) { WebPageReferenceBean.note = note; }
-
     public String getTitle() { return title; }
 
     public void setTitle(String title) { WebPageReferenceBean.title = title; }
@@ -42,23 +33,29 @@ public class WebPageReferenceBean {
 
     public void setUrl(String url) { WebPageReferenceBean.url = url; }
 
-    public LocalDate getAccessDate() { return accessDate; }
+    public String getMonth() { return month; }
 
-    public void setAccessDate(LocalDate accessDate) { WebPageReferenceBean.accessDate = accessDate; }
+    public void setMonth(String month) { WebPageReferenceBean.month = month; }
+
+    public String getYear() { return year; }
+
+    public void setYear(String year) { WebPageReferenceBean.year = year; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { WebPageReferenceBean.note = note; }
 
     public void cleanVariables(){
         author = "";
-        date = null;
-        note = "";
         title = "";
         url = "";
-        accessDate = null;
+        month = "";
+        year = "";
+        note = "";
     }
 
     public void copyEdit(WebPageReference webPage){
         if(webPage != null)
-            webPageReference = new WebPageReference(webPage.getId(), webPage.getAuthor(), webPage.getDate(),
-                    webPage.getNote(), webPage.getTitle(), webPage.getUser(), webPage.getAccessDate(),
-                    webPage.getUrl());
+            webPageReference = new WebPageReference(webPage.getTitle(), webPage.getYear(), webPage.getMonth(), webPage.getNote(), webPage.getUser(), webPage.getAuthor(), webPage.getUrl());
     }
 }

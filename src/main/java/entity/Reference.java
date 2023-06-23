@@ -1,72 +1,62 @@
 package entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "reference")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Reference {
-
     @Id
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "author")
-    private String author;
-
-    @Column(name = "dater")
-    private LocalDate date;
-
-    @Column(name = "note")
-    private String note;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @Column(name = "title")
     private String title;
+
+
+    @Column(name = "year")
+    private String year;
+
+    @Column(name = "month")
+    private String month;
+
+    @Column(name = "note")
+    private String note;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usercodex")
     private User user;
 
-    public Reference() {
-    }
+    public Reference() {}
 
-    public Reference(String author, String title, LocalDate date, String note, User user) {
-        this.author = author;
+    public Reference(String title, String year, String month, String note, User user) {
         this.title = title;
-        this.date = date;
+        this.year = year;
+        this.month = month;
         this.note = note;
         this.user = user;
     }
 
-    public Reference(int id, String author, LocalDate date, String note, String title, User user) {
-        this.id = id;
-        this.author = author;
-        this.date = date;
-        this.note = note;
-        this.title = title;
-        this.user = user;
-    }
+    public Integer getId() { return id; }
 
-    public Integer getId() {return id;}
+    public void setId(Integer id) { this.id = id; }
 
-    public void setId(Integer id) {this.id = id;}
+    public String getTitle() { return title; }
 
-    public String getAuthor() {return author;}
+    public void setTitle(String title) { this.title = title; }
 
-    public void setAuthor(String author) {this.author = author;}
+    public String getYear() { return year; }
 
-    public String getTitle() {return title;}
+    public void setYear(String year) { this.year = year; }
 
-    public void setTitle(String title) {this.title = title;}
+    public String getMonth() { return month; }
 
-    public LocalDate getDate() {return date;}
+    public void setMonth(String month) { this.month = month; }
 
-    public void setDate(LocalDate date) {this.date = date;}
+    public String getNote() { return note; }
 
-    public String getNote() {return note;}
-
-    public void setNote(String note) {this.note = note;}
+    public void setNote(String note) { this.note = note; }
 
     public User getUser() { return user; }
 

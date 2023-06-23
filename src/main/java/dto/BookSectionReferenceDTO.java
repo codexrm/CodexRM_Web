@@ -1,26 +1,25 @@
 package dto;
 
-import entity.User;
-
-import java.time.LocalDate;
-
 public class BookSectionReferenceDTO extends  BookReferenceDTO{
 
     private String chapter;
     private String pages;
+    private String type;
 
     public BookSectionReferenceDTO() {}
 
-    public BookSectionReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String publisher, String volume, String series, String address, String edition, String chapter, String pages) {
-        super(author, title, date, note, id, user, publisher, volume, series, address, edition);
+    public BookSectionReferenceDTO(String title, String year, String month, String note, Integer id, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn, String chapter, String pages, String type) {
+        super(title, year, month, note, id, author, editor, publisher, volume, series, number, address, edition, isbn);
         this.chapter = chapter;
         this.pages = pages;
+        this.type = type;
     }
 
-    public BookSectionReferenceDTO(String author, String title, LocalDate date, String note, User user, String publisher, String volume, String series, String address, String edition, String chapter, String pages) {
-        super(author, title, date, note, user, publisher, volume, series, address, edition);
+    public BookSectionReferenceDTO(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn, String chapter, String pages, String type) {
+        super(title, year, month, note, author, editor, publisher, volume, series, number, address, edition, isbn);
         this.chapter = chapter;
         this.pages = pages;
+        this.type = type;
     }
 
     public String getChapter() {
@@ -38,4 +37,8 @@ public class BookSectionReferenceDTO extends  BookReferenceDTO{
     public void setPages(String pages) {
         this.pages = pages;
     }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 }

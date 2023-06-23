@@ -25,9 +25,9 @@ public class RestReference {
 
 
     public static void main(String[] args){
-        User u = new User("mary","mary");
-        UserDTO us = new UserDTO("mary","mary");
-        WebPageReferenceDTO r = new WebPageReferenceDTO( "author",  "title", LocalDate.now(),  "note",  7, u, "url", LocalDate.now());
+        //User u = new User("mary","mary");
+       // UserDTO us = new UserDTO("mary","mary");
+       // WebPageReferenceDTO r = new WebPageReferenceDTO( "author",  "title", LocalDate.now(),  "note",  7, u, "url", LocalDate.now());
 
        // System.out.println(deleteAllReference(u));
     }
@@ -79,7 +79,7 @@ public class RestReference {
         return dtoConverter.toReference(referenceDTO);
     }
 
-    public List<Reference> getReferenceByAuthor(User user, String author) {
+    /*public List<Reference> getReferenceByAuthor(User user, String author) {
         AuthorAndUserDTO authorAndUserDTO = new AuthorAndUserDTO(author,user);
         String inputJson = null;
         inputJson = JsonUtils.convertFromObjectToJson(authorAndUserDTO);
@@ -115,7 +115,7 @@ public class RestReference {
         }
         response.join();
         return dtoConverter.toReferenceList(referenceDTOList);
-    }
+    }*/
 
     //sending request to add the Reference details.
     public boolean addReference(Reference reference) {

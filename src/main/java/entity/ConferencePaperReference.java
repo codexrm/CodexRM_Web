@@ -1,41 +1,66 @@
 package entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "conferencepaperreference")
 public class ConferencePaperReference extends Reference {
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "author")
+    private String author;
 
-    @Column(name = "pages")
-    private String pages;
+    @Column(name = "booktitle")
+    private String bookTitle;
 
-    @Column(name = "publisher")
-    private String publisher;
+    @Column(name = "editor")
+    private String editor;
 
     @Column(name = "volume")
     private String volume;
 
+    @Column(name = "numbera")
+    private String number;
+
+    @Column(name = "series")
+    private String series;
+
+    @Column(name = "pages")
+    private String pages;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "organization")
+    private String organization;
+
+    @Column(name = "publisher")
+    private String publisher;
+
     public ConferencePaperReference() {}
 
-    public ConferencePaperReference(String author, String title, LocalDate date, String note, User user, String address, String pages, String publisher, String volume) {
-        super(author, title, date, note, user);
-        this.address = address;
-        this.pages = pages;
+    public ConferencePaperReference(String title, String year, String month, String note, User user, String author, String bookTitle, String editor, String number, String series, String publisher, String volume, String address, String pages, String organization) {
+        super(title, year, month, note, user);
+        this.author = author;
+        this.bookTitle = bookTitle;
+        this.editor = editor;
+        this.number = number;
+        this.series = series;
         this.publisher = publisher;
         this.volume = volume;
+        this.address = address;
+        this.pages = pages;
+        this.organization = organization;
     }
 
-    public ConferencePaperReference(int id, String author, LocalDate date, String note, String title, User user, String address, String pages, String publisher, String volume) {
-        super(id, author, date, note, title, user);
-        this.address = address;
-        this.pages = pages;
-        this.publisher = publisher;
-        this.volume = volume;
-    }
+    public String getPublisher() { return publisher; }
+
+    public void setPublisher(String publisher) { this.publisher = publisher; }
+
+    public String getVolume() { return volume; }
+
+    public void setVolume(String volume) { this.volume = volume; }
 
     public String getAddress() { return address; }
 
@@ -45,11 +70,27 @@ public class ConferencePaperReference extends Reference {
 
     public void setPages(String pages) { this.pages = pages; }
 
-    public String getPublisher() { return publisher; }
+    public String getAuthor() { return author; }
 
-    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public void setAuthor(String author) { this.author = author; }
 
-    public String getVolume() { return volume; }
+    public String getBookTitle() { return bookTitle; }
 
-    public void setVolume(String volume) { this.volume = volume; }
+    public void setBookTitle(String bookTitle) { this.bookTitle = bookTitle; }
+
+    public String getEditor() { return editor; }
+
+    public void setEditor(String editor) { this.editor = editor; }
+
+    public String getNumber() { return number; }
+
+    public void setNumber(String number) { this.number = number; }
+
+    public String getSeries() { return series; }
+
+    public void setSeries(String series) { this.series = series; }
+
+    public String getOrganization() { return organization; }
+
+    public void setOrganization(String organization) { this.organization = organization; }
 }

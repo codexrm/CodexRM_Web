@@ -1,36 +1,31 @@
 package entity;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "webpagereference")
-public class WebPageReference extends Reference{
+public class WebPageReference extends Reference {
 
-    @Column(name = "access_date")
-    private LocalDate accessDate;
+    @Column(name = "author")
+    private String author;
 
     @Column(name = "url")
     private String url;
 
+
     public WebPageReference() {}
 
-    public WebPageReference(String author, String title, LocalDate date, String note, User user, LocalDate accessDate, String url) {
-        super(author, title, date, note, user);
-        this.accessDate = accessDate;
+    public WebPageReference(String title, String year, String month, String note, User user, String author, String url) {
+        super(title, year, month, note, user);
+        this.author = author;
         this.url = url;
     }
 
-    public WebPageReference(int id, String author, LocalDate date, String note, String title, User user, LocalDate accessDate, String url) {
-        super(id, author, date, note, title, user);
-        this.accessDate = accessDate;
-        this.url = url;
-    }
+    public String getAuthor() { return author; }
 
-    public LocalDate getAccessDate() { return accessDate; }
-
-    public void setAccessDate(LocalDate accessDate) { this.accessDate = accessDate; }
+    public void setAuthor(String author) { this.author = author; }
 
     public String getUrl() { return url; }
 

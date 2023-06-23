@@ -1,14 +1,15 @@
 package entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "thesisreference")
-public class ThesisReference extends Reference {
+public class ThesisReference extends Reference{
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "author")
+    private String author;
 
     @Column(name = "school")
     private String school;
@@ -16,25 +17,22 @@ public class ThesisReference extends Reference {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "address")
+    private String address;
+
     public ThesisReference() {}
 
-    public ThesisReference(String author, String title, LocalDate date, String note, User user, String address, String school, String type) {
-        super(author, title, date, note, user);
-        this.address = address;
+    public ThesisReference(String title, String year, String month, String note, User user, String author, String school, String type, String address) {
+        super(title, year, month, note, user);
+        this.author = author;
         this.school = school;
         this.type = type;
-    }
-
-    public ThesisReference(int id, String author, LocalDate date, String note, String title, User user, String address, String school, String type) {
-        super(id, author, date, note, title, user);
         this.address = address;
-        this.school = school;
-        this.type = type;
     }
 
-    public String getAddress() { return address; }
+    public String getAuthor() { return author; }
 
-    public void setAddress(String address) { this.address = address; }
+    public void setAuthor(String author) { this.author = author; }
 
     public String getSchool() { return school; }
 
@@ -43,4 +41,8 @@ public class ThesisReference extends Reference {
     public String getType() { return type; }
 
     public void setType(String type) { this.type = type; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
 }

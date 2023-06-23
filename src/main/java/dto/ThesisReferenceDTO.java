@@ -1,30 +1,33 @@
 package dto;
 
-import entity.User;
+public class ThesisReferenceDTO extends ReferenceDTO {
 
-import java.time.LocalDate;
-
-public class ThesisReferenceDTO extends ReferenceDTO{
-
+    private String author;
     private String school;
     private String type;
     private String address;
 
     public ThesisReferenceDTO() {}
 
-    public ThesisReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String school, String type, String address) {
-        super(author, title, date, note, id, user);
+    public ThesisReferenceDTO(String title, String year, String month, String note, Integer id, String author, String school, String type, String address) {
+        super(title, year, month, note, id);
+        this.author = author;
         this.school = school;
         this.type = type;
         this.address = address;
     }
 
-    public ThesisReferenceDTO(String author, String title, LocalDate date, String note, User user, String school, String type, String address) {
-        super(author, title, date, note, user);
+    public ThesisReferenceDTO(String title, String year, String month, String note, String author, String school, String type, String address) {
+        super(title, year, month, note);
+        this.author = author;
         this.school = school;
         this.type = type;
         this.address = address;
     }
+
+    public String getAuthor() { return author; }
+
+    public void setAuthor(String author) { this.author = author; }
 
     public String getSchool() {
         return school;

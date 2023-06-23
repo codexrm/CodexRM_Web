@@ -1,37 +1,41 @@
 package entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "bookletreference")
 public class BookLetReference extends Reference{
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "author")
+    private String author;
 
     @Column(name = "howpublished")
     private String howpublished;
 
-    public BookLetReference() { }
+    @Column(name = "address")
+    private String address;
 
-    public BookLetReference(String author, String title, LocalDate date, String note, User user, String address, String howpublished) {
-        super(author, title, date, note, user);
-        this.address = address;
+
+    public BookLetReference() {}
+
+    public BookLetReference(String title, String year, String month, String note, User user, String author, String howpublished, String address) {
+        super(title, year, month, note, user);
+        this.author = author;
         this.howpublished = howpublished;
+        this.address = address;
     }
 
-    public BookLetReference(int id, String author, LocalDate date, String note, String title, User user, String address, String howpublished) {
-        super(id, author, date, note, title, user);
-        this.address = address;
-        this.howpublished = howpublished;
-    }
+    public String getAddress() {return address;}
 
-    public String getAddress() { return address; }
+    public void setAddress(String address) {this.address = address;}
 
-    public void setAddress(String address) { this.address = address; }
+    public String getHowpublished() {return howpublished;}
 
-    public String getHowpublished() { return howpublished; }
+    public void setHowpublished(String howpublished) {this.howpublished = howpublished;}
 
-    public void setHowpublished(String howpublished) { this.howpublished = howpublished; }
+    public String getAuthor() { return author; }
+
+    public void setAuthor(String author) { this.author = author; }
 }

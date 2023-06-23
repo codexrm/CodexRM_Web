@@ -1,11 +1,12 @@
 package entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "booksectionreference")
-public class BookSectionReference extends BookReference {
+public class BookSectionReference extends BookReference{
 
     @Column(name = "chapter")
     private String chapter;
@@ -13,25 +14,28 @@ public class BookSectionReference extends BookReference {
     @Column(name = "pages")
     private String pages;
 
+    @Column(name = "type")
+    private String type;
+
     public BookSectionReference() {}
 
-    public BookSectionReference(String author, String title, LocalDate date, String note, User user, String address, String edition, String publisher, String series, String volume, String chapter, String pages) {
-        super(author, title, date, note, user, address, edition, publisher, series, volume);
+    public BookSectionReference(String title, String year, String month, String note, User user, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn,
+                                String chapter, String pages, String type) {
+        super(title, year, month, note, user, author, editor, publisher, volume, number, series, address, edition, isbn);
         this.chapter = chapter;
         this.pages = pages;
+        this.type = type;
     }
 
-    public BookSectionReference(int id, String author, LocalDate date, String note, String title, User user, String address, String edition, String publisher, String series, String volume, String chapter, String pages) {
-        super(id, author, date, note, title, user, address, edition, publisher, series, volume);
-        this.chapter = chapter;
-        this.pages = pages;
-    }
+    public String getType() { return type; }
 
-    public String getChapter() { return chapter; }
+    public void setType(String type) { this.type = type; }
 
-    public void setChapter(String chapter) { this.chapter = chapter; }
+    public String getPages() {return pages;}
 
-    public String getPages() { return pages; }
+    public void setPages(String pages) {this.pages = pages;}
 
-    public void setPages(String pages) { this.pages = pages; }
+    public String getChapter() {return chapter;}
+
+    public void setChapter(String chapter) {this.chapter = chapter;}
 }

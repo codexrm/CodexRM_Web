@@ -1,10 +1,8 @@
 package beans;
 
 import entity.BookReference;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.time.LocalDate;
 
 @ManagedBean
 @SessionScoped
@@ -12,15 +10,18 @@ public class BookReferenceBean {
 
     private static BookReference bookReference = new BookReference();
     private static String author = "";
-    private static LocalDate date = null;
-    private static String note = "";
+    private static String editor = "";
     private static String title = "";
     private static String publisher = "";
+    private static String year = "";
+    private static String volume = "";
+    private static String number = "";
+    private static String series = "";
     private static String address = "";
     private static String edition = "";
-    private static String series = "";
-    private static String volume = "";
-
+    private static String month = "";
+    private static String isbn = "";
+    private static String note = "";
 
     public BookReference getBookReference() { return bookReference; }
 
@@ -30,13 +31,9 @@ public class BookReferenceBean {
 
     public void setAuthor(String author) { BookReferenceBean.author = author; }
 
-    public LocalDate getDate() { return date; }
+    public String getEditor() { return editor; }
 
-    public void setDate(LocalDate date) { BookReferenceBean.date = date; }
-
-    public String getNote() { return note; }
-
-    public void setNote(String note) { BookReferenceBean.note = note; }
+    public void setEditor(String editor) { BookReferenceBean.editor = editor; }
 
     public String getTitle() { return title; }
 
@@ -46,6 +43,22 @@ public class BookReferenceBean {
 
     public void setPublisher(String publisher) { BookReferenceBean.publisher = publisher; }
 
+    public String getYear() { return year; }
+
+    public void setYear(String year) { BookReferenceBean.year = year; }
+
+    public String getVolume() { return volume; }
+
+    public void setVolume(String volume) { BookReferenceBean.volume = volume; }
+
+    public String getNumber() { return number; }
+
+    public void setNumber(String number) { BookReferenceBean.number = number; }
+
+    public String getSeries() { return series; }
+
+    public void setSeries(String series) { BookReferenceBean.series = series; }
+
     public String getAddress() { return address; }
 
     public void setAddress(String address) { BookReferenceBean.address = address; }
@@ -54,31 +67,39 @@ public class BookReferenceBean {
 
     public void setEdition(String edition) { BookReferenceBean.edition = edition; }
 
-    public String getSeries() { return series; }
+    public String getMonth() { return month; }
 
-    public void setSeries(String series) { BookReferenceBean.series = series; }
+    public void setMonth(String month) { BookReferenceBean.month = month; }
 
-    public String getVolume() { return volume; }
+    public String getIsbn() { return isbn; }
 
-    public void setVolume(String volume) { BookReferenceBean.volume = volume; }
+    public void setIsbn(String isbn) { BookReferenceBean.isbn = isbn; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { BookReferenceBean.note = note; }
 
     public void cleanVariables() {
         author = "";
-        date = null;
-        note = "";
+        editor = "";
         title = "";
         publisher = "";
+        year = "";
+        volume = "";
+        number = "";
+        series = "";
         address = "";
         edition = "";
-        series = "";
-        volume = "";
+        month = "";
+        isbn = "";
+        note = "";
+
     }
 
     public void copyEdit(BookReference book){
         if(book != null)
-            bookReference = new BookReference( book.getId(), book.getAuthor(), book.getDate(), book.getNote(),
-                    book.getTitle(), book.getUser(), book.getAddress(), book.getEdition(), book.getPublisher(),
-                    book.getSeries(), book.getVolume());
+            bookReference = new BookReference( book.getTitle(), book.getYear(), book.getMonth(), book.getNote(), book.getUser(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
+                    book.getEdition(), book.getIsbn());
     }
 }
 

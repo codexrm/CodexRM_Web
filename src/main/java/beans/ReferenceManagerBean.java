@@ -1,13 +1,6 @@
 package beans;
 
 import entity.*;
-import enums.Format;
-import model.Export;
-import model.ExportFactory;
-import model.Import;
-import model.ImportFactory;
-import org.jbibtex.ParseException;
-import org.jbibtex.TokenMgrException;
 import org.primefaces.PrimeFaces;
 import rest.RestReference;
 
@@ -38,8 +31,6 @@ public class ReferenceManagerBean {
     private static WebPageReferenceBean webPageReferenceBean = new WebPageReferenceBean();
     private static UserBean userBean = new UserBean();
     private static RestReference restReference = new RestReference();
-    private static ExportFactory exportFactory = new ExportFactory();
-    private static ImportFactory importFactory = new ImportFactory();
     private static File exportFile = new File(System.getProperty("user.home") + File. separator +"Desktop" + File. separator + "exported References.txt" );
     private static String path = "";
     private static String format = "";
@@ -47,8 +38,8 @@ public class ReferenceManagerBean {
 
     public void init() {
         referenceList.clear();
-        userBean.setUser(new User("mary","mary"));
-        referenceList = restReference.getAllReference(userBean.getUser());
+       /* userBean.setUser(new User("mary","mary"));
+        referenceList = restReference.getAllReference(userBean.getUser());*/
     }
     public void cleanVariables(){
         path = "";
@@ -107,14 +98,6 @@ public class ReferenceManagerBean {
 
     public void setRestReference(RestReference restReference) { ReferenceManagerBean.restReference = restReference; }
 
-    public ExportFactory getExportFactory() { return exportFactory; }
-
-    public void setExportFactory(ExportFactory exportFactory) { ReferenceManagerBean.exportFactory = exportFactory; }
-
-    public ImportFactory getImportFactory() { return importFactory; }
-
-    public void setImportFactory(ImportFactory importFactory) { ReferenceManagerBean.importFactory = importFactory; }
-
     public File getExportFile() { return exportFile; }
 
     public void setExportFile(File exportFile) { ReferenceManagerBean.exportFile = exportFile; }
@@ -133,10 +116,8 @@ public class ReferenceManagerBean {
 
     public void createArticleReference() {
 
-        ArticleReference article = new ArticleReference(articleReferenceBean.getAuthor(),
-                articleReferenceBean.getTitle(), articleReferenceBean.getDate(), articleReferenceBean.getNote(),
-                userBean.getUser(), articleReferenceBean.getJournal(), articleReferenceBean.getNumber(),
-                articleReferenceBean.getPages(), articleReferenceBean.getVolume());
+        ArticleReference article = new ArticleReference(articleReferenceBean.getTitle(), articleReferenceBean.getYear(), articleReferenceBean.getMonth(), articleReferenceBean.getNote(), userBean.getUser(), articleReferenceBean.getAuthor(),
+                articleReferenceBean.getJournal(), articleReferenceBean.getVolume(), articleReferenceBean.getNumber(), articleReferenceBean.getPages(), articleReferenceBean.getIssn());
 
         if(restReference.addReference(article)){
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Artículo adicionada", "");
@@ -152,10 +133,8 @@ public class ReferenceManagerBean {
 
     public void createBookReference() {
 
-        BookReference book = new BookReference(bookReferenceBean.getAuthor(), bookReferenceBean.getTitle(),
-                bookReferenceBean.getDate(), bookReferenceBean.getNote(), userBean.getUser(),
-                bookReferenceBean.getAddress(), bookReferenceBean.getEdition(), bookReferenceBean.getPublisher(),
-                bookReferenceBean.getSeries(), bookReferenceBean.getVolume());
+        BookReference book = new BookReference(bookReferenceBean.getTitle(), bookReferenceBean.getYear(), bookReferenceBean.getMonth(), bookReferenceBean.getNote(),  userBean.getUser(), bookReferenceBean.getAuthor(), bookReferenceBean.getEditor(),
+                bookReferenceBean.getPublisher(), bookReferenceBean.getVolume(), bookReferenceBean.getNumber(), bookReferenceBean.getSeries(), bookReferenceBean.getAddress(), bookReferenceBean.getEdition(), bookReferenceBean.getIsbn());
 
         if (restReference.addReference(book)) {
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia de Libro adicionada", "");
@@ -171,12 +150,9 @@ public class ReferenceManagerBean {
 
     public void createBookSectionReference() {
 
-        BookSectionReference bookSection = new BookSectionReference(bookSectionReferenceBean.getAuthor(),
-                bookSectionReferenceBean.getTitle(), bookSectionReferenceBean.getDate(),
-                bookSectionReferenceBean.getNote(), userBean.getUser(), bookSectionReferenceBean.getAddress(),
-                bookSectionReferenceBean.getEdition(), bookSectionReferenceBean.getPublisher(),
-                bookSectionReferenceBean.getSeries(), bookSectionReferenceBean.getVolume(),
-                bookSectionReferenceBean.getChapter(), bookSectionReferenceBean.getPages());
+        BookSectionReference bookSection = new BookSectionReference(bookSectionReferenceBean.getTitle(), bookSectionReferenceBean.getYear(), bookSectionReferenceBean.getMonth(), bookSectionReferenceBean.getNote(), userBean.getUser(),
+                bookSectionReferenceBean.getAuthor(), bookSectionReferenceBean.getEditor(), bookSectionReferenceBean.getPublisher(), bookSectionReferenceBean.getVolume(), bookSectionReferenceBean.getNumber(), bookSectionReferenceBean.getSeries(),
+                bookSectionReferenceBean.getAddress(), bookSectionReferenceBean.getEdition(), bookSectionReferenceBean.getIsbn(), bookSectionReferenceBean.getChapter(), bookSectionReferenceBean.getPages(), bookSectionReferenceBean.getType());
 
         if(restReference.addReference(bookSection)){
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia de la Sección de libro adicionada", "");
@@ -192,9 +168,8 @@ public class ReferenceManagerBean {
 
     public void createBookLetReference() {
 
-        BookLetReference bookLet = new BookLetReference(bookLetReferenceBean.getAuthor(),
-                bookLetReferenceBean.getTitle(), bookLetReferenceBean.getDate(), bookLetReferenceBean.getNote(),
-                userBean.getUser(), bookLetReferenceBean.getAddress(), bookLetReferenceBean.getHowpublished());
+        BookLetReference bookLet = new BookLetReference(bookLetReferenceBean.getTitle(), bookLetReferenceBean.getYear(), bookLetReferenceBean.getMonth(), bookLetReferenceBean.getNote(), userBean.getUser(), bookLetReferenceBean.getAuthor(),
+                bookLetReferenceBean.getHowpublished(), bookLetReferenceBean.getAddress());
 
         if(restReference.addReference(bookLet)){
            addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Folleto adicionada", "");
@@ -210,10 +185,8 @@ public class ReferenceManagerBean {
 
     public void createThesisReference() {
 
-        ThesisReference thesis = new ThesisReference(thesisReferenceBean.getAuthor(),
-                thesisReferenceBean.getTitle(), thesisReferenceBean.getDate(), thesisReferenceBean.getNote(),
-                userBean.getUser(), thesisReferenceBean.getAddress(), thesisReferenceBean.getSchool(),
-                thesisReferenceBean.getType());
+        ThesisReference thesis = new ThesisReference(thesisReferenceBean.getTitle(), thesisReferenceBean.getYear(), thesisReferenceBean.getMonth(), thesisReferenceBean.getNote(), userBean.getUser(), thesisReferenceBean.getAuthor(), thesisReferenceBean.getSchool(),
+                thesisReferenceBean.getType(), thesisReferenceBean.getAddress());
 
         if(restReference.addReference(thesis)){
            addMessage(FacesMessage.SEVERITY_INFO, "Referencia de la Tesis adicionada", "");
@@ -229,11 +202,9 @@ public class ReferenceManagerBean {
 
     public void createConferenceProceedingsReference() {
 
-        ConferenceProceedingsReference proceedings = new ConferenceProceedingsReference(
-                conferenceProceedingsReferenceBean.getAuthor(), conferenceProceedingsReferenceBean.getTitle(),
-                conferenceProceedingsReferenceBean.getDate(), conferenceProceedingsReferenceBean.getNote(),
-                userBean.getUser(), conferenceProceedingsReferenceBean.getAddress(),
-                conferenceProceedingsReferenceBean.getSeries(), conferenceProceedingsReferenceBean.getVolume());
+        ConferenceProceedingReference proceedings = new ConferenceProceedingReference(conferenceProceedingsReferenceBean.getTitle(), conferenceProceedingsReferenceBean.getYear(), conferenceProceedingsReferenceBean.getMonth(),
+                conferenceProceedingsReferenceBean.getNote(), userBean.getUser(), conferenceProceedingsReferenceBean.getEditor(), conferenceProceedingsReferenceBean.getVolume(), conferenceProceedingsReferenceBean.getNumber(),
+                conferenceProceedingsReferenceBean.getSeries(), conferenceProceedingsReferenceBean.getAddress(), conferenceProceedingsReferenceBean.getPublisher(), conferenceProceedingsReferenceBean.getIsbn(), conferenceProceedingsReferenceBean.getOrganization());
 
         if(restReference.addReference(proceedings)){
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Acta de Congreso adicionada", "");
@@ -249,11 +220,9 @@ public class ReferenceManagerBean {
 
     public void createConferencePaperReference() {
 
-        ConferencePaperReference paper = new ConferencePaperReference(conferencePaperReferenceBean.getAuthor(),
-                conferencePaperReferenceBean.getTitle(), conferencePaperReferenceBean.getDate(),
-                conferencePaperReferenceBean.getNote(), userBean.getUser(),
-                conferencePaperReferenceBean.getAddress(), conferencePaperReferenceBean.getPages(),
-                conferencePaperReferenceBean.getPublisher(), conferencePaperReferenceBean.getVolume());
+        ConferencePaperReference paper = new ConferencePaperReference(conferencePaperReferenceBean.getTitle(), conferencePaperReferenceBean.getYear(), conferencePaperReferenceBean.getMonth(), conferencePaperReferenceBean.getNote(), userBean.getUser(),
+                conferencePaperReferenceBean.getAuthor(), conferencePaperReferenceBean.getBookTitle(), conferencePaperReferenceBean.getEditor(), conferencePaperReferenceBean.getNumber(), conferencePaperReferenceBean.getSeries(),
+                conferencePaperReferenceBean.getPublisher(), conferencePaperReferenceBean.getVolume(), conferencePaperReferenceBean.getAddress(), conferencePaperReferenceBean.getPages(), conferencePaperReferenceBean.getOrganization());
 
         if(restReference.addReference(paper)){
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Documento de Sesión adicionada", "");
@@ -269,9 +238,8 @@ public class ReferenceManagerBean {
 
     public void createWebPageReference() {
 
-        WebPageReference webPage = new WebPageReference(webPageReferenceBean.getAuthor(),
-                webPageReferenceBean.getTitle(), webPageReferenceBean.getDate(), webPageReferenceBean.getNote(),
-                userBean.getUser(), webPageReferenceBean.getAccessDate(), webPageReferenceBean.getUrl());
+        WebPageReference webPage = new WebPageReference(webPageReferenceBean.getTitle(), webPageReferenceBean.getYear(), webPageReferenceBean.getMonth(), webPageReferenceBean.getNote(), userBean.getUser(), webPageReferenceBean.getAuthor(),
+                webPageReferenceBean.getUrl());
 
         if(restReference.addReference(webPage)){
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia de la Página Web adicionada", "");
@@ -310,9 +278,9 @@ public class ReferenceManagerBean {
                             PrimeFaces.current().executeScript("PF('infoBookLetReferenceDialog').show()");
 
                         } else {
-                            if (selectReference.getClass() == ConferenceProceedingsReference.class) {
+                            if (selectReference.getClass() == ConferenceProceedingReference.class) {
                                 PrimeFaces.current().ajax().update("form:info-conferenceProceedingsReference-content");
-                                conferenceProceedingsReferenceBean.copyEdit((ConferenceProceedingsReference) selectReference);
+                                conferenceProceedingsReferenceBean.copyEdit((ConferenceProceedingReference) selectReference);
                                 PrimeFaces.current().executeScript("PF('infoConferenceProceedingsReferenceDialog').show()");
 
                             } else {
@@ -382,9 +350,9 @@ public class ReferenceManagerBean {
                             PrimeFaces.current().executeScript("PF('editBookLetReferenceDialog').show()");
 
                         } else {
-                            if (selectReference.getClass() == ConferenceProceedingsReference.class) {
+                            if (selectReference.getClass() == ConferenceProceedingReference.class) {
                                 PrimeFaces.current().ajax().update("form:edit-conferenceProceedingsReference-content");
-                                conferenceProceedingsReferenceBean.copyEdit((ConferenceProceedingsReference) selectReference);
+                                conferenceProceedingsReferenceBean.copyEdit((ConferenceProceedingReference) selectReference);
                                 PrimeFaces.current().executeScript("PF('editConferenceProceedingsReferenceDialog').show()");
 
                             } else {
@@ -521,7 +489,7 @@ public class ReferenceManagerBean {
 
     public void editConferenceProceedingsReference() {
 
-        ConferenceProceedingsReference proceedingsFinded = (ConferenceProceedingsReference) restReference.getReferenceById(conferenceProceedingsReferenceBean.getConferenceProceedingsReference().getId());
+        ConferenceProceedingReference proceedingsFinded = (ConferenceProceedingReference) restReference.getReferenceById(conferenceProceedingsReferenceBean.getConferenceProceedingsReference().getId());
 
         if (proceedingsFinded == null){
             addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Referencia Inexistente");
@@ -599,20 +567,24 @@ public class ReferenceManagerBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
 
-    public void exportRis() throws IOException { exportReferenceList(Format.RIS); }
+    public void exportRis() throws IOException {
+       // exportReferenceList(Format.RIS);
+    }
 
-    public void exportBibTex() throws IOException { exportReferenceList(Format.BIBTEX); }
+    public void exportBibTex() throws IOException {
+      //  exportReferenceList(Format.BIBTEX);
+    }
 
-    private void exportReferenceList(Format format) throws IOException {
+   /* private void exportReferenceList(Format format) throws IOException {
 
         Export export = exportFactory.getExport(format);
         export.writeValue((ArrayList<Reference>) selectReferenceList, exportFile.getPath());
         addMessage(FacesMessage.SEVERITY_INFO, "Las Referencias seleccionadas han sido exportadas", "");
 
         PrimeFaces.current().ajax().update("form:messages");
-    }
+    }*/
 
-    public void importReferences() throws IOException, TokenMgrException, ParseException {
+   /* public void importReferences() throws IOException, TokenMgrException, ParseException {
 
         File importFile = new File(path);
         Import importer;
@@ -640,7 +612,7 @@ public class ReferenceManagerBean {
         init();
         PrimeFaces.current().executeScript("PF('importReferencesDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
-    }
+    }*/
 
     private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesContext.getCurrentInstance().

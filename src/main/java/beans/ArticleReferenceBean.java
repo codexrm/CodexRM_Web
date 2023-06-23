@@ -4,21 +4,24 @@ import entity.ArticleReference;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.time.LocalDate;
 
 @ManagedBean
 @SessionScoped
-public class ArticleReferenceBean {
+public class  ArticleReferenceBean {
 
     private static ArticleReference articleReference = new ArticleReference();
     private static String author = "";
-    private static LocalDate date = null;
-    private static String note = "";
     private static String title = "";
     private static String journal = "";
+    private static String year = "";
     private static String volume = "";
     private static String number = "";
     private static String pages = "";
+    private static String month = "";
+    private static String issn = "";
+    private static String note = "";
+
+    public ArticleReferenceBean() { }
 
     public ArticleReference getArticleReference() { return articleReference; }
 
@@ -28,14 +31,6 @@ public class ArticleReferenceBean {
 
     public void setAuthor(String author) { ArticleReferenceBean.author = author; }
 
-    public LocalDate getDate() { return date; }
-
-    public void setDate(LocalDate date) { ArticleReferenceBean.date = date; }
-
-    public String getNote() { return note; }
-
-    public void setNote(String note) { ArticleReferenceBean.note = note; }
-
     public String getTitle() { return title; }
 
     public void setTitle(String title) { ArticleReferenceBean.title = title; }
@@ -43,6 +38,10 @@ public class ArticleReferenceBean {
     public String getJournal() { return journal; }
 
     public void setJournal(String journal) { ArticleReferenceBean.journal = journal; }
+
+    public String getYear() { return year; }
+
+    public void setYear(String year) { ArticleReferenceBean.year = year; }
 
     public String getVolume() { return volume; }
 
@@ -56,21 +55,34 @@ public class ArticleReferenceBean {
 
     public void setPages(String pages) { ArticleReferenceBean.pages = pages; }
 
+    public String getMonth() { return month; }
+
+    public void setMonth(String month) { ArticleReferenceBean.month = month; }
+
+    public String getIssn() { return issn; }
+
+    public void setIssn(String issn) { ArticleReferenceBean.issn = issn; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { ArticleReferenceBean.note = note; }
+
     public void cleanVariables(){
         author = "";
-        date = null;
-        note = "";
         title = "";
         journal = "";
+        year = "";
         volume = "";
         number = "";
         pages = "";
+        month = "";
+        issn = "";
+        note = "";
     }
 
     public void copyEdit(ArticleReference article){
         if(article != null)
-            articleReference = new ArticleReference(article.getId(), article.getAuthor(), article.getDate(),
-                    article.getNote(), article.getTitle(), article.getUser(), article.getJournal(),
-                    article.getNumber(), article.getPages(), article.getVolume());
+            articleReference = new ArticleReference(article.getTitle(), article.getYear(), article.getMonth(), article.getNote(), article.getUser(), article.getAuthor(), article.getJournal(), article.getVolume(), article.getNumber(), article.getPages(),
+                    article.getIssn());
     }
 }

@@ -34,7 +34,7 @@ public class DTOConverter {
         else if(reference.getClass() == BookLetReference.class){
             return modelMapper.map(reference,BookLetReferenceDTO.class);
         }
-        else if(reference.getClass() == ConferenceProceedingsReference.class){
+        else if(reference.getClass() == ConferenceProceedingReference.class){
             return modelMapper.map(reference,ConferenceProceedingsReferenceDTO.class);
         }
         else if(reference.getClass() == ConferencePaperReference.class) {
@@ -62,7 +62,7 @@ public class DTOConverter {
             return modelMapper.map(referenceDTO,BookLetReference.class);
         }
         else if(referenceDTO.getClass() == ConferenceProceedingsReferenceDTO.class){
-            return modelMapper.map(referenceDTO,ConferenceProceedingsReference.class);
+            return modelMapper.map(referenceDTO,ConferenceProceedingReference.class);
         }
         else if(referenceDTO.getClass() == ConferencePaperReferenceDTO.class){
             return modelMapper.map(referenceDTO,ConferencePaperReference.class);

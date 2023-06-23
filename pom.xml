@@ -28,7 +28,6 @@
     </properties>
 
     <dependencies>
-
         <!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
         <dependency>
             <groupId>com.sun.faces</groupId>
@@ -169,21 +168,6 @@
             <artifactId>modelmapper</artifactId>
             <version>3.1.0</version>
         </dependency>
-
-        <!--Ris & BibTex DEPENDENCIES -->
-
-        <!-- https://mvnrepository.com/artifact/org.jbibtex/jbibtex -->
-        <dependency>
-            <groupId>org.jbibtex</groupId>
-            <artifactId>jbibtex</artifactId>
-            <version>1.0.20</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.codexrm</groupId>
-            <artifactId>jRis</artifactId>
-            <version>1.2.0-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
+
 </project>
