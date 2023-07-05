@@ -92,7 +92,7 @@ public class ConferenceProceedingsReferenceBean {
 
     public void copyEdit(ConferenceProceedingReference proceedings){
         if(proceedings != null)
-            conferenceProceedingsReference = new ConferenceProceedingReference(proceedings.getTitle(), proceedings.getYear(), proceedings.getMonth(), proceedings.getNote(), proceedings.getUser(), proceedings.getEditor(), proceedings.getVolume(),
+            conferenceProceedingsReference = new ConferenceProceedingReference(proceedings.getId(), proceedings.getTitle(), proceedings.getYear(), proceedings.getMonth(), proceedings.getNote(), proceedings.getEditor(), proceedings.getVolume(),
                     proceedings.getNumber(), proceedings.getSeries(), proceedings.getAddress(), proceedings.getPublisher(), proceedings.getIsbn(), proceedings.getOrganization());
     }
 }

@@ -24,18 +24,21 @@ public class Reference {
     @Column(name = "note")
     private String note;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "usercodex")
-    private User user;
-
     public Reference() {}
 
-    public Reference(String title, String year, String month, String note, User user) {
+    public Reference(String title, String year, String month, String note) {
         this.title = title;
         this.year = year;
         this.month = month;
         this.note = note;
-        this.user = user;
+    }
+
+    public Reference(Integer id, String title, String year, String month, String note) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.month = month;
+        this.note = note;
     }
 
     public Integer getId() { return id; }
@@ -57,8 +60,4 @@ public class Reference {
     public String getNote() { return note; }
 
     public void setNote(String note) { this.note = note; }
-
-    public User getUser() { return user; }
-
-    public void setUser(User user) { this.user = user; }
 }

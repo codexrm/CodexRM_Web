@@ -22,8 +22,16 @@ public class ThesisReference extends Reference{
 
     public ThesisReference() {}
 
-    public ThesisReference(String title, String year, String month, String note, User user, String author, String school, String type, String address) {
-        super(title, year, month, note, user);
+    public ThesisReference(String title, String year, String month, String note, String author, String school, String type, String address) {
+        super(title, year, month, note);
+        this.author = author;
+        this.school = school;
+        this.type = type;
+        this.address = address;
+    }
+
+    public ThesisReference(Integer id, String title, String year, String month, String note, String author, String school, String type, String address) {
+        super(id, title, year, month, note);
         this.author = author;
         this.school = school;
         this.type = type;

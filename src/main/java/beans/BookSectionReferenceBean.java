@@ -116,7 +116,7 @@ public class BookSectionReferenceBean {
 
     public void copyEdit(BookSectionReference section){
         if(section != null)
-            bookSectionReference = new BookSectionReference(section.getTitle(), section.getYear(), section.getMonth(), section.getNote(), section.getUser(), section.getAuthor(), section.getEditor(), section.getPublisher(), section.getVolume(), section.getNumber(),
+            bookSectionReference = new BookSectionReference(section.getId(), section.getTitle(), section.getYear(), section.getMonth(), section.getNote(), section.getAuthor(), section.getEditor(), section.getPublisher(), section.getVolume(), section.getNumber(),
                     section.getSeries(), section.getAddress(), section.getEdition(), section.getIsbn(), section.getChapter(), section.getPages(), section.getType());
     }
 }

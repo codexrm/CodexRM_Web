@@ -68,6 +68,6 @@ public class ThesisReferenceBean {
 
     public void copyEdit(ThesisReference thesis){
         if(thesis != null)
-            thesisReference = new ThesisReference(thesis.getTitle(), thesis.getYear(), thesis.getMonth(), thesis.getNote(), thesis.getUser(), thesis.getAuthor(), thesis.getSchool(), thesis.getType(), thesis.getAddress());
+            thesisReference = new ThesisReference(thesis.getId(), thesis.getTitle(), thesis.getYear(), thesis.getMonth(), thesis.getNote(), thesis.getAuthor(), thesis.getSchool(), thesis.getType(), thesis.getAddress());
     }
 }

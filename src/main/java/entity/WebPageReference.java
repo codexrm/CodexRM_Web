@@ -17,8 +17,14 @@ public class WebPageReference extends Reference {
 
     public WebPageReference() {}
 
-    public WebPageReference(String title, String year, String month, String note, User user, String author, String url) {
-        super(title, year, month, note, user);
+    public WebPageReference(String title, String year, String month, String note, String author, String url) {
+        super(title, year, month, note);
+        this.author = author;
+        this.url = url;
+    }
+
+    public WebPageReference(Integer id, String title, String year, String month, String note, String author, String url) {
+        super(id, title, year, month, note);
         this.author = author;
         this.url = url;
     }

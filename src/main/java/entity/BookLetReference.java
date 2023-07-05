@@ -20,8 +20,15 @@ public class BookLetReference extends Reference{
 
     public BookLetReference() {}
 
-    public BookLetReference(String title, String year, String month, String note, User user, String author, String howpublished, String address) {
-        super(title, year, month, note, user);
+    public BookLetReference(String title, String year, String month, String note, String author, String howpublished, String address) {
+        super(title, year, month, note);
+        this.author = author;
+        this.howpublished = howpublished;
+        this.address = address;
+    }
+
+    public BookLetReference(Integer id, String title, String year, String month, String note, String author, String howpublished, String address) {
+        super(id, title, year, month, note);
         this.author = author;
         this.howpublished = howpublished;
         this.address = address;

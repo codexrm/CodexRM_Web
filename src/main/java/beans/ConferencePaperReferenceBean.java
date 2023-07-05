@@ -105,7 +105,7 @@ public class ConferencePaperReferenceBean {
 
     public void copyEdit(ConferencePaperReference paper){
         if(paper != null)
-            conferencePaperReference = new ConferencePaperReference(paper.getTitle(), paper.getYear(), paper.getMonth(), paper.getNote(), paper.getUser(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(), paper.getNumber(), paper.getSeries(),
+            conferencePaperReference = new ConferencePaperReference(paper.getId(), paper.getTitle(), paper.getYear(), paper.getMonth(), paper.getNote(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(), paper.getNumber(), paper.getSeries(),
                     paper.getPublisher(), paper.getVolume(), paper.getAddress(), paper.getPages(), paper.getOrganization());
     }
 }

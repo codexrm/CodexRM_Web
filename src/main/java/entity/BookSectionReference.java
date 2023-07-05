@@ -19,9 +19,16 @@ public class BookSectionReference extends BookReference{
 
     public BookSectionReference() {}
 
-    public BookSectionReference(String title, String year, String month, String note, User user, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn,
+    public BookSectionReference(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn,
                                 String chapter, String pages, String type) {
-        super(title, year, month, note, user, author, editor, publisher, volume, number, series, address, edition, isbn);
+        super(title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn);
+        this.chapter = chapter;
+        this.pages = pages;
+        this.type = type;
+    }
+
+    public BookSectionReference(Integer id, String title, String year, String month, String note, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn, String chapter, String pages, String type) {
+        super(id, title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn);
         this.chapter = chapter;
         this.pages = pages;
         this.type = type;

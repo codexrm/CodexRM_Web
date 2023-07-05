@@ -1,41 +1,72 @@
 package dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserDTO {
 
+    private String token;
+    private String type = "Bearer";
+    private String refreshToken;
+    private Date tokenExpirationDate;
+    private Date refreshTokenExpirationDate;
     private Integer id;
     private String username;
-    private String password;
+    private String email;
     private String name;
     private String lastName;
-    private String email;
     private boolean enabled;
     private List<String> roles;
 
-    public UserDTO() {}
 
-    public UserDTO(Integer id, String username, String password, String name, String lastName, String email, boolean enabled) {
+    public UserDTO(){ }
+
+    public UserDTO(String accessToken, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate, Integer id, String username, String email, String name, String lastName,
+                   boolean enabled, List<String> roles) {
+        this.token = accessToken;
+        this.refreshToken = refreshToken;
+        this.tokenExpirationDate = tokenExpirationDate;
+        this.refreshTokenExpirationDate = refreshTokenExpirationDate;
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.email = email;
         this.name = name;
         this.lastName = lastName;
-        this.email = email;
         this.enabled = enabled;
+        this.roles = roles;
     }
 
-    public String getUsername() {return username;}
+    public String getAccessToken() { return token; }
 
-    public void setUsername(String username) {this.username = username;}
+    public void setAccessToken(String accessToken) { this.token = accessToken; }
 
-    public String getPassword() {return password;}
+    public String getTokenType() { return type; }
 
-    public void setPassword(String password) {this.password = password;}
+    public void setTokenType(String tokenType) { this.type = tokenType; }
+
+    public String getRefreshToken() { return refreshToken; }
+
+    public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
+
+    public Date getTokenExpirationDate() { return tokenExpirationDate; }
+
+    public void setTokenExpirationDate(Date tokenExpirationDate) { this.tokenExpirationDate = tokenExpirationDate; }
+
+    public Date getRefreshTokenExpirationDate() { return refreshTokenExpirationDate; }
+
+    public void setRefreshTokenExpirationDate(Date refreshTokenExpirationDate) { this.refreshTokenExpirationDate = refreshTokenExpirationDate; }
 
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id; }
+
+    public String getUsername() { return username; }
+
+    public void setUsername(String username) { this.username = username; }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public String getName() { return name; }
 
@@ -45,10 +76,6 @@ public class UserDTO {
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) { this.email = email; }
-
     public boolean isEnabled() { return enabled; }
 
     public void setEnabled(boolean enabled) { this.enabled = enabled; }
@@ -56,6 +83,4 @@ public class UserDTO {
     public List<String> getRoles() { return roles; }
 
     public void setRoles(List<String> roles) { this.roles = roles; }
-
-    public void setRol(String rol) { this.roles.add(rol); }
 }

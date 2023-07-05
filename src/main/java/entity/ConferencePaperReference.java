@@ -40,8 +40,8 @@ public class ConferencePaperReference extends Reference {
 
     public ConferencePaperReference() {}
 
-    public ConferencePaperReference(String title, String year, String month, String note, User user, String author, String bookTitle, String editor, String number, String series, String publisher, String volume, String address, String pages, String organization) {
-        super(title, year, month, note, user);
+    public ConferencePaperReference(String title, String year, String month, String note, String author, String bookTitle, String editor, String number, String series, String publisher, String volume, String address, String pages, String organization) {
+        super(title, year, month, note);
         this.author = author;
         this.bookTitle = bookTitle;
         this.editor = editor;
@@ -52,6 +52,20 @@ public class ConferencePaperReference extends Reference {
         this.address = address;
         this.pages = pages;
         this.organization = organization;
+    }
+
+    public ConferencePaperReference(Integer id, String title, String year, String month, String note, String author, String bookTitle, String editor, String number, String series, String publisher, String volume, String address, String pages, String organization) {
+        super(id, title, year, month, note);
+        this.author = author;
+        this.bookTitle = bookTitle;
+        this.editor = editor;
+        this.volume = volume;
+        this.number = number;
+        this.series = series;
+        this.pages = pages;
+        this.address = address;
+        this.organization = organization;
+        this.publisher = publisher;
     }
 
     public String getPublisher() { return publisher; }

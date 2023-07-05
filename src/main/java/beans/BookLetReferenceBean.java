@@ -62,6 +62,6 @@ public class BookLetReferenceBean {
 
     public void copyEdit(BookLetReference bookLet){
         if(bookLet != null)
-            bookLetReference = new BookLetReference(bookLet.getTitle(), bookLet.getYear(), bookLet.getMonth(), bookLet.getNote(), bookLet.getUser(), bookLet.getAuthor(), bookLet.getHowpublished(), bookLet.getAddress());
+            bookLetReference = new BookLetReference(bookLet.getId(), bookLet.getTitle(), bookLet.getYear(), bookLet.getMonth(), bookLet.getNote(), bookLet.getAuthor(), bookLet.getHowpublished(), bookLet.getAddress());
     }
 }

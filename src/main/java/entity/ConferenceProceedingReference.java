@@ -34,8 +34,8 @@ public class ConferenceProceedingReference extends Reference {
 
     public ConferenceProceedingReference() {}
 
-    public ConferenceProceedingReference(String title, String year, String month, String note, User user, String editor, String volume, String number, String series, String address, String publisher, String isbn, String organization) {
-        super(title, year, month, note, user);
+    public ConferenceProceedingReference(String title, String year, String month, String note, String editor, String volume, String number, String series, String address, String publisher, String isbn, String organization) {
+        super(title, year, month, note);
         this.editor = editor;
         this.volume = volume;
         this.number = number;
@@ -44,6 +44,18 @@ public class ConferenceProceedingReference extends Reference {
         this.publisher = publisher;
         this.isbn = isbn;
         this.organization = organization;
+    }
+
+    public ConferenceProceedingReference(Integer id, String title, String year, String month, String note, String editor, String volume, String number, String series, String address, String publisher, String isbn, String organization) {
+        super(id, title, year, month, note);
+        this.editor = editor;
+        this.volume = volume;
+        this.number = number;
+        this.series = series;
+        this.address = address;
+        this.publisher = publisher;
+        this.organization = organization;
+        this.isbn = isbn;
     }
 
     public String getAddress() {

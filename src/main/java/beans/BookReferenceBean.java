@@ -98,7 +98,7 @@ public class BookReferenceBean {
 
     public void copyEdit(BookReference book){
         if(book != null)
-            bookReference = new BookReference( book.getTitle(), book.getYear(), book.getMonth(), book.getNote(), book.getUser(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
+            bookReference = new BookReference(book.getId(),  book.getTitle(), book.getYear(), book.getMonth(), book.getNote(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
                     book.getEdition(), book.getIsbn());
     }
 }

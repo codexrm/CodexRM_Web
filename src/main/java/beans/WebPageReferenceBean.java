@@ -56,6 +56,6 @@ public class WebPageReferenceBean {
 
     public void copyEdit(WebPageReference webPage){
         if(webPage != null)
-            webPageReference = new WebPageReference(webPage.getTitle(), webPage.getYear(), webPage.getMonth(), webPage.getNote(), webPage.getUser(), webPage.getAuthor(), webPage.getUrl());
+            webPageReference = new WebPageReference(webPage.getId(), webPage.getTitle(), webPage.getYear(), webPage.getMonth(), webPage.getNote(), webPage.getAuthor(), webPage.getUrl());
     }
 }

@@ -36,8 +36,21 @@ public class BookReference extends Reference{
 
     public BookReference() {}
 
-    public BookReference(String title, String year, String month, String note, User user, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
-        super(title, year, month, note, user);
+    public BookReference(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
+        super(title, year, month, note);
+        this.author = author;
+        this.editor = editor;
+        this.publisher = publisher;
+        this.volume = volume;
+        this.number = number;
+        this.series = series;
+        this.address = address;
+        this.edition = edition;
+        this.isbn = isbn;
+    }
+
+    public BookReference(Integer id, String title, String year, String month, String note, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
+        super(id, title, year, month, note);
         this.author = author;
         this.editor = editor;
         this.publisher = publisher;

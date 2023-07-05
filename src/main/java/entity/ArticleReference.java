@@ -28,8 +28,18 @@ public class ArticleReference extends Reference {
 
     public ArticleReference() {}
 
-    public ArticleReference(String title, String year, String month, String note, User user, String author, String journal, String volume, String number, String pages, String issn) {
-        super(title, year, month, note, user);
+    public ArticleReference(String title, String year, String month, String note, String author, String journal, String volume, String number, String pages, String issn) {
+        super(title, year, month, note);
+        this.author = author;
+        this.journal = journal;
+        this.volume = volume;
+        this.number = number;
+        this.pages = pages;
+        this.issn = issn;
+    }
+
+    public ArticleReference(Integer id, String title, String year, String month, String note, String author, String journal, String volume, String number, String pages, String issn) {
+        super(id, title, year, month, note);
         this.author = author;
         this.journal = journal;
         this.volume = volume;

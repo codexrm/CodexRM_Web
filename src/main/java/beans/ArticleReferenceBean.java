@@ -82,7 +82,7 @@ public class  ArticleReferenceBean {
 
     public void copyEdit(ArticleReference article){
         if(article != null)
-            articleReference = new ArticleReference(article.getTitle(), article.getYear(), article.getMonth(), article.getNote(), article.getUser(), article.getAuthor(), article.getJournal(), article.getVolume(), article.getNumber(), article.getPages(),
+            articleReference = new ArticleReference(article.getId(), article.getTitle(), article.getYear(), article.getMonth(), article.getNote(), article.getAuthor(), article.getJournal(), article.getVolume(), article.getNumber(), article.getPages(),
                     article.getIssn());
     }
 }
