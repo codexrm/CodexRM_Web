@@ -58,22 +58,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/dto" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/model" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3643678" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="utils" />
       <recent name="enums" />
       <recent name="dto" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mary\Documents\Proyecto\CodexRM_Web\src\main\java\model" />
       <recent name="C:\Users\mary\Documents\Proyecto\CodexRM_Web\src\main\java\dto" />
       <recent name="C:\Users\mary\Documents\Proyecto\CodexRM_Web\src\main\java\Auth" />
       <recent name="C:\Users\mary\Documents\Proyecto\CodexRM_Web\web\resources" />
       <recent name="C:\Users\mary\Documents\Proyecto\CodexRM_Web\web\pages" />
-      <recent name="C:\Users\mary\Documents\Proyecto\CodexRM_Web\src\main\java\utils" />
     </key>
   </component>
   <component name="RunManager">
@@ -165,6 +166,7 @@
       <workItem from="1687555140197" duration="9189000" />
       <workItem from="1688072965169" duration="6799000" />
       <workItem from="1688512258652" duration="4842000" />
+      <workItem from="1688590552699" duration="1574000" />
     </task>
     <servers />
   </component>
@@ -184,18 +186,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="127" y="274" key="#Project_Structure" timestamp="1687556719218">
+    <state x="127" y="274" key="#Project_Structure" timestamp="1688590791049">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="127" y="274" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1687556719218" />
+    <state x="127" y="274" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1688590791049" />
     <state x="94" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1687555746860">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="94" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1687555746860" />
-    <state x="1085" y="416" key="#com.intellij.ide.util.MemberChooser" timestamp="1688078011287">
+    <state x="1085" y="416" key="#com.intellij.ide.util.MemberChooser" timestamp="1688591915785">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1085" y="416" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1688078011287" />
+    <state x="1085" y="416" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1688591915785" />
     <state x="370" y="342" key="#com.intellij.j2ee.appServerIntegrations.ApplicationServersConfigurable" timestamp="1687555742376">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -286,7 +288,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/beans/ReferenceManagerBean.java</url>
-          <line>211</line>
+          <line>227</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -297,13 +299,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/web/pages/ReferenceManager.xhtml</url>
           <line>1771</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/web/pages/ReferenceManager.xhtml</url>
           <line>1999</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

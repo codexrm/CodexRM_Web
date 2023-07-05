@@ -5,6 +5,9 @@ import Auth.TokenRefreshRequest;
 import Auth.TokenRefreshResponse;
 import Auth.UserLogin;
 import entity.*;
+import enums.Format;
+import model.ExportR;
+import model.ImportR;
 import org.primefaces.PrimeFaces;
 import rest.RestReference;
 import rest.Service;
@@ -37,10 +40,13 @@ public class ReferenceManagerBean {
     private static ConferencePaperReferenceBean conferencePaperReferenceBean = new ConferencePaperReferenceBean();
     private static WebPageReferenceBean webPageReferenceBean = new WebPageReferenceBean();
 
+    private static ExportR exportR = new ExportR();
+    private static ImportR importR = new ImportR();
+
     private static AuthenticationData authenticationData = new AuthenticationData();
     private static Service service = new Service();
 
-    private static File exportFile = new File(System.getProperty("user.home") + File. separator +"Desktop" + File. separator + "exported References.txt" );
+    private static File exportFile = new File(System.getProperty("user.home") + File. separator +"Downloads" + File. separator + "exported References.txt" );
     private static String path = "";
     private static String format = "";
     private static LocalDate ActualDate = LocalDate.now();
@@ -126,9 +132,19 @@ public class ReferenceManagerBean {
 
     public void setPath(String path) { ReferenceManagerBean.path = path; }
 
+    public ExportR getExportR() { return exportR; }
+
+    public void setExportR(ExportR exportR) { ReferenceManagerBean.exportR = exportR; }
+
+    public ImportR getImportR() { return importR; }
+
+    public void setImportR(ImportR importR) { ReferenceManagerBean.importR = importR; }
+
     public LocalDate getActualDate() { return ActualDate; }
 
     public void setActualDate(LocalDate actualDate) { ActualDate = actualDate; }
+
+
 
     public void createArticleReference() {
 
@@ -684,21 +700,20 @@ public class ReferenceManagerBean {
     }
 
     public void exportRis() throws IOException {
-       // exportReferenceList(Format.RIS);
+        exportReferenceList(Format.RIS);
     }
 
     public void exportBibTex() throws IOException {
-      //  exportReferenceList(Format.BIBTEX);
+        exportReferenceList(Format.BIBTEX);
     }
 
-   /* private void exportReferenceList(Format format) throws IOException {
+   private void exportReferenceList(Format format) throws IOException {
 
-        Export export = exportFactory.getExport(format);
-        export.writeValue((ArrayList<Reference>) selectReferenceList, exportFile.getPath());
+        exportR.exportReferenceList(exportFile, (ArrayList<Reference>) selectReferenceList, format);
         addMessage(FacesMessage.SEVERITY_INFO, "Las Referencias seleccionadas han sido exportadas", "");
 
         PrimeFaces.current().ajax().update("form:messages");
-    }*/
+    }
 
    /* public void importReferences() throws IOException, TokenMgrException, ParseException {
 
