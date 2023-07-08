@@ -144,17 +144,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="publisherB">Editorial</p:outputLabel>
-                        <p:inputText id="publisherB" value="#{referenceManagerBean.bookReferenceBean.publisher}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="publisherB" value="#{referenceManagerBean.bookReferenceBean.publisher}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearB">Año</p:outputLabel>
                         <p:inputText id="yearB" value="#{referenceManagerBean.bookReferenceBean.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -183,7 +180,7 @@
                         <p:outputLabel for="addressB">Dirección</p:outputLabel>
                         <p:inputText id="addressB" value="#{referenceManagerBean.bookReferenceBean.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -192,7 +189,7 @@
                         <p:outputLabel for="editionB">Edición</p:outputLabel>
                         <p:inputText id="editionB" value="#{referenceManagerBean.bookReferenceBean.edition}">
                             <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\s\.]+"/>
+                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+|\d+\."/>
                         </p:inputText>
                     </div>
 
@@ -219,9 +216,8 @@
                         <p:outputLabel for="isbnB">ISBN</p:outputLabel>
                         <p:inputText id="isbnB" value="#{referenceManagerBean.bookReferenceBean.isbn}">
                             <f:validateRegex
-                                    pattern="\d{4}-\d{4}"/>
+                                    pattern="^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$"/>
                         </p:inputText>
-                        <small class="block">0000-0000</small>
                     </div>
 
                     <div class="p-field">
@@ -263,17 +259,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="journalA">Revista</p:outputLabel>
-                        <p:inputText id="journalA" value="#{referenceManagerBean.articleReferenceBean.journal}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="journalA" value="#{referenceManagerBean.articleReferenceBean.journal}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearA">Año</p:outputLabel>
                         <p:inputText id="yearA" value="#{referenceManagerBean.articleReferenceBean.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -294,7 +287,7 @@
                         <p:outputLabel for="pagesA">Páginas</p:outputLabel>
                         <p:inputText id="pagesA" value="#{referenceManagerBean.articleReferenceBean.pages}">
                             <f:validateRegex
-                                    pattern="[IVXMLCD0-9-,]+"/>
+                                    pattern="[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+"/>
                         </p:inputText>
                     </div>
 
@@ -321,7 +314,7 @@
                         <p:outputLabel for="issnA">ISSN</p:outputLabel>
                         <p:inputText id="issnA" value="#{referenceManagerBean.articleReferenceBean.issn}">
                             <f:validateRegex
-                                    pattern="\d{4}-\d{4}"/>
+                                    pattern="\d{4}-\d{4}|\d{4}-\d{3}X"/>
                         </p:inputText>
                         <small class="block">0000-0000</small>
                     </div>
@@ -358,7 +351,7 @@
                         <p:outputLabel for="pagesBS">Páginas</p:outputLabel>
                         <p:inputText id="pagesBS" value="#{referenceManagerBean.bookSectionReferenceBean.pages}" required="true">
                             <f:validateRegex
-                                    pattern="[IVXMLCD0-9-,]+"/>
+                                    pattern="[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+"/>
                         </p:inputText>
                     </div>
 
@@ -387,17 +380,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="publisherBS">Editorial</p:outputLabel>
-                        <p:inputText id="publisherBS" value="#{referenceManagerBean.bookSectionReferenceBean.publisher}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="publisherBS" value="#{referenceManagerBean.bookSectionReferenceBean.publisher}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearBS">Año</p:outputLabel>
                         <p:inputText id="yearBS" value="#{referenceManagerBean.bookSectionReferenceBean.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -441,7 +431,7 @@
                         <p:outputLabel for="addressBS">Dirección</p:outputLabel>
                         <p:inputText id="addressBS" value="#{referenceManagerBean.bookSectionReferenceBean.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -450,7 +440,7 @@
                         <p:outputLabel for="editionBS">Edición</p:outputLabel>
                         <p:inputText id="editionBS" value="#{referenceManagerBean.bookSectionReferenceBean.edition}">
                             <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\s\.]+"/>
+                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0]+|\d+\."/>
                         </p:inputText>
                     </div>
 
@@ -477,9 +467,8 @@
                         <p:outputLabel for="isbnBS">ISBN</p:outputLabel>
                         <p:inputText id="isbnBS" value="#{referenceManagerBean.bookSectionReferenceBean.isbn}">
                             <f:validateRegex
-                                    pattern="\d{4}-\d{4}"/>
+                                    pattern="^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$"/>
                         </p:inputText>
-                        <small class="block">0000-0000</small>
                     </div>
 
                     <div class="p-field">
@@ -528,7 +517,7 @@
                         <p:outputLabel for="addressBL">Dirección</p:outputLabel>
                         <p:inputText id="addressBL" value="#{referenceManagerBean.bookLetReferenceBean.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Cuidad, Pais</small>
                     </div>
@@ -556,7 +545,7 @@
                         <p:outputLabel for="yearBL">Año</p:outputLabel>
                         <p:inputText id="yearBL" value="#{referenceManagerBean.bookLetReferenceBean.year}">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -593,7 +582,7 @@
                         <p:outputLabel for="yearCP">Año</p:outputLabel>
                         <p:inputText id="yearCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -631,17 +620,14 @@
                         <p:outputLabel for="addressCP">Dirección</p:outputLabel>
                         <p:inputText id="addressCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                             <small class="block">Ciudad, Pais</small>
                         </p:inputText>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="publisherCP">Editorial</p:outputLabel>
-                        <p:inputText id="publisherCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.publisher}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="publisherCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.publisher}"/>
                     </div>
 
                     <div class="p-field">
@@ -665,19 +651,15 @@
 
                     <div class="p-field">
                         <p:outputLabel for="OrganizationCP">Organización</p:outputLabel>
-                        <p:inputText id="OrganizationCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.organization}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+"/>
-                        </p:inputText>
+                        <p:inputText id="OrganizationCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.organization}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="isbnCP">ISBN</p:outputLabel>
                         <p:inputText id="isbnCP" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.isbn}">
                             <f:validateRegex
-                                    pattern="\d{4}-\d{4}"/>
+                                    pattern="^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$"/>
                         </p:inputText>
-                        <small class="block">0000-0000</small>
                     </div>
 
                     <div class="p-field">
@@ -720,17 +702,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="schoolT">Escuela</p:outputLabel>
-                        <p:inputText id="schoolT" value="#{referenceManagerBean.thesisReferenceBean.school}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s,]+"/>
-                        </p:inputText>
+                        <p:inputText id="schoolT" value="#{referenceManagerBean.thesisReferenceBean.school}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearT">Año</p:outputLabel>
                         <p:inputText id="yearT" value="#{referenceManagerBean.thesisReferenceBean.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -747,7 +726,7 @@
                         <p:outputLabel for="addressT">Dirección</p:outputLabel>
                         <p:inputText id="addressT" value="#{referenceManagerBean.thesisReferenceBean.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -817,7 +796,7 @@
                         <p:outputLabel for="yearCPR">Año</p:outputLabel>
                         <p:inputText id="yearCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -855,7 +834,7 @@
                         <p:outputLabel for="pagesCPR">Páginas</p:outputLabel>
                         <p:inputText id="pagesCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.pages}">
                             <f:validateRegex
-                                    pattern="[IVXMLCD0-9-,]+"/>
+                                    pattern="[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+"/>
                         </p:inputText>
                     </div>
 
@@ -863,7 +842,7 @@
                         <p:outputLabel for="addressCPR">Dirección</p:outputLabel>
                         <p:inputText id="addressCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -889,18 +868,12 @@
 
                     <div class="p-field">
                         <p:outputLabel for="OrganizationCPR">Organización</p:outputLabel>
-                        <p:inputText id="OrganizationCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.organization}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+"/>
-                        </p:inputText>
+                        <p:inputText id="OrganizationCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.organization}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="publisherCPR">Editorial</p:outputLabel>
-                        <p:inputText id="publisherCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.publisher}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="publisherCPR" value="#{referenceManagerBean.conferencePaperReferenceBean.publisher}"/>
                     </div>
 
                     <div class="p-field">
@@ -963,7 +936,7 @@
                         <p:outputLabel for="yearWP">Año</p:outputLabel>
                         <p:inputText id="yearWP" value="#{referenceManagerBean.webPageReferenceBean.year}">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -1070,7 +1043,7 @@
                         <p:outputLabel for="format">Formato</p:outputLabel>
                         <p:selectOneMenu id="format" value="#{referenceManagerBean.format}">
                             <f:selectItem itemLabel="Ris" itemValue="Ris"/>
-                            <f:selectItem itemLabel="BibTeX" itemValue="BibTex"/>
+                            <f:selectItem itemLabel="BibTeX" itemValue="BibTeX"/>
                         </p:selectOneMenu>
                     </div>
                 </p:outputPanel>
@@ -1581,17 +1554,14 @@
 
                         <div class="p-field">
                             <p:outputLabel for="publisherBE">Editorial</p:outputLabel>
-                            <p:inputText id="publisherBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.publisher}" required="true">
-                                <f:validateRegex
-                                        pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                            </p:inputText>
+                            <p:inputText id="publisherBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.publisher}" required="true"/>
                         </div>
 
                         <div class="p-field">
                             <p:outputLabel for="yearBE">Año</p:outputLabel>
                             <p:inputText id="yearBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.year}" required="true">
                                 <f:validateRegex
-                                        pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                        pattern="\d{4}|\d{4}--\d{4}"/>
                             </p:inputText>
                         </div>
 
@@ -1620,7 +1590,7 @@
                             <p:outputLabel for="addressBE">Dirección</p:outputLabel>
                             <p:inputText id="addressBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.address}">
                                 <f:validateRegex
-                                        pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                        pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                             </p:inputText>
                             <small class="block">Ciudad, Pais</small>
                         </div>
@@ -1629,7 +1599,7 @@
                             <p:outputLabel for="editionBE">Edición</p:outputLabel>
                             <p:inputText id="editionBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.edition}">
                                 <f:validateRegex
-                                        pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\s\.]+"/>
+                                        pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0]+|\d+\."/>
                             </p:inputText>
                         </div>
 
@@ -1656,9 +1626,8 @@
                             <p:outputLabel for="isbnBE">ISBN</p:outputLabel>
                             <p:inputText id="isbnBE" value="#{referenceManagerBean.bookReferenceBean.bookReference.isbn}">
                                 <f:validateRegex
-                                        pattern="\d{4}-\d{4}"/>
+                                        pattern="^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$"/>
                             </p:inputText>
-                            <small class="block">0000-0000</small>
                         </div>
 
                         <div class="p-field">
@@ -1697,17 +1666,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="journalAE">Revista</p:outputLabel>
-                        <p:inputText id="journalAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.journal}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="journalAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.journal}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearAE">Año</p:outputLabel>
                         <p:inputText id="yearAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -1720,7 +1686,7 @@
                         <p:outputLabel for="numberAE">Número</p:outputLabel>
                         <p:inputText id="numberAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.number}">
                             <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\s-]+"/>
+                                    pattern="[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+"/>
                         </p:inputText>
                     </div>
 
@@ -1755,7 +1721,7 @@
                         <p:outputLabel for="issnAE">ISSN</p:outputLabel>
                         <p:inputText id="issnAE" value="#{referenceManagerBean.articleReferenceBean.articleReference.issn}">
                             <f:validateRegex
-                                    pattern="\d{4}-\d{4}"/>
+                                    pattern="\d{4}-\d{4}|\d{4}-\d{3}X"/>
                         </p:inputText>
                         <small class="block">0000-0000</small>
                     </div>
@@ -1803,7 +1769,7 @@
                         <p:outputLabel for="addressBLE">Dirección</p:outputLabel>
                         <p:inputText id="addressBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -1831,7 +1797,7 @@
                         <p:outputLabel for="yearBLE">Año</p:outputLabel>
                         <p:inputText id="yearBLE" value="#{referenceManagerBean.bookLetReferenceBean.bookLetReference.year}">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4"/>
                         </p:inputText>
                     </div>
 
@@ -1864,7 +1830,7 @@
                         <p:outputLabel for="pagesBSE">Páginas</p:outputLabel>
                         <p:inputText id="pagesBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.pages}" required="true">
                             <f:validateRegex
-                                    pattern="[IVXMLCD0-9-,]+"/>
+                                    pattern="[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+"/>
                         </p:inputText>
                     </div>
 
@@ -1893,17 +1859,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="publisherBSE">Editorial</p:outputLabel>
-                        <p:inputText id="publisherBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="publisherBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.publisher}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearBSE">Año</p:outputLabel>
                         <p:inputText id="yearBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -1947,7 +1910,7 @@
                         <p:outputLabel for="addressBSE">Dirección</p:outputLabel>
                         <p:inputText id="addressBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -1956,7 +1919,7 @@
                         <p:outputLabel for="editionBSE">Edición</p:outputLabel>
                         <p:inputText id="editionBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.edition}">
                             <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\s\.]+"/>
+                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0]+|\d+\."/>
                         </p:inputText>
                     </div>
 
@@ -1983,9 +1946,8 @@
                         <p:outputLabel for="isbnBSE">ISBN</p:outputLabel>
                         <p:inputText id="isbnBSE" value="#{referenceManagerBean.bookSectionReferenceBean.bookSectionReference.isbn}">
                             <f:validateRegex
-                                    pattern= "\d{4}-\d{4}"/>
+                                    pattern= "^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$"/>
                         </p:inputText>
-                        <small class="block">0000-0000</small>
                     </div>
 
                     <div class="p-field">
@@ -2017,7 +1979,7 @@
                         <p:outputLabel for="yearCPE">Año</p:outputLabel>
                         <p:inputText id="yearCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -2055,17 +2017,14 @@
                         <p:outputLabel for="addressCPE">Dirección</p:outputLabel>
                         <p:inputText id="addressCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="publisherCPE">Editorial</p:outputLabel>
-                        <p:inputText id="publisherCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.publisher}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="publisherCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.publisher}"/>
                     </div>
 
                     <div class="p-field">
@@ -2089,19 +2048,15 @@
 
                     <div class="p-field">
                         <p:outputLabel for="organizationCPE">Organización</p:outputLabel>
-                        <p:inputText id="organizationCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.organization}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+"/>
-                        </p:inputText>
+                        <p:inputText id="organizationCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.organization}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="isbnCPE">ISBN</p:outputLabel>
                         <p:inputText id="isbnCPE" value="#{referenceManagerBean.conferenceProceedingsReferenceBean.conferenceProceedingsReference.isbn}">
                             <f:validateRegex
-                                    pattern= "\d{4}-\d{4}"/>
+                                    pattern= "^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]"/>
                         </p:inputText>
-                        <small class="block">0000-0000</small>
                     </div>
 
                     <div class="p-field">
@@ -2140,17 +2095,14 @@
 
                     <div class="p-field">
                         <p:outputLabel for="schoolTE">Escuela</p:outputLabel>
-                        <p:inputText id="schoolTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.school}" required="true">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s,]+"/>
-                        </p:inputText>
+                        <p:inputText id="schoolTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.school}" required="true"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="yearTE">Año</p:outputLabel>
                         <p:inputText id="yearTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -2167,7 +2119,7 @@
                         <p:outputLabel for="addressTE">Dirección</p:outputLabel>
                         <p:inputText id="addressTE" value="#{referenceManagerBean.thesisReferenceBean.thesisReference.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -2234,7 +2186,7 @@
                         <p:outputLabel for="yearCPRE">Año</p:outputLabel>
                         <p:inputText id="yearCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.year}" required="true">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 
@@ -2272,7 +2224,7 @@
                         <p:outputLabel for="pagesCPRE">Páginas</p:outputLabel>
                         <p:inputText id="pagesCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.pages}">
                             <f:validateRegex
-                                    pattern="[IVXMLCD0-9-,]+"/>
+                                    pattern="[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+"/>
                         </p:inputText>
                     </div>
 
@@ -2280,7 +2232,7 @@
                         <p:outputLabel for="addressCPRE">Dirección</p:outputLabel>
                         <p:inputText id="addressCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.address}">
                             <f:validateRegex
-                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+[,\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
+                                    pattern="^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*"/>
                         </p:inputText>
                         <small class="block">Ciudad, Pais</small>
                     </div>
@@ -2306,18 +2258,12 @@
 
                     <div class="p-field">
                         <p:outputLabel for="organizationCPRE">Organización</p:outputLabel>
-                        <p:inputText id="organizationCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.organization}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s]+"/>
-                        </p:inputText>
+                        <p:inputText id="organizationCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.organization}"/>
                     </div>
 
                     <div class="p-field">
                         <p:outputLabel for="PublisherCPRE">Editorial</p:outputLabel>
-                        <p:inputText id="PublisherCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}">
-                            <f:validateRegex
-                                    pattern="[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\s\.]+"/>
-                        </p:inputText>
+                        <p:inputText id="PublisherCPRE" value="#{referenceManagerBean.conferencePaperReferenceBean.conferencePaperReference.publisher}"/>
                     </div>
 
                     <div class="p-field">
@@ -2377,7 +2323,7 @@
                         <p:outputLabel for="yearWPE">Año</p:outputLabel>
                         <p:inputText id="yearWPE" value="#{referenceManagerBean.webPageReferenceBean.webPageReference.year}">
                             <f:validateRegex
-                                    pattern="\d{4}|\d{4}-\d{4}|\d{4}--\d{4}"/>
+                                    pattern="\d{4}|\d{4}--\d{4}"/>
                         </p:inputText>
                     </div>
 

@@ -19,12 +19,14 @@ public class ImportR {
         this.enumsConverter = new EnumsConverter();
     }
 
-    public ArrayList<Reference> importReferences(String path, Format format) throws IOException, TokenMgrException, ParseException {
+    public ArrayList<Reference> importReferences(String path, String format) throws IOException, TokenMgrException, ParseException {
+
+        Format fto = enumsConverter.getFormat(format);
 
         EIManager manager = new EIManager();
         ArrayList<Reference> referenceList = new ArrayList<>();
 
-        ArrayList<BaseR> list = manager.importReferences(path, enumsConverter.getFormat(format));
+        ArrayList<BaseR> list = manager.importReferences(path, enumsConverter.getFormatLibrary(fto));
 
         for (BaseR entry : list) {
             referenceList.add(createReference(entry));

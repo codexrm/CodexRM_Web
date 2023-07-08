@@ -80,7 +80,7 @@ public class EnumsConverter {
         }
     }
 
-    public FormatLibrary getFormat(Format format) {
+    public FormatLibrary getFormatLibrary(Format format) {
 
         if (format != null) {
             switch (format) {
@@ -88,6 +88,22 @@ public class EnumsConverter {
                     return FormatLibrary.RIS;
                 case BIBTEX:
                     return FormatLibrary.BIBTEX;
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Format getFormat(String format) {
+
+        if (format != null) {
+            switch (format) {
+                case "Ris":
+                    return Format.RIS;
+                case "BibTeX":
+                    return Format.BIBTEX;
                 default:
                     return null;
             }

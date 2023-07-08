@@ -30,7 +30,7 @@ public class ExportR {
             }
         }
 
-        manager.exportReferenceList(file.toPath(), list, enumsConverter.getFormat(format));
+        manager.exportReferenceList(file.toPath(), list, enumsConverter.getFormatLibrary(format));
     }
 
     private BaseR identifyType(Reference reference) {

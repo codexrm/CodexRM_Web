@@ -8,6 +8,8 @@ import entity.*;
 import enums.Format;
 import model.ExportR;
 import model.ImportR;
+import org.jbibtex.ParseException;
+import org.jbibtex.TokenMgrException;
 import org.primefaces.PrimeFaces;
 import rest.RestReference;
 import rest.Service;
@@ -715,24 +717,15 @@ public class ReferenceManagerBean {
         PrimeFaces.current().ajax().update("form:messages");
     }
 
-   /* public void importReferences() throws IOException, TokenMgrException, ParseException {
+    public void importReferences() throws IOException, TokenMgrException, ParseException {
 
         File importFile = new File(path);
-        Import importer;
-
         if(importFile.exists() && importFile.isFile()){
-            if(format.equals("Ris")){
-                importer = importFactory.getImport(Format.RIS);
-            }else{
-                importer = importFactory.getImport(Format.BIBTEX);
-            }
+            ArrayList<Reference> importerReferenceList = importR.importReferences(path,format);
 
-            ArrayList<Reference> importerReferenceList = importer.readFile(importFile.getPath());
-            for (Reference reference: importerReferenceList ) {
-                reference.setUser(userBean.getUser());
-            }
+            verificateExpiationDate();
 
-            if(restReference.addReferenceGroup(importerReferenceList)){
+            if(service.addReferenceGroup(authenticationData.getId(), importerReferenceList, authenticationData.getToken())){
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencias Importadas", "");
             }
         }
@@ -743,7 +736,7 @@ public class ReferenceManagerBean {
         init();
         PrimeFaces.current().executeScript("PF('importReferencesDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
-    }*/
+    }
 
     private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesContext.getCurrentInstance().

@@ -37,10 +37,10 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.1" />
           <element id="library" level="project" name="Maven: org.modelmapper:modelmapper:3.1.0" />
-          <element id="library" level="project" name="Maven: io.github.codexrm:EILibrary:1.1-SNAPSHOT" />
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.20" />
           <element id="library" level="project" name="Maven: org.jbibtex:jbibtex:1.0.20" />
-          <element id="library" level="project" name="Maven: io.github.codexrm:jRis:1.3.0-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: io.github.codexrm:jRis:1.4.0-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: io.github.codexrm:EILibrary:1.2.1-SNAPSHOT" />
         </element>
       </element>
     </root>
