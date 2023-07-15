@@ -1,9 +1,7 @@
 package rest;
 
-import Auth.AuthenticationData;
-import Auth.TokenRefreshRequest;
-import Auth.TokenRefreshResponse;
-import Auth.UserLogin;
+import Auth.*;
+import dto.ReferenceDTO;
 import dto.UserDTO;
 import utils.JsonUtils;
 
@@ -31,7 +29,13 @@ public class RestAuth {
         UserDTO userDTO = new UserDTO();
 
         try {
-            userDTO = JsonUtils.convertFromJsonToObject(response.get().body(), UserDTO.class);
+            if (response.get().statusCode() == 401) {
+                response.join();
+                return null;
+            } else {
+                userDTO = JsonUtils.convertFromJsonToObject(response.get().body(), UserDTO.class);
+                response.join();
+            }
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -71,5 +75,27 @@ public class RestAuth {
 
         return response.get().statusCode() == 200;
     }
+
+    public String registerUser(SignupRequest signUpRequest) {
+
+        String  inputJson = JsonUtils.convertFromObjectToJson(signUpRequest);
+
+        HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "signup"))
+                .header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+        CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
+
+        MessageResponse message = new MessageResponse();
+
+        try {
+            message = JsonUtils.convertFromJsonToObject(response.get().body(), MessageResponse.class);
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        response.join();
+
+        return message.getMessage();
+
+        }
 }
 

@@ -1,30 +1,45 @@
 package beans;
 
 import entity.User;
-import rest.RestUser;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @ManagedBean
 @SessionScoped
 public class UserBean {
 
     private static String username = "";
+    private static String email = "";
+    private static Set<String> rolesList = new HashSet<>();
+    private static String password = "";
     private static String name = "";
     private static String lastName = "";
-    private static String email = "";
     private static boolean enabled = false;
-    private static String password = "";
-    private static User user = new User();
-    private static RestUser restUser = new RestUser();
 
+    private static User user = new User();
 
     public String getUsername() { return username; }
 
     public void setUsername(String username) { UserBean.username = username; }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { UserBean.email = email; }
+
+    public Set<String> getRolesList() { return rolesList; }
+
+    public void setRolesList(Set<String> rolesList) { UserBean.rolesList = rolesList; }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { UserBean.password = password; }
 
     public String getName() { return name; }
 
@@ -34,34 +49,26 @@ public class UserBean {
 
     public void setLastName(String lastName) { UserBean.lastName = lastName; }
 
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) { UserBean.email = email; }
-
     public boolean isEnabled() { return enabled; }
 
     public void setEnabled(boolean enabled) { UserBean.enabled = enabled; }
-
-    public String getPassword() { return password; }
-
-    public void setPassword(String password) { UserBean.password = password; }
 
     public User getUser() { return user; }
 
     public void setUser(User user) { UserBean.user = user; }
 
-    public RestUser getRestUser() { return restUser; }
-
-    public void setRestUser(RestUser restUser) { UserBean.restUser = restUser; }
-
     public void cleanVariables(){
         username = "";
+        email = "";
+        rolesList.clear();
+        password = "";
         name = "";
         lastName = "";
-        email = "";
         enabled = false;
-        password = "";
     }
+
+
+
 
     public void createUser() {
 

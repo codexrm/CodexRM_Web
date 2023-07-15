@@ -28,48 +28,44 @@
 <h:body>
     <div class="container-scroller">
         <!-- partial:../../partials/_horizontal-navbar.html -->
-        <!--  <div class="horizontal-menu">
-             <nav class="navbar top-navbar col-lg-12 col-12 p-0">
-                 <div class="container-fluid">
-                     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
-
-                         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                             <img src="/resources/imagenes/logo.jpg" alt="logo"/>
-                         </div>
-                         <ul class="navbar-nav navbar-nav-right">
-                             <li class="nav-item nav-profile dropdown">
-                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                                     <span class="nav-profile-name">Johnson</span>
-                                     <span class="online-status"></span>
-                                     <img src="/resources/images/faces/face28.png" alt="profile"/>
-                                 </a>
-                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                                     <a class="dropdown-item">
-                                         <i class="mdi mdi-settings text-primary"></i>
-                                         Settings
-                                     </a>
-                                     <form action="/logout"
-                                           method="post">
-                                         <input class="class=btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit"
-                                                value="Log out"/>
-                                         <input type="hidden"
-                                                name="${_csrf.parameterName}"
-                                                value="${_csrf.token}"/>
-                                     </form>
-                                      <a class="dropdown-item">
-                                            <i class="mdi mdi-logout text-primary"></i>
-                                            Logout
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
-                                <span class="mdi mdi-menu"></span>
-                            </button>
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container-fluid">
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown  d-lg-flex d-none">
+                    <p:link outcome="/pages/ReferenceManager.faces" value="Libreria"/>
+                </li>
+                <li class="nav-item dropdown  d-lg-flex d-none">
+                    <p:link outcome="/pages/preferences.faces" value="Preferencias"/>
+                </li>
+                <li class="nav-item dropdown d-lg-flex d-none">
+                    <p:link outcome="/pages/adminUser.faces" value="G.Usuarios"/>
+                </li>
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <span class="nav-profile-name">#{template_bean.currentUser()}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            <form action="/logout"
+                                  method="post">
+                                <input class="class=btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit"
+                                       value="Log out"/>
+                                <input type="hidden"
+                                       name="${_csrf.parameterName}"
+                                       value="${_csrf.token}"/>
+                            </form>
                         </div>
-                    </div>
-                </nav>
-            </div>-->
+                    </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                <span class="mdi mdi-menu"></span>
+            </button>
+                </div>
+                </div>
+            </nav>
+        </div>
+
            <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">

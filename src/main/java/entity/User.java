@@ -1,9 +1,7 @@
 package entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,9 +33,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Reference> referenceList = new ArrayList<>();
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -54,10 +49,6 @@ public class User {
         this.enabled = enabled;
         this.password = password;
     }
-
-    public List<Reference> getReferenceList() { return referenceList; }
-
-    public void setReferenceList(List<Reference> referenceList) { this.referenceList = referenceList; }
 
     public String getPassword() { return password; }
 
@@ -92,6 +83,5 @@ public class User {
     public void setRoles(Set<Role> roles) { this.roles = roles; }
 
     public void setRole(Role role) { this.roles.add(role); }
-
 
 }

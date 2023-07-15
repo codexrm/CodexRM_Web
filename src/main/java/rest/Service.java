@@ -1,9 +1,6 @@
 package rest;
 
-import Auth.AuthenticationData;
-import Auth.TokenRefreshRequest;
-import Auth.TokenRefreshResponse;
-import Auth.UserLogin;
+import Auth.*;
 import dto.ReferencePageDTO;
 import entity.Reference;
 import enums.SortReference;
@@ -77,7 +74,8 @@ public class Service {
 
     public boolean logout(String token) throws ExecutionException, InterruptedException { return restAuth.userLogout(token); }
 
-    public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) { return restAuth.refreshToken(refreshToken); }
+    public String registerUser(SignupRequest signUpRequest){ return restAuth.registerUser(signUpRequest); }
 
+    public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) { return restAuth.refreshToken(refreshToken); }
 
 }

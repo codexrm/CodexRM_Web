@@ -1,9 +1,6 @@
 package beans;
 
-import Auth.AuthenticationData;
-import Auth.TokenRefreshRequest;
-import Auth.TokenRefreshResponse;
-import Auth.UserLogin;
+import Auth.*;
 import entity.*;
 import enums.Format;
 import model.ExportR;
@@ -11,7 +8,6 @@ import model.ImportR;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import org.primefaces.PrimeFaces;
-import rest.RestReference;
 import rest.Service;
 
 import javax.faces.application.FacesMessage;
@@ -24,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @ManagedBean
 @SessionScoped
@@ -42,6 +39,9 @@ public class ReferenceManagerBean {
     private static ConferencePaperReferenceBean conferencePaperReferenceBean = new ConferencePaperReferenceBean();
     private static WebPageReferenceBean webPageReferenceBean = new WebPageReferenceBean();
 
+    private static AuthenticationBean authenticationBean = new AuthenticationBean();
+    private static UserBean userBean = new UserBean();
+
     private static ExportR exportR = new ExportR();
     private static ImportR importR = new ImportR();
 
@@ -54,12 +54,6 @@ public class ReferenceManagerBean {
     private static LocalDate ActualDate = LocalDate.now();
 
     public void init() {
-        referenceList.clear();
-        authenticationData = service.login(new UserLogin("marynes", "Marynes@123"));
-        referenceList = service.getAllReference(authenticationData);
-    }
-
-    private void refreshReferenceList(){
         verificateExpiationDate();
         referenceList.clear();
         referenceList = service.getAllReference(authenticationData);
@@ -114,6 +108,14 @@ public class ReferenceManagerBean {
 
     public void setWebPageReferenceBean(WebPageReferenceBean webPageReferenceBean) { ReferenceManagerBean.webPageReferenceBean = webPageReferenceBean; }
 
+    public AuthenticationBean getAuthenticationBean() { return authenticationBean; }
+
+    public void setAuthenticationBean(AuthenticationBean authenticationBean) { ReferenceManagerBean.authenticationBean = authenticationBean; }
+
+    public UserBean getUserBean() { return userBean; }
+
+    public void setUserBean(UserBean userBean) { ReferenceManagerBean.userBean = userBean; }
+
     public AuthenticationData getAuthenticationData() { return authenticationData; }
 
     public void setAuthenticationData(AuthenticationData authenticationData) { ReferenceManagerBean.authenticationData = authenticationData; }
@@ -147,7 +149,51 @@ public class ReferenceManagerBean {
     public void setActualDate(LocalDate actualDate) { ActualDate = actualDate; }
 
 
+    // User
+    public String singin() {
+      authenticationData = service.login(new UserLogin(authenticationBean.getUsername(), authenticationBean.getPassword()));
+      if(authenticationData == null){
+          addMessage(FacesMessage.SEVERITY_ERROR, "Usuario no autorizado", "Verifique ususario y contraseña nuevamente");
+          PrimeFaces.current().ajax().update("form:messages", "form-log");
+          return null;
+      }else{
+          authenticationBean.cleanVariables();
+          return "exito";
+      }
+    }
 
+    public void singout() {
+        try {
+            service.logout(authenticationData.getToken());
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void singup() {
+        userBean.getRolesList().add("user");
+        SignupRequest user = new SignupRequest(userBean.getUsername(), userBean.getEmail(), userBean.getRolesList(), userBean. getPassword(), userBean.getName(), userBean.getLastName(), true);
+        String message = service.registerUser(user);
+        userBean.cleanVariables();
+
+        switch (message){
+            case "Error: Username is already taken!":
+                addMessage(FacesMessage.SEVERITY_ERROR, "El nombre de ususario ya esta tomado", "");
+                break;
+            case "Error: Email is already in use!":
+                addMessage(FacesMessage.SEVERITY_ERROR, "El E-mail ya esta en uso ", "");
+                break;
+            case "User registered successfully!":
+                addMessage(FacesMessage.SEVERITY_INFO, "Usuario registrado satisfactoriamente", "");
+                break;
+        }
+        PrimeFaces.current().ajax().update("form:messages", "form-register");
+
+    }
+
+
+
+    // References
     public void createArticleReference() {
 
         ArticleReference article = new ArticleReference(articleReferenceBean.getTitle(), articleReferenceBean.getYear(), articleReferenceBean.getMonth(), articleReferenceBean.getNote(), articleReferenceBean.getAuthor(), articleReferenceBean.getJournal(),
@@ -162,7 +208,7 @@ public class ReferenceManagerBean {
             addMessage( FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addArticleReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -181,7 +227,7 @@ public class ReferenceManagerBean {
            addMessage(FacesMessage.SEVERITY_ERROR, "Existe error en el formulario", "");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addBookReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -201,7 +247,7 @@ public class ReferenceManagerBean {
           addMessage(FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addBookSectionReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -220,7 +266,7 @@ public class ReferenceManagerBean {
            addMessage(FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addBookLetReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -239,7 +285,7 @@ public class ReferenceManagerBean {
             addMessage(FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addThesisReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -259,7 +305,7 @@ public class ReferenceManagerBean {
             addMessage(FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addConferenceProceedingsReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -279,7 +325,7 @@ public class ReferenceManagerBean {
            addMessage(FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addConferencePaperReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -297,7 +343,7 @@ public class ReferenceManagerBean {
             addMessage(FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('addWebPageReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -438,7 +484,7 @@ public class ReferenceManagerBean {
                     "Existen errores al eliminar la referencia", ""));
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
 
@@ -458,7 +504,7 @@ public class ReferenceManagerBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar la referencia", ""));
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
 
@@ -537,7 +583,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editArticleReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -559,7 +605,7 @@ public class ReferenceManagerBean {
            }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editBookReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -582,7 +628,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editBookLetReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -605,7 +651,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editBookSectionReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -628,7 +674,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editConferencePaperReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -651,7 +697,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editConferenceProceedingsReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -674,7 +720,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editThesisReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
@@ -696,7 +742,7 @@ public class ReferenceManagerBean {
             }
         }
 
-        refreshReferenceList();
+        init();
         PrimeFaces.current().executeScript("PF('editWebPageReferenceDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }

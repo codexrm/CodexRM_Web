@@ -11,20 +11,23 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Index</title>
+    <title>CodexRM</title>
 </h:head>
 
 <h:body>
     <ui:composition template="/pages/template.xhtml">
-        <ui:define name="title">Index</ui:define>
+        <ui:define name="title">Codex RM</ui:define>
         <ui:define name="content">
-
             <h:form>
-                <h6 align="center"> Welcome back!!!</h6>
-
+                <h6 align="center"> Bienvenido de nuevo!!!</h6>
+                <div class="brand-logo" align="center">
+                    <img src="/resources/images/logo.png" alt="logo" />
+                </div>
                 <input type="hidden"
                        name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
