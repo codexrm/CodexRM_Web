@@ -17,4 +17,36 @@
             <to-view-id>/pages/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/pages/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/ReferenceManager.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/pages/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/adminUser.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/pages/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/preferences.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/pages/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

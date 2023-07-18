@@ -162,11 +162,18 @@ public class ReferenceManagerBean {
       }
     }
 
-    public void singout() {
+    public String singout() {
+        verificateExpiationDate();
         try {
-            service.logout(authenticationData.getToken());
+            if(service.logout(authenticationData.getToken())){
+                return "logout";
+            } else{
+                return null;
+            }
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
+            return null;
         }
     }
 

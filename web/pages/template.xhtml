@@ -47,14 +47,12 @@
                             <span class="nav-profile-name">#{template_bean.currentUser()}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <form action="/logout"
-                                  method="post">
-                                <input class="class=btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit"
-                                       value="Log out"/>
+                            <h:form id="form-template">
+                            <h:commandButton  value="Log out" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" action="#{referenceManagerBean.singout}"/>
                                 <input type="hidden"
                                        name="${_csrf.parameterName}"
                                        value="${_csrf.token}"/>
-                            </form>
+                            </h:form>
                         </div>
                     </li>
             </ul>

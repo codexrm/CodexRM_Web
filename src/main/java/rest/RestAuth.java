@@ -76,6 +76,7 @@ public class RestAuth {
         return response.get().statusCode() == 200;
     }
 
+
     public String registerUser(SignupRequest signUpRequest) {
 
         String  inputJson = JsonUtils.convertFromObjectToJson(signUpRequest);
