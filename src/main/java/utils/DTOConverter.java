@@ -17,6 +17,7 @@ public class DTOConverter {
         this.modelMapper = new ModelMapper();
     }
 
+    //Reference
     public ReferenceDTO toReferenceDTO(Reference reference) {
 
         if(reference.getClass() == ArticleReference.class){
@@ -47,7 +48,7 @@ public class DTOConverter {
     }
 
     public Reference toReference(ReferenceDTO referenceDTO) {
-;
+
 
         if(referenceDTO.getClass() == ArticleReferenceDTO.class){
             return modelMapper.map(referenceDTO,ArticleReference.class);
@@ -92,17 +93,18 @@ public class DTOConverter {
         return referenceList;
     }
 
-    //User
-    public List<UserDTO> toUserDTOList(final List<User> userList) {
 
-        List<UserDTO> userDTOList = new ArrayList<>();
+    //User
+    public List<UserDetailsDTO> toUserDTOList(final List<User> userList) {
+
+        List<UserDetailsDTO> userDTOList = new ArrayList<>();
         userList.forEach(user ->
                 userDTOList.add(toUserDTO(user))
         );
         return userDTOList;
     }
 
-    public List<User> toUserList(final List<UserDTO> userDTOList) {
+    public List<User> toUserList(final List<UserDetailsDTO> userDTOList) {
 
         List<User> userList = new ArrayList<>();
         userDTOList.forEach(userDTO ->
@@ -111,11 +113,9 @@ public class DTOConverter {
         return userList;
     }
 
-    public UserDTO toUserDTO(final User user) {
-        return modelMapper.map(user, UserDTO.class);
+    public UserDetailsDTO toUserDTO(final User user) {
+        return modelMapper.map(user, UserDetailsDTO.class);
     }
 
-    public User toUser(final UserDTO userDTO) {
-        return modelMapper.map(userDTO, User.class);
-    }
+    public User toUser(final UserDetailsDTO userDTO) { return modelMapper.map(userDTO, User.class); }
 }

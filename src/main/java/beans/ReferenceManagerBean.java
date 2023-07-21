@@ -59,6 +59,12 @@ public class ReferenceManagerBean {
         referenceList = service.getAllReference(authenticationData);
     }
 
+    public void initUserTable() {
+        verificateExpiationDate();
+        userBean.getUserList().clear();
+        userBean.setUserList(service.getAllUser(authenticationData.getToken()));
+    }
+
     public void cleanVariables(){
         path = "";
         format = "";
@@ -149,11 +155,11 @@ public class ReferenceManagerBean {
     public void setActualDate(LocalDate actualDate) { ActualDate = actualDate; }
 
 
-    // User
+    // Auth
     public String singin() {
       authenticationData = service.login(new UserLogin(authenticationBean.getUsername(), authenticationBean.getPassword()));
       if(authenticationData == null){
-          addMessage(FacesMessage.SEVERITY_ERROR, "Usuario no autorizado", "Verifique ususario y contraseña nuevamente");
+          addMessage(FacesMessage.SEVERITY_ERROR, "Usuario no autorizado", "Verifique nombre de usuario y contraseña nuevamente o es posible que el usuario se encuentre deshabilitado");
           PrimeFaces.current().ajax().update("form:messages", "form-log");
           return null;
       }else{
@@ -170,7 +176,6 @@ public class ReferenceManagerBean {
             } else{
                 return null;
             }
-
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -178,27 +183,79 @@ public class ReferenceManagerBean {
     }
 
     public void singup() {
-        userBean.getRolesList().add("user");
-        SignupRequest user = new SignupRequest(userBean.getUsername(), userBean.getEmail(), userBean.getRolesList(), userBean. getPassword(), userBean.getName(), userBean.getLastName(), true);
-        String message = service.registerUser(user);
-        userBean.cleanVariables();
-
-        switch (message){
-            case "Error: Username is already taken!":
-                addMessage(FacesMessage.SEVERITY_ERROR, "El nombre de ususario ya esta tomado", "");
-                break;
-            case "Error: Email is already in use!":
-                addMessage(FacesMessage.SEVERITY_ERROR, "El E-mail ya esta en uso ", "");
-                break;
-            case "User registered successfully!":
-                addMessage(FacesMessage.SEVERITY_INFO, "Usuario registrado satisfactoriamente", "");
-                break;
-        }
+        userBean.getRoles().add("ROLE_USER");
+        registerUser(new SignupRequest(userBean.getUsername(), userBean.getEmail(), userBean.assignRole(), userBean. getPassword(), userBean.getName(), userBean.getLastName(), true));
         PrimeFaces.current().ajax().update("form:messages", "form-register");
-
     }
 
+    // User
+    public void createUser() {
+        registerUser( new SignupRequest(userBean.getUsername(), userBean.getEmail(), userBean.assignRole(), userBean.getPassword(), userBean.getName(), userBean.getLastName(), userBean.isEnabled()));
+        initUserTable();
+        PrimeFaces.current().executeScript("PF('addUserDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-user");
+    }
 
+    public void deleteUser() {
+
+        verificateExpiationDate();
+
+        if (userBean.getUser() != null && service.deleteUser(userBean.getUser().getId(), authenticationData.getToken())) {
+            addMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado", "");
+        }
+        else{
+            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar el usuario", "");
+        }
+
+        initUserTable();
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-user");
+    }
+
+    public void deleteSelectedUser() {
+
+        ArrayList<Integer> idList = new ArrayList<>();
+        for(User user: userBean.getSelectUserList()){
+            idList.add(user.getId());
+        }
+
+        verificateExpiationDate();
+
+        if(idList.size() != 0 && service.deleteUserGroup(idList, authenticationData.getToken())){
+            addMessage(FacesMessage.SEVERITY_INFO, "Usuarios seleccionados eliminados", "");
+
+        }else{
+           addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar el usuario", "");
+        }
+
+        initUserTable();
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-user");
+    }
+
+    public void editUser() {
+
+        verificateExpiationDate();
+
+        User userFinded = service.getUserById(userBean.getUser().getId(), authenticationData.getToken());
+
+        if (userFinded == null){
+            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuario", "Usuario Inexistente");
+        }
+        else{
+            if (userBean.getUser().getPassword().equals("")){
+                userBean.getUser().setPassword(userFinded.getPassword());
+            }
+            if(!service.updateUser(userBean.getUser(), authenticationData.getToken())){
+                addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuario", "Error en el formulario");
+            }
+            else{
+                addMessage(FacesMessage.SEVERITY_INFO, "Usuario actualizado", "");
+            }
+        }
+
+        initUserTable();
+        PrimeFaces.current().executeScript("PF('editUserDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-user");
+    }
 
     // References
     public void createArticleReference() {
@@ -487,8 +544,7 @@ public class ReferenceManagerBean {
             addMessage(FacesMessage.SEVERITY_INFO, "Referencia eliminada", "");
         }
         else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Existen errores al eliminar la referencia", ""));
+           addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar la referencia", "");
         }
 
         init();
@@ -508,7 +564,7 @@ public class ReferenceManagerBean {
             addMessage(FacesMessage.SEVERITY_INFO, "Referencias seleccionadas eliminadas", "");
 
         }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar la referencia", ""));
+            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al eliminar la referencia", "");
         }
 
         init();
@@ -583,7 +639,7 @@ public class ReferenceManagerBean {
         }
         else{
             if(!service.updateReference(authenticationData.getId(), articleReferenceBean.getArticleReference(), authenticationData.getToken())){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+                addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
             }
             else{
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Artículo actualizada", "");
@@ -605,7 +661,7 @@ public class ReferenceManagerBean {
         }
         else{
            if (!service.updateReference(authenticationData.getId(), bookReferenceBean.getBookReference(), authenticationData.getToken())){
-               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+               addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
            }
            else{
                addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Libro actualizada", "");
@@ -628,7 +684,7 @@ public class ReferenceManagerBean {
         }
         else{
             if (!service.updateReference(authenticationData.getId(), bookLetReferenceBean.getBookLetReference(), authenticationData.getToken())){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+                addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
             }
             else{
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Folleto actualizada", "");
@@ -651,7 +707,7 @@ public class ReferenceManagerBean {
         }
         else{
             if(!service.updateReference(authenticationData.getId(), bookSectionReferenceBean.getBookSectionReference(), authenticationData.getToken())){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+             addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
             }
             else{
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencia de la Sección de libro actualizada", "");
@@ -674,7 +730,7 @@ public class ReferenceManagerBean {
         }
         else{
             if(!service.updateReference(authenticationData.getId(), conferencePaperReferenceBean.getConferencePaperReference(), authenticationData.getToken())){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+               addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
             }
             else{
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencia del Documento de Sesión actualizada", "");
@@ -720,7 +776,7 @@ public class ReferenceManagerBean {
         }
         else{
             if(!service.updateReference(authenticationData.getId(), thesisReferenceBean.getThesisReference(), authenticationData.getToken())){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+               addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
             }
             else{
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencia de la Tesis actualizada", "");
@@ -742,7 +798,7 @@ public class ReferenceManagerBean {
         }
         else{
             if(!service.updateReference(authenticationData.getId(), webPageReferenceBean.getWebPageReference(), authenticationData.getToken())){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario"));
+                addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar la referencia", "Error en el formulario");
             }
             else {
                 addMessage(FacesMessage.SEVERITY_INFO, "Referencia de la Página Web actualizada", "");
@@ -754,13 +810,9 @@ public class ReferenceManagerBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
 
-    public void exportRis() throws IOException {
-        exportReferenceList(Format.RIS);
-    }
+    public void exportRis() throws IOException { exportReferenceList(Format.RIS); }
 
-    public void exportBibTex() throws IOException {
-        exportReferenceList(Format.BIBTEX);
-    }
+    public void exportBibTex() throws IOException { exportReferenceList(Format.BIBTEX); }
 
    private void exportReferenceList(Format format) throws IOException {
 
@@ -791,9 +843,25 @@ public class ReferenceManagerBean {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
     }
 
+    public void registerUser(SignupRequest user) {
+        String message = service.registerUser(user);
+        userBean.cleanVariables();
+
+        switch (message){
+            case "Error: Username is already taken!":
+                addMessage(FacesMessage.SEVERITY_ERROR, "El nombre de ususario ya esta tomado", "");
+                break;
+            case "Error: Email is already in use!":
+                addMessage(FacesMessage.SEVERITY_ERROR, "El E-mail ya esta en uso ", "");
+                break;
+            case "User registered successfully!":
+                addMessage(FacesMessage.SEVERITY_INFO, "Usuario registrado satisfactoriamente", "");
+                break;
+        }
+    }
+
     private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().
-                addMessage(null, new FacesMessage(severity, summary, detail));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
     private void verificateExpiationDate() {

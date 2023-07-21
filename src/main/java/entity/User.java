@@ -1,8 +1,8 @@
 package entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "\"User\"",  uniqueConstraints = {
@@ -33,11 +33,7 @@ public class User {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private List<String> roles = new ArrayList<>();
 
     public User() {}
 
@@ -48,6 +44,17 @@ public class User {
         this.email = email;
         this.enabled = enabled;
         this.password = password;
+    }
+
+    public User(Integer id, String username, String name, String lastName, String email, boolean enabled, String password, List<String> roles) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.enabled = enabled;
+        this.password = password;
+        this.roles = roles;
     }
 
     public String getPassword() { return password; }
@@ -78,10 +85,7 @@ public class User {
 
     public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
-    public Set<Role> getRoles() { return roles; }
+    public List<String> getRoles() { return roles; }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
-
-    public void setRole(Role role) { this.roles.add(role); }
-
+    public void setRoles(List<String> roles) { this.roles = roles; }
 }

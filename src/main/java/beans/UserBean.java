@@ -2,28 +2,37 @@ package beans;
 
 import entity.User;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @ManagedBean
 @SessionScoped
 public class UserBean {
 
+    private static List<User> userList = new ArrayList<User>();
+    private static User user = new User();
+    private static List<User> selectUserList = new ArrayList<User>();
+
     private static String username = "";
     private static String email = "";
-    private static Set<String> rolesList = new HashSet<>();
+    private static List<String> roles = new ArrayList<>();
     private static String password = "";
     private static String name = "";
     private static String lastName = "";
     private static boolean enabled = false;
 
-    private static User user = new User();
+    public List<User> getUserList() { return userList; }
+
+    public void setUserList(List<User> userList) { UserBean.userList = userList; }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { UserBean.user = user; }
+
+    public List<User> getSelectUserList() { return selectUserList; }
+
+    public void setSelectUserList(List<User> selectUserList) { UserBean.selectUserList = selectUserList; }
 
     public String getUsername() { return username; }
 
@@ -33,15 +42,15 @@ public class UserBean {
 
     public void setEmail(String email) { UserBean.email = email; }
 
-    public Set<String> getRolesList() { return rolesList; }
+    public List<String> getRoles() { return roles; }
 
-    public void setRolesList(Set<String> rolesList) { UserBean.rolesList = rolesList; }
+    public void setRoles(List<String> roles) { UserBean.roles = roles; }
 
     public String getPassword() { return password; }
 
     public void setPassword(String password) { UserBean.password = password; }
 
-    public String getName() { return name; }
+    public String getName(){ return name; }
 
     public void setName(String name) { UserBean.name = name; }
 
@@ -53,67 +62,70 @@ public class UserBean {
 
     public void setEnabled(boolean enabled) { UserBean.enabled = enabled; }
 
-    public User getUser() { return user; }
-
-    public void setUser(User user) { UserBean.user = user; }
-
     public void cleanVariables(){
         username = "";
         email = "";
-        rolesList.clear();
+        roles.clear();
         password = "";
         name = "";
         lastName = "";
         enabled = false;
     }
 
+    public void copyEdit(User userCodex){
+        if(userCodex != null)
+            user = new User(userCodex.getId(), userCodex.getUsername(), userCodex.getName(), userCodex.getLastName(), userCodex.getEmail(), userCodex.isEnabled(), userCodex.getPassword(), userCodex.getRoles());
+    }
 
+    public String translateEstado(boolean text){ return (text)? "habilitado" : "deshabilitado"; }
 
+    public String translateColorEstado(boolean text){ return (text)? "green" : "red"; }
 
-    public void createUser() {
+    public List<String> roleInfo(){
 
-        User userCodex = new User( username, name, lastName, email, enabled, password);
+        List<String> RoleInfo = new ArrayList<>();
+        for(String role: user.getRoles()){
+            switch (role) {
+                case "ROLE_ADMIN":
+                    RoleInfo.add("Administrador");
+                    break;
 
-        if(userCodex != null){
+                case "ROLE_MANAGER":
+                    RoleInfo.add("Gerente");
+                    break;
 
-            addMessage(FacesMessage.SEVERITY_INFO, "Usuario adicionado", "");
-        }else{
-            addMessage( FacesMessage.SEVERITY_ERROR,"Existe error en el formulario","");
+                case "ROLE_AUDITOR":
+                    RoleInfo.add("Auditor");
+                    break;
+
+                default:
+                    RoleInfo.add("Usuario");
+            }
         }
-        //PrimeFaces.current().executeScript("PF('addArticleReferenceDialog').hide()");
-        //PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
+        return RoleInfo;
     }
 
-    public void copyEdit(User UserCodex){
-        if(UserCodex != null)
-            user = new User( UserCodex.getUsername(), UserCodex.getName(), UserCodex.getLastName(), UserCodex.getEmail(), UserCodex.isEnabled(), UserCodex.getPassword());
-    }
-    public void editUser() {
-        if (user != null){
-            //referenceList.remove(thesisReferenceBean.getThesisReference().getId());
+    public Set<String> assignRole(){
+        Set<String> rolesAdd = new HashSet<>();
 
-           // referenceList.add(thesisReferenceBean.getThesisReference());
-            addMessage(FacesMessage.SEVERITY_INFO, "Usuario Actualizado", "");
+        for(String role: roles){
+            switch (role) {
+                case "ROLE_ADMIN":
+                    rolesAdd.add("admin");
+                    break;
+
+                case "ROLE_MANAGER":
+                    rolesAdd.add("manager");
+                    break;
+
+                case "ROLE_AUDITOR":
+                    rolesAdd.add("auditor");
+                    break;
+
+                default:
+                    rolesAdd.add("user");
+            }
         }
-        else{
-            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuario", "Usuario Inexistente");
-        }
-
-        //PrimeFaces.current().executeScript("PF('editThesisReferenceDialog').hide()");
-       // PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
+        return rolesAdd;
     }
-
-    public void delete() {
-        if (user != null) {
-            //referenceList.remove(reference);
-            addMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado", "");
-        }
-       // PrimeFaces.current().ajax().update("form:messages", "form:dt-reference");
-    }
-
-    private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().
-                addMessage(null, new FacesMessage(severity, summary, detail));
-    }
-
 }

@@ -2,8 +2,11 @@ package rest;
 
 import Auth.*;
 import dto.ReferencePageDTO;
+import dto.UserPageDTO;
 import entity.Reference;
+import entity.User;
 import enums.SortReference;
+import enums.SortUser;
 import utils.DTOConverter;
 
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class Service {
     // Rest Reference
     public ArrayList<Reference> getAllReference(AuthenticationData authenticationData) {
 
+        ArrayList<Reference> temporalList = new ArrayList<>();
         ArrayList<Reference> referenceList = new ArrayList<>();
         ReferencePageDTO referencePageDTO = new ReferencePageDTO();
 
@@ -34,8 +38,11 @@ public class Service {
             if(referencePageDTO == null){
                 break;
             }
-            referenceList = (ArrayList<Reference>) dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList());
-        } while (referencePageDTO.getPageDTO().getCurrentPage() + 1 != referencePageDTO.getPageDTO().getTotalPages());;
+            temporalList = (ArrayList<Reference>) dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList());
+            for(Reference reference: temporalList){
+                referenceList.add(reference);
+            } referencePageDTO.getPageDTO().setCurrentPage(referencePageDTO.getPageDTO().getCurrentPage() +1);
+        } while (referenceList.size() != referencePageDTO.getPageDTO().getTotalElement());
 
         return referenceList;
     }
@@ -77,5 +84,44 @@ public class Service {
     public String registerUser(SignupRequest signUpRequest){ return restAuth.registerUser(signUpRequest); }
 
     public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) { return restAuth.refreshToken(refreshToken); }
+
+
+    // Rest User
+    public ArrayList<User> getAllUser(String token) {
+
+        ArrayList<User> temporalList = new ArrayList<>();
+        ArrayList<User> userList = new ArrayList<>();
+        UserPageDTO userPageDTO = new UserPageDTO();
+
+        do {
+            userPageDTO = restUser.getAllUser(userPageDTO.getPageDTO().getCurrentPage(), SortUser.idAsc, token);
+            if(userPageDTO == null){
+                break;
+            }
+            temporalList = (ArrayList<User>) dtoConverter.toUserList(userPageDTO.getUserDTOList());
+            for(User user: temporalList){
+                userList.add(user);
+            }
+            userPageDTO.getPageDTO().setCurrentPage(userPageDTO.getPageDTO().getCurrentPage() +1);
+        } while (userList.size() != userPageDTO.getPageDTO().getTotalElement());
+
+        return userList;
+    }
+
+    public User getUserById(Integer id, String token) {
+        return dtoConverter.toUser(restUser.getUserById(id,token));
+    }
+
+    public boolean updateUser(User user, String token) {
+        return restUser.updateUser(dtoConverter.toUserDTO(user), token);
+    }
+
+    public boolean deleteUser(Integer id, String token) {
+        return restUser.deleteUser(id, token);
+    }
+
+    public boolean deleteUserGroup(ArrayList<Integer> idList, String token) {
+        return restUser.deleteUserGroup(idList, token);
+    }
 
 }
