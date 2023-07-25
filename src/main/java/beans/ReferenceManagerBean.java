@@ -65,6 +65,11 @@ public class ReferenceManagerBean {
         userBean.setUserList(service.getAllUser(authenticationData.getToken()));
     }
 
+    public void initPreferences() {
+        verificateExpiationDate();
+        userBean.copyEdit(service.getUserById(authenticationData.getId(), authenticationData.getToken()));
+    }
+
     public void cleanVariables(){
         path = "";
         format = "";
@@ -256,6 +261,32 @@ public class ReferenceManagerBean {
         PrimeFaces.current().executeScript("PF('editUserDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-user");
     }
+
+    public void editpreferences() {
+
+        verificateExpiationDate();
+
+        User userFinded = service.getUserById(userBean.getUser().getId(), authenticationData.getToken());
+
+        if (userFinded == null){
+            addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuario", "Usuario Inexistente");
+        }
+        else{
+            if (userBean.getUser().getPassword().equals("")){
+                userBean.getUser().setPassword(userFinded.getPassword());
+            }
+            if(!service.updateUser(userBean.getUser(), authenticationData.getToken())){
+                addMessage(FacesMessage.SEVERITY_ERROR, "Existen errores al editar el usuario", "Error en el formulario");
+            }
+            else{
+                addMessage(FacesMessage.SEVERITY_INFO, "Usuario actualizado", "");
+            }
+        }
+
+        PrimeFaces.current().ajax().update("form:messages", "form-preferences");
+    }
+
+
 
     // References
     public void createArticleReference() {
