@@ -1,5 +1,7 @@
 package entity;
 
+import utils.FieldValidations;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -32,30 +34,56 @@ public class ConferenceProceedingReference extends Reference {
     @Column(name = "isbn")
     private String isbn;
 
+    private final FieldValidations validations = new FieldValidations();
+
     public ConferenceProceedingReference() {}
 
     public ConferenceProceedingReference(String title, String year, String month, String note, String editor, String volume, String number, String series, String address, String publisher, String isbn, String organization) {
         super(title, year, month, note);
-        this.editor = editor;
-        this.volume = volume;
-        this.number = number;
-        this.series = series;
-        this.address = address;
         this.publisher = publisher;
-        this.isbn = isbn;
         this.organization = organization;
+
+        if(validations.validateAuthorOrEditor(editor))
+        this.editor = editor;
+
+        if(validations.isNumber(volume))
+        this.volume = volume;
+
+        if(validations.validateNumber(number))
+        this.number = number;
+
+        if(validations.validateSeries(series))
+        this.series = series;
+
+        if(validations.validateAddress(address))
+        this.address = address;
+
+        if(validations.validateIsbn(isbn))
+        this.isbn = isbn;
     }
 
     public ConferenceProceedingReference(Integer id, String title, String year, String month, String note, String editor, String volume, String number, String series, String address, String publisher, String isbn, String organization) {
         super(id, title, year, month, note);
-        this.editor = editor;
-        this.volume = volume;
-        this.number = number;
-        this.series = series;
-        this.address = address;
         this.publisher = publisher;
         this.organization = organization;
-        this.isbn = isbn;
+
+        if(validations.validateAuthorOrEditor(editor))
+            this.editor = editor;
+
+        if(validations.isNumber(volume))
+            this.volume = volume;
+
+        if(validations.validateNumber(number))
+            this.number = number;
+
+        if(validations.validateSeries(series))
+            this.series = series;
+
+        if(validations.validateAddress(address))
+            this.address = address;
+
+        if(validations.validateIsbn(isbn))
+            this.isbn = isbn;
     }
 
     public String getAddress() {
@@ -63,6 +91,7 @@ public class ConferenceProceedingReference extends Reference {
     }
 
     public void setAddress(String address) {
+        if(validations.validateAddress(address))
         this.address = address;
     }
 
@@ -71,6 +100,7 @@ public class ConferenceProceedingReference extends Reference {
     }
 
     public void setSeries(String series) {
+        if(validations.validateSeries(series))
         this.series = series;
     }
 
@@ -79,16 +109,23 @@ public class ConferenceProceedingReference extends Reference {
     }
 
     public void setVolume(String volume) {
+        if(validations.isNumber(volume))
         this.volume = volume;
     }
 
     public String getEditor() { return editor; }
 
-    public void setEditor(String editor) { this.editor = editor; }
+    public void setEditor(String editor) {
+        if(validations.validateAuthorOrEditor(editor))
+        this.editor = editor;
+    }
 
     public String getNumber() { return number; }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        if(validations.validateNumber(number))
+        this.number = number;
+    }
 
     public String getPublisher() { return publisher; }
 
@@ -96,7 +133,10 @@ public class ConferenceProceedingReference extends Reference {
 
     public String getIsbn() { return isbn; }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setIsbn(String isbn) {
+        if(validations.validateIsbn(isbn))
+        this.isbn = isbn;
+    }
 
     public String getOrganization() { return organization; }
 

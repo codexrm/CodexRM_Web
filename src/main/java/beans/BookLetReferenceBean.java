@@ -64,4 +64,6 @@ public class BookLetReferenceBean {
         if(bookLet != null)
             bookLetReference = new BookLetReference(bookLet.getId(), bookLet.getTitle(), bookLet.getYear(), bookLet.getMonth(), bookLet.getNote(), bookLet.getAuthor(), bookLet.getHowpublished(), bookLet.getAddress());
     }
+
+    public BookLetReference create(){ return new BookLetReference(title, year, month, note, author, howpublished,address); }
 }

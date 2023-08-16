@@ -119,4 +119,29 @@ public class BookSectionReferenceBean {
             bookSectionReference = new BookSectionReference(section.getId(), section.getTitle(), section.getYear(), section.getMonth(), section.getNote(), section.getAuthor(), section.getEditor(), section.getPublisher(), section.getVolume(), section.getNumber(),
                     section.getSeries(), section.getAddress(), section.getEdition(), section.getIsbn(), section.getChapter(), section.getPages(), section.getType());
     }
+    
+    public BookSectionReference create(){ return new BookSectionReference(title, year,month, note, author,editor, publisher, volume, number, series, address,edition, isbn, chapter, pages, type); }
+
+    public String infoBookSectionType(String type) {
+        switch (type){
+            case "MATHESIS":
+                return "Tesis de Maestría";
+            case "PHDTHESIS":
+                return "Tesis de Doctorado";
+            case "CANDTHESIS":
+                return "Tesis Candidata";
+            case "TECHREPORT":
+                return "Reporte Técnico";
+            case "RESREPORT":
+                return "Informe de investigación";
+            case "SOFTWARE":
+                return "Software";
+            case "AUDIOCD":
+                return "CD de audio";
+            case "DataCD":
+                return "CD de datos";
+            default:
+                return "";
+        }
+    }
 }

@@ -108,4 +108,6 @@ public class ConferencePaperReferenceBean {
             conferencePaperReference = new ConferencePaperReference(paper.getId(), paper.getTitle(), paper.getYear(), paper.getMonth(), paper.getNote(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(), paper.getNumber(), paper.getSeries(),
                     paper.getPublisher(), paper.getVolume(), paper.getAddress(), paper.getPages(), paper.getOrganization());
     }
+
+    public ConferencePaperReference create(){ return new ConferencePaperReference(title, year, month, note, author, bookTitle, editor, number, series, publisher, volume, address, pages, organization); }
 }

@@ -1,8 +1,12 @@
 package rest;
 
-import Auth.*;
-import dto.ReferenceDTO;
 import dto.UserDTO;
+import payload.Request.SignupRequest;
+import payload.Request.TokenRefreshRequest;
+import payload.Request.UserLoginRequest;
+import payload.Response.AuthenticationDataResponse;
+import payload.Response.MessageResponse;
+import payload.Response.TokenRefreshResponse;
 import utils.JsonUtils;
 
 import java.net.URI;
@@ -18,7 +22,7 @@ public class RestAuth {
     private static final String authURL = "http://localhost:8081/api/auth/";
 
 
-    public AuthenticationData userLogin(UserLogin userLogin) {
+    public AuthenticationDataResponse userLogin(UserLoginRequest userLogin) {
 
         String  inputJson = JsonUtils.convertFromObjectToJson(userLogin);
 
@@ -43,8 +47,8 @@ public class RestAuth {
         response.join();
         String token = userDTO.getTokenType() + " " + userDTO.getAccessToken();
 
-        return new AuthenticationData( userDTO.getId(),  userDTO.getUsername(),  userDTO.getName(),  userDTO.getLastName(),  userDTO.getEmail(),
-                userDTO.isEnabled(), token, userDTO.getRefreshToken(), userDTO.getTokenExpirationDate(), userDTO.getRefreshTokenExpirationDate() );
+        return new AuthenticationDataResponse( userDTO.getId(),  userDTO.getUsername(),  userDTO.getName(),  userDTO.getLastName(),  userDTO.getEmail(),
+                userDTO.isEnabled(), token, userDTO.getRefreshToken(), userDTO.getTokenExpirationDate(), userDTO.getRefreshTokenExpirationDate(), userDTO.getRoles());
     }
 
     public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) {

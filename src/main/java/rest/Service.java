@@ -1,12 +1,14 @@
 package rest;
 
-import Auth.*;
 import dto.ReferencePageDTO;
+import payload.Request.*;
 import dto.UserPageDTO;
 import entity.Reference;
 import entity.User;
 import enums.SortReference;
 import enums.SortUser;
+import payload.Response.AuthenticationDataResponse;
+import payload.Response.TokenRefreshResponse;
 import utils.DTOConverter;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class Service {
     }
 
     // Rest Reference
-    public ArrayList<Reference> getAllReference(AuthenticationData authenticationData) {
+    public ArrayList<Reference> getAllReference(AuthenticationDataResponse authenticationData) {
 
         ArrayList<Reference> temporalList = new ArrayList<>();
         ArrayList<Reference> referenceList = new ArrayList<>();
@@ -77,7 +79,7 @@ public class Service {
 
 
     // Rest Auth
-    public AuthenticationData login(UserLogin userLogin){ return restAuth.userLogin(userLogin); }
+    public AuthenticationDataResponse login(UserLoginRequest userLogin){ return restAuth.userLogin(userLogin); }
 
     public boolean logout(String token) throws ExecutionException, InterruptedException { return restAuth.userLogout(token); }
 
@@ -108,20 +110,18 @@ public class Service {
         return userList;
     }
 
-    public User getUserById(Integer id, String token) {
-        return dtoConverter.toUser(restUser.getUserById(id,token));
-    }
+    public User getUserById(Integer id, String token) { return dtoConverter.toUser(restUser.getUserById(id,token)); }
 
-    public boolean updateUser(User user, String token) {
-        return restUser.updateUser(dtoConverter.toUserDTO(user), token);
-    }
+    public String addUser(AddUserRequest user, String token){ return restUser.addUser(user, token); }
 
-    public boolean deleteUser(Integer id, String token) {
-        return restUser.deleteUser(id, token);
-    }
+    public boolean updateUser(User user, String token) { return restUser.updateUser(dtoConverter.toUserDTO(user), token); }
 
-    public boolean deleteUserGroup(ArrayList<Integer> idList, String token) {
-        return restUser.deleteUserGroup(idList, token);
-    }
+    public boolean updatePreferences(User user, String token) { return restUser.updatePreferences(dtoConverter.toUserDTO(user), token); }
+
+    public String updateUserPassword(UpdatePasswordRequest updatePasswordDTO, String token){ return restUser.updateUserPassword(updatePasswordDTO, token); }
+
+    public boolean deleteUser(Integer id, String token) { return restUser.deleteUser(id, token); }
+
+    public boolean deleteUserGroup(ArrayList<Integer> idList, String token) { return restUser.deleteUserGroup(idList, token); }
 
 }

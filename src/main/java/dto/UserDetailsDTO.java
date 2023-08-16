@@ -6,7 +6,6 @@ public class UserDetailsDTO {
 
     private Integer id;
     private String username;
-    private String password;
     private String name;
     private String lastName;
     private String email;
@@ -15,10 +14,9 @@ public class UserDetailsDTO {
 
     public UserDetailsDTO() {}
 
-    public UserDetailsDTO(Integer id, String username, String password, String name, String lastName, String email, boolean enabled) {
+    public UserDetailsDTO(Integer id, String username, String name, String lastName, String email, boolean enabled) {
         this.id = id;
         this.username = username;
-        this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -28,10 +26,6 @@ public class UserDetailsDTO {
     public String getUsername() {return username;}
 
     public void setUsername(String username) {this.username = username;}
-
-    public String getPassword() {return password;}
-
-    public void setPassword(String password) {this.password = password;}
 
     public Integer getId() { return id; }
 
@@ -59,4 +53,3 @@ public class UserDetailsDTO {
 
     public void setRol(String rol) { this.roles.add(rol); }
 }
-

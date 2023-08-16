@@ -1,5 +1,7 @@
 package beans;
 
+import payload.Request.UserLoginRequest;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -24,5 +26,5 @@ public class AuthenticationBean {
         password = "";
     }
 
-
+    public UserLoginRequest createUserLogin(){ return new UserLoginRequest(username, password); }
 }

@@ -23,4 +23,17 @@
     <welcome-file-list>
         <welcome-file>pages/login.faces</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pages/Error_404.faces</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/pages/Error_403.faces</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/pages/Error_500.faces</location>
+    </error-page>
 </web-app>

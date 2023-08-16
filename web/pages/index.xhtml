@@ -23,15 +23,18 @@
     <ui:composition template="/pages/template.xhtml">
         <ui:define name="title">Codex RM</ui:define>
         <ui:define name="content">
-            <h:form>
-                <h6 align="center"> Bienvenido de nuevo!!!</h6>
-                <div class="brand-logo" align="center">
-                    <img src="/resources/images/logo.png" alt="logo" />
-                </div>
+            <div class="center" style="background: #0cb7f2">
+                <h2 style="font-size: 300px; font-family: Forte; color: black; text-align: center">Codex RM</h2>
+                <h2 style="font-size: 120px; font-family: Rockwell; color: white; text-align: center">Gestor</h2>
+                <h2 style="font-size: 120px; font-family: Rockwell; color: white; text-align: center">de</h2>
+                <h2 style="font-size: 120px; font-family: Rockwell; color: white; text-align: center">Referencias Bibliograficas</h2>
+                <h2 style="font-size: 100px; font-family: Forte; color: black; text-align: center">Bienvenido!!!</h2>
+
+            </div>
+
                 <input type="hidden"
                        name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
-            </h:form>
 
         </ui:define>
     </ui:composition>

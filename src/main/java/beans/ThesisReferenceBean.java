@@ -70,4 +70,18 @@ public class ThesisReferenceBean {
         if(thesis != null)
             thesisReference = new ThesisReference(thesis.getId(), thesis.getTitle(), thesis.getYear(), thesis.getMonth(), thesis.getNote(), thesis.getAuthor(), thesis.getSchool(), thesis.getType(), thesis.getAddress());
     }
+
+    public ThesisReference create(){ return new ThesisReference(title, year, month, note, author, school, type, address); }
+
+
+    public String infoThesisType(String type) {
+        switch (type){
+            case "MASTERS":
+                return "Maestría";
+            case "PHD":
+                return "Doctorado";
+            default:
+                return "";
+        }
+    }
 }

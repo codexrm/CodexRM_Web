@@ -1,4 +1,4 @@
-package Auth;
+package payload.Request;
 
 import java.util.Set;
 
@@ -7,16 +7,14 @@ public class SignupRequest {
 
     private String username;
     private String email;
-    private Set<String> role;
     private String password;
     private String name;
     private String lastName;
     private boolean enabled;
 
-    public SignupRequest(String username, String email, Set<String> role, String password, String name, String lastName, boolean enabled) {
+    public SignupRequest(String username, String email, String password, String name, String lastName, boolean enabled) {
         this.username = username;
         this.email = email;
-        this.role = role;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
@@ -45,14 +43,6 @@ public class SignupRequest {
  
     public void setPassword(String password) {
         this.password = password;
-    }
-    
-    public Set<String> getRole() {
-      return this.role;
-    }
-    
-    public void setRole(Set<String> role) {
-      this.role = role;
     }
 
     public String getName() { return name; }

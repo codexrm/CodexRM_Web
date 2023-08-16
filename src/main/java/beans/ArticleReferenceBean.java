@@ -85,4 +85,6 @@ public class  ArticleReferenceBean {
             articleReference = new ArticleReference(article.getId(), article.getTitle(), article.getYear(), article.getMonth(), article.getNote(), article.getAuthor(), article.getJournal(), article.getVolume(), article.getNumber(), article.getPages(),
                     article.getIssn());
     }
+
+    public ArticleReference create(){ return new ArticleReference(title, year, month, note, author, journal, volume, number, pages, issn); }
 }

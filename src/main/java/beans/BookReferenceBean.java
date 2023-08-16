@@ -101,5 +101,7 @@ public class BookReferenceBean {
             bookReference = new BookReference(book.getId(),  book.getTitle(), book.getYear(), book.getMonth(), book.getNote(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
                     book.getEdition(), book.getIsbn());
     }
+
+    public BookReference create(){ return new BookReference(title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn); }
 }
 

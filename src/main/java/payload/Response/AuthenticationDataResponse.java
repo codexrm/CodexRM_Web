@@ -1,8 +1,9 @@
-package Auth;
+package payload.Response;
 
 import java.util.Date;
+import java.util.List;
 
-public class AuthenticationData {
+public class AuthenticationDataResponse {
 
     private Integer id;
     private String username;
@@ -14,11 +15,12 @@ public class AuthenticationData {
     private String refreshToken;
     private Date tokenExpirationDate;
     private Date refreshTokenExpirationDate;
+    private List<String> roles;
 
 
-    public AuthenticationData() { }
+    public AuthenticationDataResponse() { }
 
-    public AuthenticationData(Integer id, String username, String name, String lastName, String email, boolean enabled, String token, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate) {
+    public AuthenticationDataResponse(Integer id, String username, String name, String lastName, String email, boolean enabled, String token, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate, List<String> roles) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -29,6 +31,7 @@ public class AuthenticationData {
         this.refreshToken = refreshToken;
         this.tokenExpirationDate = tokenExpirationDate;
         this.refreshTokenExpirationDate = refreshTokenExpirationDate;
+        this.roles = roles;
     }
 
     public Integer getId() { return id; }
@@ -71,6 +74,9 @@ public class AuthenticationData {
 
     public void setRefreshTokenExpirationDate(Date refreshTokenExpirationDate) { this.refreshTokenExpirationDate = refreshTokenExpirationDate; }
 
+    public List<String> getRoles() { return roles; }
+
+    public void setRoles(List<String> roles) { this.roles = roles; }
 }
 
 

@@ -1,4 +1,4 @@
-package Auth;
+package payload.Request;
 
 public class TokenRefreshRequest {
 

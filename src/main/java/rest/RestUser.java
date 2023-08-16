@@ -1,5 +1,8 @@
 package rest;
 
+import payload.Request.AddUserRequest;
+import payload.Response.MessageResponse;
+import payload.Request.UpdatePasswordRequest;
 import dto.UserDetailsDTO;
 import dto.UserPageDTO;
 import enums.SortUser;
@@ -56,6 +59,27 @@ public class RestUser {
         return userDetailsDTO;
     }
 
+    //sending request to add a User.
+    public String addUser(AddUserRequest addUserRequestr, String token) {
+        String inputJson = null;
+        inputJson = JsonUtils.convertFromObjectToJson(addUserRequestr);
+        HttpRequest req = HttpRequest.newBuilder(URI.create(userURL + "Add"))
+                .header("Content-Type","application/json").header("Authorization", token).POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+        CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
+        MessageResponse message = new MessageResponse();
+
+        try {
+            message = JsonUtils.convertFromJsonToObject(response.get().body(), MessageResponse.class);
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        response.join();
+
+        return message.getMessage();
+    }
+
+
     //sending request to update a User details.
     public boolean updateUser(UserDetailsDTO userDetailsDTO, String token) {
         String inputJson = null;
@@ -77,6 +101,49 @@ public class RestUser {
             e.printStackTrace();
         }
         return false;
+    }
+
+    //sending request to update user preferences.
+    public boolean updatePreferences(UserDetailsDTO userDetailsDTO, String token) {
+        String inputJson = null;
+        inputJson = JsonUtils.convertFromObjectToJson(userDetailsDTO);
+        HttpRequest req = HttpRequest.newBuilder(URI.create(userURL + "Preferences"))
+                .header("Content-Type","application/json").header("Authorization", token).PUT(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+        CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
+        try {
+            if (response.get().statusCode() == 500){
+                response.join();
+                return false;
+            }
+            else{
+                userDetailsDTO = JsonUtils.convertFromJsonToObject(response.get().body(), UserDetailsDTO.class);
+                response.join();
+                return true;
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //sending request to update user preferences.
+    public String updateUserPassword(UpdatePasswordRequest updatePasswordDTO, String token) {
+        String inputJson = null;
+        inputJson = JsonUtils.convertFromObjectToJson(updatePasswordDTO);
+        HttpRequest req = HttpRequest.newBuilder(URI.create(userURL + "UpdatePassword"))
+                .header("Content-Type","application/json").header("Authorization", token).PUT(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+        CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
+        MessageResponse message = new MessageResponse();
+        try {
+            message = JsonUtils.convertFromJsonToObject(response.get().body(), MessageResponse.class);
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        response.join();
+
+        return message.getMessage();
+
     }
 
     //sending request to delete the user by its id.

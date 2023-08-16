@@ -1,4 +1,4 @@
-package Auth;
+package payload.Response;
 
 public class MessageResponse {
 

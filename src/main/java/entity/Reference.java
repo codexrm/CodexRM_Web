@@ -1,5 +1,7 @@
 package entity;
 
+import utils.FieldValidations;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,21 +26,27 @@ public class Reference {
     @Column(name = "note")
     private String note;
 
+    private final FieldValidations validations = new FieldValidations();
+
     public Reference() {}
 
     public Reference(String title, String year, String month, String note) {
         this.title = title;
-        this.year = year;
         this.month = month;
         this.note = note;
+
+        if(validations.validateYear(year))
+        this.year = year;
     }
 
     public Reference(Integer id, String title, String year, String month, String note) {
         this.id = id;
         this.title = title;
-        this.year = year;
         this.month = month;
         this.note = note;
+
+        if(validations.validateYear(year))
+        this.year = year;
     }
 
     public Integer getId() { return id; }
@@ -51,7 +59,10 @@ public class Reference {
 
     public String getYear() { return year; }
 
-    public void setYear(String year) { this.year = year; }
+    public void setYear(String year) {
+        if(validations.validateYear(year))
+            this.year = year;
+    }
 
     public String getMonth() { return month; }
 

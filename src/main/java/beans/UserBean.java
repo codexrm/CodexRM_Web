@@ -1,6 +1,9 @@
 package beans;
 
+import payload.Request.AddUserRequest;
+import payload.Request.SignupRequest;
 import entity.User;
+import payload.Request.UpdatePasswordRequest;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,6 +24,8 @@ public class UserBean {
     private static String name = "";
     private static String lastName = "";
     private static boolean enabled = false;
+
+    private static UpdateUserPasswordBean updateUserPasswordBean = new UpdateUserPasswordBean();
 
     public List<User> getUserList() { return userList; }
 
@@ -62,6 +67,10 @@ public class UserBean {
 
     public void setEnabled(boolean enabled) { UserBean.enabled = enabled; }
 
+    public UpdateUserPasswordBean getUpdateUserPasswordBean() { return updateUserPasswordBean; }
+
+    public void setUpdateUserPasswordBean(UpdateUserPasswordBean updateUserPasswordBean) { UserBean.updateUserPasswordBean = updateUserPasswordBean; }
+
     public void cleanVariables(){
         username = "";
         email = "";
@@ -76,6 +85,12 @@ public class UserBean {
         if(userCodex != null)
             user = new User(userCodex.getId(), userCodex.getUsername(), userCodex.getName(), userCodex.getLastName(), userCodex.getEmail(), userCodex.isEnabled(), userCodex.getPassword(), userCodex.getRoles());
     }
+
+    public SignupRequest singup(){ return new SignupRequest(username, email, password, name, lastName, true); }
+
+    public AddUserRequest createUser(){ return new AddUserRequest(username, email, password, name, lastName, enabled, roles); }
+
+    public UpdatePasswordRequest editUserPassword(Integer id){ return new UpdatePasswordRequest( updateUserPasswordBean.getNewPassword(), updateUserPasswordBean.getCurrentPassword(), updateUserPasswordBean.getConfirmationPassword(), id); }
 
     public String translateEstado(boolean text){ return (text)? "habilitado" : "deshabilitado"; }
 
@@ -98,34 +113,13 @@ public class UserBean {
                     RoleInfo.add("Auditor");
                     break;
 
-                default:
+                case "ROLE_USER":
                     RoleInfo.add("Usuario");
+                    break;
+
+                default:
             }
         }
         return RoleInfo;
-    }
-
-    public Set<String> assignRole(){
-        Set<String> rolesAdd = new HashSet<>();
-
-        for(String role: roles){
-            switch (role) {
-                case "ROLE_ADMIN":
-                    rolesAdd.add("admin");
-                    break;
-
-                case "ROLE_MANAGER":
-                    rolesAdd.add("manager");
-                    break;
-
-                case "ROLE_AUDITOR":
-                    rolesAdd.add("auditor");
-                    break;
-
-                default:
-                    rolesAdd.add("user");
-            }
-        }
-        return rolesAdd;
     }
 }

@@ -1,13 +1,13 @@
-package Auth;
+package payload.Request;
 
-public class UserLogin {
+public class UserLoginRequest {
 
     private String username;
     private String password;
 
-    public UserLogin() { }
+    public UserLoginRequest() { }
 
-    public UserLogin(String username, String password) {
+    public UserLoginRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }

@@ -95,4 +95,6 @@ public class ConferenceProceedingsReferenceBean {
             conferenceProceedingsReference = new ConferenceProceedingReference(proceedings.getId(), proceedings.getTitle(), proceedings.getYear(), proceedings.getMonth(), proceedings.getNote(), proceedings.getEditor(), proceedings.getVolume(),
                     proceedings.getNumber(), proceedings.getSeries(), proceedings.getAddress(), proceedings.getPublisher(), proceedings.getIsbn(), proceedings.getOrganization());
     }
+
+    public ConferenceProceedingReference create(){ return new ConferenceProceedingReference(title, year, month, note, editor, volume, number, series, address, publisher, isbn, organization); }
 }

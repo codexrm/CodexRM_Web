@@ -24,7 +24,7 @@
     <ui:composition template="template.xhtml">
         <ui:define name="title">Preferencias</ui:define>
         <ui:define name="content">
-            #{referenceManagerBean.initPreferences()}
+            #{managerBean.initPreferences()}
             <div class="container-scroller">
                 <div class="container-fluid page-body-wrapper full-page-wrapper">
                     <div class="main-panel">
@@ -39,7 +39,7 @@
                                                 <div class="p-field">
                                                     <p:outputLabel for="username">Nombre de Usuario</p:outputLabel>
                                                     <p:inputText id="username"
-                                                                 value="#{referenceManagerBean.userBean.user.username}"
+                                                                 value="#{managerBean.userBean.user.username}"
                                                                  required="true">
                                                         <f:validateRegex pattern="[a-z]+[0-9]*[_.-]?[a-z0-9]+$"/>
                                                     </p:inputText>
@@ -48,7 +48,7 @@
                                                 <div class="p-field">
                                                     <p:outputLabel for="email">E-mail</p:outputLabel>
                                                     <p:inputText id="email"
-                                                                 value="#{referenceManagerBean.userBean.user.email}"
+                                                                 value="#{managerBean.userBean.user.email}"
                                                                  required="true">
                                                         <f:validateRegex
                                                                 pattern="[\w\.-]*[a-zA-Z8-9_]@[\w\.-]*[a-zA-Z8-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]+$"/>
@@ -56,21 +56,9 @@
                                                 </div>
 
                                                 <div class="p-field">
-                                                    <p:outputLabel for="password">Contraseña</p:outputLabel>
-                                                    <p:password id="password"
-                                                                value="#{referenceManagerBean.userBean.user.password}"
-                                                                feedback="true"
-                                                                promptLabel="Ingresa tu contraseña" weakLabel="Debil"
-                                                                goodLabel="Buena" strongLabel="Fuerte"/>
-                                                    <p:staticMessage severity="info"
-                                                                     detail="Dejar el campo vacio para mantener contraseña actual."
-                                                                     style="width: 100%"/>
-                                                </div>
-
-                                                <div class="p-field">
                                                     <p:outputLabel for="name">Nombre</p:outputLabel>
                                                     <p:inputText id="name"
-                                                                 value="#{referenceManagerBean.userBean.user.name}"
+                                                                 value="#{managerBean.userBean.user.name}"
                                                                  required="true">
                                                         <f:validateRegex pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
                                                     </p:inputText>
@@ -79,7 +67,7 @@
                                                 <div class="p-field">
                                                     <p:outputLabel for="lastName">Apellido</p:outputLabel>
                                                     <p:inputText id="lastName"
-                                                                 value="#{referenceManagerBean.userBean.user.lastName}"
+                                                                 value="#{managerBean.userBean.user.lastName}"
                                                                  required="true">
                                                         <f:validateRegex pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
                                                     </p:inputText>
@@ -88,8 +76,45 @@
                                             <div class="mt-3">
                                                 <p:commandButton value="Actualizar"
                                                                  styleClass="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                                                 actionListener="#{referenceManagerBean.editpreferences}"/>
+                                                                 actionListener="#{managerBean.editPreferences}"/>
                                             </div>
+                                            <div class="text-center mt-4 font-weight-light">
+                                                <p:commandButton value="Editar Contraseña" styleClass="ui-button-flat" oncomplete="PF('editUserPasswordDialog').show()" process="@this"/>
+                                            </div>
+                                            
+                                            <!--Edit User password dialog-->
+                                            <p:dialog header="Editar la contraseña" height="400" width="450" showEffect="fade" modal="true"
+                                                      widgetVar="editUserPasswordDialog" id="editUserPasswordDialog" resposive="true">
+                                                <p:outputPanel id="edit-user-content" class="ui-fluid">
+                                                    #{managerBean.userBean.updateUserPasswordBean.cleanVariables()}
+                                                    <p:outputPanel>
+                                                        <div class="p-field">
+                                                            <p:outputLabel for="currentPassword">Contraseña Actual</p:outputLabel>
+                                                            <p:password id="currentPassword" value="#{managerBean.userBean.updateUserPasswordBean.currentPassword}" feedback="true" required="true"
+                                                                        promptLabel="Ingresa tu contraseña" weakLabel="Debil" goodLabel="Buena" strongLabel="Fuerte"/>
+                                                        </div>
+
+                                                        <div class="p-field">
+                                                            <p:outputLabel for="newPassword">Contraseña Nueva</p:outputLabel>
+                                                            <p:password id="newPassword" value="#{managerBean.userBean.updateUserPasswordBean.newPassword}" feedback="true" required="true"
+                                                                        promptLabel="Ingresa tu contraseña" weakLabel="Debil" goodLabel="Buena" strongLabel="Fuerte"/>
+                                                        </div>
+
+                                                        <div class="p-field">
+                                                            <p:outputLabel for="confirmationPassword">Confirmación</p:outputLabel>
+                                                            <p:password id="confirmationPassword" value="#{managerBean.userBean.updateUserPasswordBean.confirmationPassword}" feedback="true" required="true"
+                                                                        promptLabel="Ingresa tu contraseña" weakLabel="Debil" goodLabel="Buena" strongLabel="Fuerte"/>
+                                                        </div>
+                                                    </p:outputPanel>
+                                                </p:outputPanel>
+                                                <f:facet name="footer">
+                                                    <p:commandButton value="Editar" icon="pi pi-check" actionListener="#{managerBean.editUserPassword}"
+                                                                     update="edit-user-content" process="edit-user-content @this"/>
+                                                    <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('editUserPasswordDialog').hide()"
+                                                                     class="ui-button-secondary" update="edit-user-content"
+                                                                     process="edit-user-content @this"/>
+                                                </f:facet>
+                                            </p:dialog>
                                             <input type="hidden"
                                                    name="${_csrf.parameterName}"
                                                    value="${_csrf.token}"/>

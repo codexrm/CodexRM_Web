@@ -58,4 +58,6 @@ public class WebPageReferenceBean {
         if(webPage != null)
             webPageReference = new WebPageReference(webPage.getId(), webPage.getTitle(), webPage.getYear(), webPage.getMonth(), webPage.getNote(), webPage.getAuthor(), webPage.getUrl());
     }
+
+    public WebPageReference create(){ return new WebPageReference(title, year, month, note, author, url); }
 }
