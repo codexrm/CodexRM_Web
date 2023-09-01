@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "thesisreference")
-public class ThesisReference extends Reference{
+public class ThesisReference extends Reference {
 
     @Column(name = "author")
     private String author;
@@ -24,18 +24,19 @@ public class ThesisReference extends Reference{
 
     private final FieldValidations validations = new FieldValidations();
 
-    public ThesisReference() {}
+    public ThesisReference() {
+    }
 
     public ThesisReference(String title, String year, String month, String note, String author, String school, String type, String address) {
         super(title, year, month, note);
         this.school = school;
         this.type = type;
 
-        if(validations.validateAuthorOrEditor(author))
-        this.author = author;
+        if (validations.validateAuthorOrEditor(author))
+            this.author = author;
 
-        if(validations.validateAddress(address))
-        this.address = address;
+        if (validations.validateAddress(address))
+            this.address = address;
     }
 
     public ThesisReference(Integer id, String title, String year, String month, String note, String author, String school, String type, String address) {
@@ -43,18 +44,18 @@ public class ThesisReference extends Reference{
         this.school = school;
         this.type = type;
 
-        if(validations.validateAuthorOrEditor(author))
+        if (validations.validateAuthorOrEditor(author))
             this.author = author;
 
-        if(validations.validateAddress(address))
+        if (validations.validateAddress(address))
             this.address = address;
     }
 
     public String getAuthor() { return author; }
 
     public void setAuthor(String author) {
-        if(validations.validateAuthorOrEditor(author))
-        this.author = author;
+        if (validations.validateAuthorOrEditor(author))
+            this.author = author;
     }
 
     public String getSchool() { return school; }
@@ -68,7 +69,7 @@ public class ThesisReference extends Reference{
     public String getAddress() { return address; }
 
     public void setAddress(String address) {
-        if(validations.validateAddress(address))
-        this.address = address;
+        if (validations.validateAddress(address))
+            this.address = address;
     }
 }

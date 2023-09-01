@@ -43,43 +43,83 @@ public class ConferencePaperReferenceDTO extends ReferenceDTO {
         this.publisher = publisher;
     }
 
-    public String getAuthor() { return author; }
+    public String getAuthor() {
+        return author;
+    }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-    public String getBookTitle() { return bookTitle; }
+    public String getBookTitle() {
+        return bookTitle;
+    }
 
-    public void setBookTitle(String bookTitle) { this.bookTitle = bookTitle; }
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
 
-    public String getEditor() { return editor; }
+    public String getEditor() {
+        return editor;
+    }
 
-    public void setEditor(String editor) { this.editor = editor; }
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
 
-    public String getNumber() { return number; }
+    public String getNumber() {
+        return number;
+    }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-    public String getSeries() { return series; }
+    public String getSeries() {
+        return series;
+    }
 
-    public void setSeries(String series) { this.series = series; }
+    public void setSeries(String series) {
+        this.series = series;
+    }
 
-    public String getOrganization() { return organization; }
+    public String getOrganization() {
+        return organization;
+    }
 
-    public void setOrganization(String organization) { this.organization = organization; }
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
 
-    public String getPublisher() { return publisher; }
+    public String getPublisher() {
+        return publisher;
+    }
 
-    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-    public String getVolume() { return volume; }
+    public String getVolume() {
+        return volume;
+    }
 
-    public void setVolume(String volume) { this.volume = volume; }
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
 
-    public String getAddress() { return address; }
+    public String getAddress() {
+        return address;
+    }
 
-    public void setAddress(String address) { this.address = address; }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-    public String getPages() { return pages; }
+    public String getPages() {
+        return pages;
+    }
 
-    public void setPages(String pages) { this.pages = pages; }
+    public void setPages(String pages) {
+        this.pages = pages;
+    }
 }

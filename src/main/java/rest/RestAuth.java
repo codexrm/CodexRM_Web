@@ -9,6 +9,8 @@ import payload.Response.MessageResponse;
 import payload.Response.TokenRefreshResponse;
 import utils.JsonUtils;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -21,13 +23,13 @@ public class RestAuth {
     private static final HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
     private static final String authURL = "http://localhost:8081/api/auth/";
 
-
     public AuthenticationDataResponse userLogin(UserLoginRequest userLogin) {
 
-        String  inputJson = JsonUtils.convertFromObjectToJson(userLogin);
+        String inputJson = JsonUtils.convertFromObjectToJson(userLogin);
 
+        assert inputJson != null;
         HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "signin"))
-                .header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+                .header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
         UserDTO userDTO = new UserDTO();
@@ -42,51 +44,52 @@ public class RestAuth {
             }
 
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            addMessage();
         }
         response.join();
+        assert userDTO != null;
         String token = userDTO.getTokenType() + " " + userDTO.getAccessToken();
 
-        return new AuthenticationDataResponse( userDTO.getId(),  userDTO.getUsername(),  userDTO.getName(),  userDTO.getLastName(),  userDTO.getEmail(),
+        return new AuthenticationDataResponse(userDTO.getId(), userDTO.getUsername(), userDTO.getName(), userDTO.getLastName(), userDTO.getEmail(),
                 userDTO.isEnabled(), token, userDTO.getRefreshToken(), userDTO.getTokenExpirationDate(), userDTO.getRefreshTokenExpirationDate(), userDTO.getRoles());
     }
 
     public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) {
-        String  inputJson = JsonUtils.convertFromObjectToJson(refreshToken);
+        String inputJson = JsonUtils.convertFromObjectToJson(refreshToken);
 
+        assert inputJson != null;
         HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "refreshtoken"))
-                .header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+                .header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
         TokenRefreshResponse tokenRefreshResponse = new TokenRefreshResponse();
 
         try {
-            tokenRefreshResponse =  JsonUtils.convertFromJsonToObject(response.get().body(), TokenRefreshResponse.class);
+            tokenRefreshResponse = JsonUtils.convertFromJsonToObject(response.get().body(), TokenRefreshResponse.class);
 
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            addMessage();
         }
         response.join();
         return tokenRefreshResponse;
     }
 
-
     public boolean userLogout(String token) throws ExecutionException, InterruptedException {
 
         HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "signout"))
-                .header("Content-Type","application/json").header("Authorization", token).POST(HttpRequest.BodyPublishers.noBody()).build();
+                .header("Content-Type", "application/json").header("Authorization", token).POST(HttpRequest.BodyPublishers.noBody()).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
         return response.get().statusCode() == 200;
     }
 
-
     public String registerUser(SignupRequest signUpRequest) {
 
-        String  inputJson = JsonUtils.convertFromObjectToJson(signUpRequest);
+        String inputJson = JsonUtils.convertFromObjectToJson(signUpRequest);
 
+        assert inputJson != null;
         HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "signup"))
-                .header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
+                .header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
         MessageResponse message = new MessageResponse();
@@ -95,12 +98,16 @@ public class RestAuth {
             message = JsonUtils.convertFromJsonToObject(response.get().body(), MessageResponse.class);
 
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            addMessage();
         }
         response.join();
 
+        assert message != null;
         return message.getMessage();
+    }
 
-        }
+    private void addMessage() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hubo un error en el servidor. Inténtelo luego", ""));
+    }
 }
 

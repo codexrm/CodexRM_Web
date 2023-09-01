@@ -7,16 +7,19 @@ import io.github.codexrm.EILibrary.model.*;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import utils.EnumsConverter;
+import utils.ValidateReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImportR {
 
-    EnumsConverter enumsConverter;
+    private final EnumsConverter enumsConverter;
+    private final ValidateReference validation;
 
     public ImportR() {
         this.enumsConverter = new EnumsConverter();
+        this.validation = new ValidateReference();
     }
 
     public ArrayList<Reference> importReferences(String path, String format) throws IOException, TokenMgrException, ParseException {
@@ -29,7 +32,9 @@ public class ImportR {
         ArrayList<BaseR> list = manager.importReferences(path, enumsConverter.getFormatLibrary(fto));
 
         for (BaseR entry : list) {
-            referenceList.add(createReference(entry));
+            Reference reference = createReference(entry);
+            if (reference != null)
+                referenceList.add(reference);
         }
         return referenceList;
     }
@@ -51,16 +56,16 @@ public class ImportR {
                     } else {
                         if (entry instanceof ConferenceProceedingsR) {
                             reference = readConferenceProceedingsReference((ConferenceProceedingsR) entry);
-                        }else {
+                        } else {
                             if (entry instanceof ConferencePaperR) {
                                 reference = readConferencePaperReference((ConferencePaperR) entry);
-                            }else {
+                            } else {
                                 if (entry instanceof WebPageR) {
                                     reference = readWebPageReference((WebPageR) entry);
                                 } else {
-                                    if(entry instanceof BookLetR){
+                                    if (entry instanceof BookLetR) {
                                         reference = readBookLetReference((BookLetR) entry);
-                                    }else{
+                                    } else {
                                         reference = null;
                                     }
                                 }
@@ -92,7 +97,7 @@ public class ImportR {
         article.setPages(entry.getPages());
         article.setIssn(entry.getIssn());
 
-        return article;
+     return validation.validateRequiredArticle(article);
     }
 
     private Reference readBookReference(BookR entry) {
@@ -110,7 +115,7 @@ public class ImportR {
         book.setEdition(entry.getEdition());
         book.setIsbn(entry.getIsbn());
 
-        return book;
+        return validation.validateRequiredBook(book);
     }
 
     private Reference readBookSectionReference(BookSectionR entry) {
@@ -131,7 +136,7 @@ public class ImportR {
         section.setEdition(entry.getEdition());
         section.setIsbn(entry.getIsbn());
 
-        return section;
+        return validation.validateRequiredBookSection(section);
     }
 
     private Reference readBookLetReference(BookLetR entry) {
@@ -143,7 +148,7 @@ public class ImportR {
         let.setHowpublished(entry.getHowpublished());
         let.setAddress(entry.getAddress());
 
-        return let;
+        return validation.validateRequiredBookLet(let);
     }
 
     private Reference readThesisReference(ThesisR entry) {
@@ -156,7 +161,7 @@ public class ImportR {
         thesis.setType(enumsConverter.getThesisType(entry.getType()));
         thesis.setAddress(entry.getAddress());
 
-        return thesis;
+        return validation.validateRequiredThesis(thesis);
     }
 
     private Reference readConferenceProceedingsReference(ConferenceProceedingsR entry) {
@@ -173,7 +178,7 @@ public class ImportR {
         proceedings.setOrganization(entry.getOrganization());
         proceedings.setIsbn(entry.getIsbn());
 
-        return proceedings;
+        return validation.validateRequiredConferenceProceedings(proceedings);
     }
 
     private Reference readConferencePaperReference(ConferencePaperR entry) {
@@ -192,7 +197,7 @@ public class ImportR {
         paper.setOrganization(entry.getOrganization());
         paper.setPublisher(entry.getPublisher());
 
-        return paper;
+        return validation.validateRequiredConferencePaper(paper);
     }
 
     private Reference readWebPageReference(WebPageR entry) {

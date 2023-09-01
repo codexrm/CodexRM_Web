@@ -16,25 +16,45 @@ public class TemplateBean {
     private boolean role_manager;
     private boolean role_auditor;
 
-    public List<String> getRoles() { return roles; }
+    public List<String> getRoles() {
+        return roles;
+    }
 
-    public void setRoles(List<String> roles) { TemplateBean.roles = roles; }
+    public void setRoles(List<String> roles) {
+        TemplateBean.roles = roles;
+    }
 
-    public boolean isRole_admin() { return role_admin; }
+    public boolean isRole_admin() {
+        return role_admin;
+    }
 
-    public void setRole_admin(boolean role_admin) { this.role_admin = role_admin; }
+    public void setRole_admin(boolean role_admin) {
+        this.role_admin = role_admin;
+    }
 
-    public boolean isRole_user() { return role_user; }
+    public boolean isRole_user() {
+        return role_user;
+    }
 
-    public void setRole_user(boolean role_user) { this.role_user = role_user; }
+    public void setRole_user(boolean role_user) {
+        this.role_user = role_user;
+    }
 
-    public boolean isRole_manager() { return role_manager; }
+    public boolean isRole_manager() {
+        return role_manager;
+    }
 
-    public void setRole_manager(boolean role_manager) { this.role_manager = role_manager; }
+    public void setRole_manager(boolean role_manager) {
+        this.role_manager = role_manager;
+    }
 
-    public boolean isRole_auditor() { return role_auditor; }
+    public boolean isRole_auditor() {
+        return role_auditor;
+    }
 
-    public void setRole_auditor(boolean role_auditor) { this.role_auditor = role_auditor; }
+    public void setRole_auditor(boolean role_auditor) {
+        this.role_auditor = role_auditor;
+    }
 
     public void init(List<String> roleList) {
         cleanVariable();
@@ -42,7 +62,7 @@ public class TemplateBean {
         verifyRol();
     }
 
-    private void cleanVariable(){
+    private void cleanVariable() {
         roles.clear();
         role_admin = false;
         role_auditor = false;
@@ -70,8 +90,8 @@ public class TemplateBean {
 
     public boolean translateRole_Boolean(boolean... r) {
         boolean t = false;
-        for (int i = 0; i < r.length; i++) {
-            t = t || r[i];
+        for (boolean b : r) {
+            t = t || b;
         }
         return t;
     }

@@ -14,10 +14,6 @@ public class BookReferenceDTO extends ReferenceDTO {
 
     public BookReferenceDTO() {}
 
-    public String getAuthor() { return author; }
-
-    public void setAuthor(String author) { this.author = author; }
-
     public BookReferenceDTO(String title, String year, String month, String note, Integer id, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
         super(title, year, month, note, id);
         this.author = author;
@@ -30,7 +26,6 @@ public class BookReferenceDTO extends ReferenceDTO {
         this.edition = edition;
         this.isbn = isbn;
     }
-
 
     public BookReferenceDTO(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
         super(title, year, month, note);
@@ -45,17 +40,37 @@ public class BookReferenceDTO extends ReferenceDTO {
         this.isbn = isbn;
     }
 
-    public String getEditor() { return editor; }
+    public String getAuthor() {
+        return author;
+    }
 
-    public void setEditor(String editor) { this.editor = editor; }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-    public String getNumber() { return number; }
+    public String getEditor() {
+        return editor;
+    }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
 
-    public String getIsbn() { return isbn; }
+    public String getNumber() {
+        return number;
+    }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public String getPublisher() {
         return publisher;

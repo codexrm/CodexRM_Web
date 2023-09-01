@@ -18,11 +18,19 @@ public class UserPageDTO {
         this.pageDTO = pageDTO;
     }
 
-    public List<UserDetailsDTO> getUserDTOList() { return userDTOList; }
+    public List<UserDetailsDTO> getUserDTOList() {
+        return userDTOList;
+    }
 
-    public void setUserDTOList(List<UserDetailsDTO> userDTOList) { this.userDTOList = userDTOList; }
+    public void setUserDTOList(List<UserDetailsDTO> userDTOList) {
+        this.userDTOList = userDTOList;
+    }
 
-    public PageDTO getPageDTO() { return pageDTO; }
+    public PageDTO getPageDTO() {
+        return pageDTO;
+    }
 
-    public void setPageDTO(PageDTO pageDTO) { this.pageDTO = pageDTO; }
+    public void setPageDTO(PageDTO pageDTO) {
+        this.pageDTO = pageDTO;
+    }
 }

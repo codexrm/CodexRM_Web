@@ -1,21 +1,22 @@
 package beans;
 
+import entity.User;
 import payload.Request.AddUserRequest;
 import payload.Request.SignupRequest;
-import entity.User;
 import payload.Request.UpdatePasswordRequest;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ManagedBean
 @SessionScoped
 public class UserBean {
 
-    private static List<User> userList = new ArrayList<User>();
+    private static List<User> userList = new ArrayList<>();
     private static User user = new User();
-    private static List<User> selectUserList = new ArrayList<User>();
+    private static List<User> selectUserList = new ArrayList<>();
 
     private static String username = "";
     private static String email = "";
@@ -55,7 +56,7 @@ public class UserBean {
 
     public void setPassword(String password) { UserBean.password = password; }
 
-    public String getName(){ return name; }
+    public String getName() { return name; }
 
     public void setName(String name) { UserBean.name = name; }
 
@@ -71,7 +72,7 @@ public class UserBean {
 
     public void setUpdateUserPasswordBean(UpdateUserPasswordBean updateUserPasswordBean) { UserBean.updateUserPasswordBean = updateUserPasswordBean; }
 
-    public void cleanVariables(){
+    public void cleanVariables() {
         username = "";
         email = "";
         roles.clear();
@@ -81,45 +82,59 @@ public class UserBean {
         enabled = false;
     }
 
-    public void copyEdit(User userCodex){
-        if(userCodex != null)
+    public void copyEdit(User userCodex) {
+        if (userCodex != null)
             user = new User(userCodex.getId(), userCodex.getUsername(), userCodex.getName(), userCodex.getLastName(), userCodex.getEmail(), userCodex.isEnabled(), userCodex.getPassword(), userCodex.getRoles());
     }
 
-    public SignupRequest singup(){ return new SignupRequest(username, email, password, name, lastName, true); }
+    public SignupRequest singup() {
+        return new SignupRequest(username, email, password, name, lastName, true);
+    }
 
-    public AddUserRequest createUser(){ return new AddUserRequest(username, email, password, name, lastName, enabled, roles); }
+    public AddUserRequest createUser() { return new AddUserRequest(username, email, password, name, lastName, enabled, roles); }
 
-    public UpdatePasswordRequest editUserPassword(Integer id){ return new UpdatePasswordRequest( updateUserPasswordBean.getNewPassword(), updateUserPasswordBean.getCurrentPassword(), updateUserPasswordBean.getConfirmationPassword(), id); }
+    public UpdatePasswordRequest editUserPassword() { return new UpdatePasswordRequest(updateUserPasswordBean.getNewPassword(), updateUserPasswordBean.getCurrentPassword(), updateUserPasswordBean.getConfirmationPassword()); }
 
-    public String translateEstado(boolean text){ return (text)? "habilitado" : "deshabilitado"; }
+    public String translateEstado(boolean text) {
+        return (text) ? "habilitado" : "deshabilitado";
+    }
 
-    public String translateColorEstado(boolean text){ return (text)? "green" : "red"; }
+    public String translateColorEstado(boolean text) {
+        return (text) ? "green" : "red";
+    }
 
-    public List<String> roleInfo(){
+    public String roleInfo() {
 
-        List<String> RoleInfo = new ArrayList<>();
-        for(String role: user.getRoles()){
+        List<String> roleList = new ArrayList<>();
+        for (String role : user.getRoles()) {
             switch (role) {
                 case "ROLE_ADMIN":
-                    RoleInfo.add("Administrador");
+                    roleList.add("Administrador");
                     break;
 
                 case "ROLE_MANAGER":
-                    RoleInfo.add("Gerente");
+                    roleList.add("Gerente");
                     break;
 
                 case "ROLE_AUDITOR":
-                    RoleInfo.add("Auditor");
+                    roleList.add("Auditor");
                     break;
 
                 case "ROLE_USER":
-                    RoleInfo.add("Usuario");
+                    roleList.add("Usuario");
                     break;
 
                 default:
             }
         }
-        return RoleInfo;
+        StringBuilder roleInfo = new StringBuilder();
+        for (int i = 0; i < roleList.size(); i++) {
+
+            if (i != 0) {
+                roleInfo.append(",");
+            }
+            roleInfo.append(roleList.get(i));
+        }
+        return roleInfo.toString();
     }
 }

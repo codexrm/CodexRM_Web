@@ -35,35 +35,60 @@
                                 <h6 class="font-weight-light">Registrarse es fácil. Solo toma unos pocos pasos</h6>
                                 <h:form id="form-register">
                                     <p:growl id="messages" showDetail="true"/>
-                                    <div class="mb-3">
-                                        <p:inputText class="form-control text-left" id="username" value="#{managerBean.userBean.username}" placeholder="Usuario" required="true">
+                                    <div class="form-group">
+                                        <p:inputText class="form-control text-left" id="username"
+                                                     value="#{managerBean.userBean.username}" placeholder="Usuario"
+                                                     required="true" requiredMessage="Campo usuario requerido"
+                                                     validatorMessage="El usuario solo debe contener letras minúsculas y números. Longirtud entre 3 y 20 caracteres">
                                             <f:validateRegex pattern="[a-z]+[0-9]*[_.-]?[a-z0-9]+$"/>
+                                            <f:validateLength minimum="3" maximum="20"/>
                                         </p:inputText>
                                     </div>
                                     <div class="form-group">
-                                        <p:inputText class="form-control text-left" id="e-mail" value="#{managerBean.userBean.email}" validatorMessage="Direccion de correo erronea" maxlength="50" placeholder="E-mail" required="true">
-                                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z8-9_]@[\w\.-]*[a-zA-Z8-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]+$"/>
+                                        <p:inputText class="form-control text-left" id="e-mail"
+                                                     value="#{managerBean.userBean.email}" maxlength="50"
+                                                     placeholder="E-mail"
+                                                     required="true" requiredMessage="Campo e-mail requerido"
+                                                     validatorMessage="Dirección de correo erronea">
+                                            <f:validateRegex
+                                                    pattern="[\w\.-]*[a-zA-Z8-9_]@[\w\.-]*[a-zA-Z8-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]+$"/>
                                         </p:inputText>
                                     </div>
                                     <div class="form-group">
-                                        <p:inputText class="form-control text-left" id="name" value="#{managerBean.userBean.name}" maxlength="20" placeholder="Nombre" required="true" >
+                                        <p:inputText class="form-control text-left" id="name"
+                                                     value="#{managerBean.userBean.name}" maxlength="20"
+                                                     placeholder="Nombre"
+                                                     required="true" requiredMessage="Campo nombre requerido"
+                                                     validatorMessage="El nombre solo debe contener letras, su longitud máxima es 20 caracteres">
                                             <f:validateRegex pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
                                         </p:inputText>
                                     </div>
                                     <div class="form-group">
-                                        <p:inputText class="form-control text-left" id="lastName" value="#{managerBean.userBean.lastName}" maxlength="20" placeholder="Apellido" required="true">
-                                            <f:validateRegex pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ]+$"/>
+                                        <p:inputText class="form-control text-left" id="lastName"
+                                                     value="#{managerBean.userBean.lastName}" maxlength="20"
+                                                     placeholder="Apellido"
+                                                     required="true" requiredMessage="Campo apellido requerido"
+                                                     validatorMessage="El apellido solo debe contener letras, su longitud máxima es 20 caracteres">
+                                            <f:validateRegex pattern="[a-zA-Z áéíóúüñÁÉÍÓÚÜÑ-]+$"/>
                                         </p:inputText>
                                     </div>
                                     <div class="form-group">
-                                        <p:password class="form-control text-left" id="password" value="#{managerBean.userBean.password}" feedback="true" placeholder="Contraseña" required="true" maxlength="40"
-                                                    promptLabel="Ingresa tu contraseña" weakLabel="Debil" goodLabel="Buena" strongLabel="Fuerte"/>
+                                        <p:password class="form-control text-left" id="password"
+                                                    value="#{managerBean.userBean.password}" feedback="true"
+                                                    placeholder="Contraseña"
+                                                    required="true" requiredMessage="Campo contraseña requerido"
+                                                    validatorMessage="La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número (0-9) y un carácter especial como ! @ # ( ). Longirtud entre 6 y 40 caracteres">
+                                            <f:validateRegex
+                                                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$^*()_-]).{6,40}$"/>
+                                        </p:password>
                                     </div>
                                     <div class="form-group">
-                                        <p:commandButton value="Registar" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" actionListener="#{managerBean.singup}"/>
+                                        <p:commandButton value="Registar"
+                                                         class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                                                         ajax="" actionListener="#{managerBean.singup}"/>
                                     </div>
                                     <div class="text-center mt-4 font-weight-light">
-                                        Ya tienes una cuenta? <p:link outcome="/pages/login.faces" value="Log in"/>>
+                                        Ya tienes una cuenta? <p:link outcome="/pages/login.faces" value="Log in"/>
                                     </div>
                                 </h:form>
                             </div>

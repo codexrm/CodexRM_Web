@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class  ArticleReferenceBean {
+public class ArticleReferenceBean {
 
     private static ArticleReference articleReference = new ArticleReference();
     private static String author = "";
@@ -21,7 +21,7 @@ public class  ArticleReferenceBean {
     private static String issn = "";
     private static String note = "";
 
-    public ArticleReferenceBean() { }
+    public ArticleReferenceBean() {}
 
     public ArticleReference getArticleReference() { return articleReference; }
 
@@ -67,7 +67,7 @@ public class  ArticleReferenceBean {
 
     public void setNote(String note) { ArticleReferenceBean.note = note; }
 
-    public void cleanVariables(){
+    public void cleanVariables() {
         author = "";
         title = "";
         journal = "";
@@ -80,11 +80,13 @@ public class  ArticleReferenceBean {
         note = "";
     }
 
-    public void copyEdit(ArticleReference article){
-        if(article != null)
+    public void copyEdit(ArticleReference article) {
+        if (article != null)
             articleReference = new ArticleReference(article.getId(), article.getTitle(), article.getYear(), article.getMonth(), article.getNote(), article.getAuthor(), article.getJournal(), article.getVolume(), article.getNumber(), article.getPages(),
                     article.getIssn());
     }
 
-    public ArticleReference create(){ return new ArticleReference(title, year, month, note, author, journal, volume, number, pages, issn); }
+    public ArticleReference create() {
+        return new ArticleReference(title, year, month, note, author, journal, volume, number, pages, issn);
+    }
 }

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "booksectionreference")
-public class BookSectionReference extends BookReference{
+public class BookSectionReference extends BookReference {
 
     @Column(name = "chapter")
     private String chapter;
@@ -21,18 +21,18 @@ public class BookSectionReference extends BookReference{
 
     private final FieldValidations validations = new FieldValidations();
 
-    public BookSectionReference() {}
+    public BookSectionReference() { }
 
     public BookSectionReference(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn,
                                 String chapter, String pages, String type) {
         super(title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn);
         this.type = type;
 
-        if(validations.isNumber(chapter))
-        this.chapter = chapter;
+        if (validations.validateChapterOrVolume(chapter))
+            this.chapter = chapter;
 
-        if(validations.validatePages(pages))
-        this.pages = pages;
+        if (validations.validatePages(pages))
+            this.pages = pages;
 
     }
 
@@ -40,10 +40,10 @@ public class BookSectionReference extends BookReference{
         super(id, title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn);
         this.type = type;
 
-        if(validations.isNumber(chapter))
+        if (validations.validateChapterOrVolume(chapter))
             this.chapter = chapter;
 
-        if(validations.validatePages(pages))
+        if (validations.validatePages(pages))
             this.pages = pages;
     }
 
@@ -51,17 +51,17 @@ public class BookSectionReference extends BookReference{
 
     public void setType(String type) { this.type = type; }
 
-    public String getPages() {return pages;}
+    public String getPages() { return pages; }
 
     public void setPages(String pages) {
-        if(validations.validatePages(pages))
-        this.pages = pages;
+        if (validations.validatePages(pages))
+            this.pages = pages;
     }
 
-    public String getChapter() {return chapter;}
+    public String getChapter() { return chapter; }
 
     public void setChapter(String chapter) {
-        if(validations.isNumber(chapter))
-        this.chapter = chapter;
+        if (validations.validateChapterOrVolume(chapter))
+            this.chapter = chapter;
     }
 }

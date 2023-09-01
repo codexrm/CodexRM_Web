@@ -1,6 +1,6 @@
 package dto;
 
-public class BookLetReferenceDTO extends ReferenceDTO{
+public class BookLetReferenceDTO extends ReferenceDTO {
 
     private String author;
     private String howpublished;
@@ -22,15 +22,21 @@ public class BookLetReferenceDTO extends ReferenceDTO{
         this.address = address;
     }
 
-    public String getAuthor() { return author; }
+    public String getAuthor() {
+        return author;
+    }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getHowpublished() {
         return howpublished;
     }
 
-    public void setHowpublished(String howpublished) {this.howpublished = howpublished;}
+    public void setHowpublished(String howpublished) {
+        this.howpublished = howpublished;
+    }
 
     public String getAddress() {
         return address;

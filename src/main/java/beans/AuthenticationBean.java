@@ -12,19 +12,28 @@ public class AuthenticationBean {
     private static String username = "";
     private static String password = "";
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
-    public void setUsername(String username) { AuthenticationBean.username = username; }
+    public void setUsername(String username) {
+        AuthenticationBean.username = username;
+    }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
-    public void setPassword(String password) { AuthenticationBean.password = password; }
+    public void setPassword(String password) {
+        AuthenticationBean.password = password;
+    }
 
-
-    public void cleanVariables(){
+    public void cleanVariables() {
         username = "";
         password = "";
     }
 
-    public UserLoginRequest createUserLogin(){ return new UserLoginRequest(username, password); }
+    public UserLoginRequest createUserLogin() {
+        return new UserLoginRequest(username, password);
+    }
 }

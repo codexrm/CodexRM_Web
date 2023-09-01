@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "reference")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Reference {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -15,7 +16,6 @@ public class Reference {
 
     @Column(name = "title")
     private String title;
-
 
     @Column(name = "year")
     private String year;
@@ -28,15 +28,16 @@ public class Reference {
 
     private final FieldValidations validations = new FieldValidations();
 
-    public Reference() {}
+    public Reference() {
+    }
 
     public Reference(String title, String year, String month, String note) {
         this.title = title;
         this.month = month;
         this.note = note;
 
-        if(validations.validateYear(year))
-        this.year = year;
+        if (validations.validateYear(year))
+            this.year = year;
     }
 
     public Reference(Integer id, String title, String year, String month, String note) {
@@ -45,8 +46,8 @@ public class Reference {
         this.month = month;
         this.note = note;
 
-        if(validations.validateYear(year))
-        this.year = year;
+        if (validations.validateYear(year))
+            this.year = year;
     }
 
     public Integer getId() { return id; }
@@ -60,7 +61,7 @@ public class Reference {
     public String getYear() { return year; }
 
     public void setYear(String year) {
-        if(validations.validateYear(year))
+        if (validations.validateYear(year))
             this.year = year;
     }
 

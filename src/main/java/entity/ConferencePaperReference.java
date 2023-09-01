@@ -42,7 +42,7 @@ public class ConferencePaperReference extends Reference {
 
     private final FieldValidations validations = new FieldValidations();
 
-    public ConferencePaperReference() {}
+    public ConferencePaperReference() { }
 
     public ConferencePaperReference(String title, String year, String month, String note, String author, String bookTitle, String editor, String number, String series, String publisher, String volume, String address, String pages, String organization) {
         super(title, year, month, note);
@@ -50,26 +50,26 @@ public class ConferencePaperReference extends Reference {
         this.publisher = publisher;
         this.organization = organization;
 
-        if(validations.validateAuthorOrEditor(author))
-        this.author = author;
+        if (validations.validateAuthorOrEditor(author))
+            this.author = author;
 
-        if(validations.validateAuthorOrEditor(editor))
-        this.editor = editor;
+        if (validations.validateAuthorOrEditor(editor))
+            this.editor = editor;
 
-        if(validations.validateNumber(number))
-        this.number = number;
+        if (validations.validateNumber(number))
+            this.number = number;
 
-        if(validations.validateSeries(series))
-        this.series = series;
+        if (validations.validateSeries(series))
+            this.series = series;
 
-        if(validations.isNumber(volume))
-        this.volume = volume;
+        if (validations.validateChapterOrVolume(volume))
+            this.volume = volume;
 
-        if(validations.validateAddress(address))
-        this.address = address;
+        if (validations.validateAddress(address))
+            this.address = address;
 
-        if(validations.validatePages(pages))
-        this.pages = pages;
+        if (validations.validatePages(pages))
+            this.pages = pages;
     }
 
     public ConferencePaperReference(Integer id, String title, String year, String month, String note, String author, String bookTitle, String editor, String number, String series, String publisher, String volume, String address, String pages, String organization) {
@@ -78,25 +78,25 @@ public class ConferencePaperReference extends Reference {
         this.publisher = publisher;
         this.organization = organization;
 
-        if(validations.validateAuthorOrEditor(author))
+        if (validations.validateAuthorOrEditor(author))
             this.author = author;
 
-        if(validations.validateAuthorOrEditor(editor))
+        if (validations.validateAuthorOrEditor(editor))
             this.editor = editor;
 
-        if(validations.validateNumber(number))
+        if (validations.validateNumber(number))
             this.number = number;
 
-        if(validations.validateSeries(series))
+        if (validations.validateSeries(series))
             this.series = series;
 
-        if(validations.isNumber(volume))
+        if (validations.validateChapterOrVolume(volume))
             this.volume = volume;
 
-        if(validations.validateAddress(address))
+        if (validations.validateAddress(address))
             this.address = address;
 
-        if(validations.validatePages(pages))
+        if (validations.validatePages(pages))
             this.pages = pages;
     }
 
@@ -107,29 +107,29 @@ public class ConferencePaperReference extends Reference {
     public String getVolume() { return volume; }
 
     public void setVolume(String volume) {
-        if(validations.isNumber(volume))
-        this.volume = volume;
+        if (validations.validateChapterOrVolume(volume))
+            this.volume = volume;
     }
 
     public String getAddress() { return address; }
 
     public void setAddress(String address) {
-        if(validations.validateAddress(address))
-        this.address = address;
+        if (validations.validateAddress(address))
+            this.address = address;
     }
 
     public String getPages() { return pages; }
 
     public void setPages(String pages) {
-        if(validations.validatePages(pages))
-        this.pages = pages;
+        if (validations.validatePages(pages))
+            this.pages = pages;
     }
 
     public String getAuthor() { return author; }
 
     public void setAuthor(String author) {
-        if(validations.validateAuthorOrEditor(author))
-        this.author = author;
+        if (validations.validateAuthorOrEditor(author))
+            this.author = author;
     }
 
     public String getBookTitle() { return bookTitle; }
@@ -139,22 +139,22 @@ public class ConferencePaperReference extends Reference {
     public String getEditor() { return editor; }
 
     public void setEditor(String editor) {
-        if(validations.validateAuthorOrEditor(editor))
-        this.editor = editor;
+        if (validations.validateAuthorOrEditor(editor))
+            this.editor = editor;
     }
 
     public String getNumber() { return number; }
 
     public void setNumber(String number) {
-        if(validations.validateNumber(number))
-        this.number = number;
+        if (validations.validateNumber(number))
+            this.number = number;
     }
 
     public String getSeries() { return series; }
 
     public void setSeries(String series) {
-        if(validations.validateSeries(series))
-        this.series = series;
+        if (validations.validateSeries(series))
+            this.series = series;
     }
 
     public String getOrganization() { return organization; }

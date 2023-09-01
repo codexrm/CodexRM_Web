@@ -1,6 +1,6 @@
 package dto;
 
-public class ConferenceProceedingsReferenceDTO extends ReferenceDTO{
+public class ConferenceProceedingsReferenceDTO extends ReferenceDTO {
 
     private String editor;
     private String volume;
@@ -13,8 +13,7 @@ public class ConferenceProceedingsReferenceDTO extends ReferenceDTO{
 
     public ConferenceProceedingsReferenceDTO() {}
 
-
-    public ConferenceProceedingsReferenceDTO(String title, String year, String month, String note, Integer id,  String editor, String volume, String number, String series, String address, String publisher, String organization, String isbn) {
+    public ConferenceProceedingsReferenceDTO(String title, String year, String month, String note, Integer id, String editor, String volume, String number, String series, String address, String publisher, String organization, String isbn) {
         super(title, year, month, note, id);
         this.editor = editor;
         this.volume = volume;
@@ -38,25 +37,45 @@ public class ConferenceProceedingsReferenceDTO extends ReferenceDTO{
         this.isbn = isbn;
     }
 
-    public String getEditor() { return editor; }
+    public String getEditor() {
+        return editor;
+    }
 
-    public void setEditor(String editor) { this.editor = editor; }
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
 
-    public String getNumber() { return number; }
+    public String getNumber() {
+        return number;
+    }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-    public String getPublisher() { return publisher; }
+    public String getPublisher() {
+        return publisher;
+    }
 
-    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-    public String getOrganization() { return organization; }
+    public String getOrganization() {
+        return organization;
+    }
 
-    public void setOrganization(String organization) { this.organization = organization; }
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
 
-    public String getIsbn() { return isbn; }
+    public String getIsbn() {
+        return isbn;
+    }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public String getVolume() {
         return volume;

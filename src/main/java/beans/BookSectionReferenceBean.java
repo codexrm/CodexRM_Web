@@ -95,7 +95,7 @@ public class BookSectionReferenceBean {
 
     public void setNote(String note) { BookSectionReferenceBean.note = note; }
 
-    public void cleanVariables(){
+    public void cleanVariables() {
         chapter = "";
         pages = "";
         author = "";
@@ -114,16 +114,18 @@ public class BookSectionReferenceBean {
         note = "";
     }
 
-    public void copyEdit(BookSectionReference section){
-        if(section != null)
+    public void copyEdit(BookSectionReference section) {
+        if (section != null)
             bookSectionReference = new BookSectionReference(section.getId(), section.getTitle(), section.getYear(), section.getMonth(), section.getNote(), section.getAuthor(), section.getEditor(), section.getPublisher(), section.getVolume(), section.getNumber(),
                     section.getSeries(), section.getAddress(), section.getEdition(), section.getIsbn(), section.getChapter(), section.getPages(), section.getType());
     }
-    
-    public BookSectionReference create(){ return new BookSectionReference(title, year,month, note, author,editor, publisher, volume, number, series, address,edition, isbn, chapter, pages, type); }
+
+    public BookSectionReference create() {
+        return new BookSectionReference(title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn, chapter, pages, type);
+    }
 
     public String infoBookSectionType(String type) {
-        switch (type){
+        switch (type) {
             case "MATHESIS":
                 return "Tesis de Maestría";
             case "PHDTHESIS":

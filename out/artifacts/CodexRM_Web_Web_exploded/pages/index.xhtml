@@ -11,9 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
     <title>CodexRM</title>
@@ -23,19 +21,25 @@
     <ui:composition template="/pages/template.xhtml">
         <ui:define name="title">Codex RM</ui:define>
         <ui:define name="content">
-            <div class="center" style="background: #0cb7f2">
-                <h2 style="font-size: 300px; font-family: Forte; color: black; text-align: center">Codex RM</h2>
-                <h2 style="font-size: 120px; font-family: Rockwell; color: white; text-align: center">Gestor</h2>
-                <h2 style="font-size: 120px; font-family: Rockwell; color: white; text-align: center">de</h2>
-                <h2 style="font-size: 120px; font-family: Rockwell; color: white; text-align: center">Referencias Bibliograficas</h2>
-                <h2 style="font-size: 100px; font-family: Forte; color: black; text-align: center">Bienvenido!!!</h2>
 
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-center py-5 px-4 px-sm-5">
+                            <div class="center" style="background: #0cb7f2">
+                                <h2 style="font-size: 75px; font-family: Forte,serif; color: black; text-align: center">Codex RM</h2>
+                                <h2 style="font-size: 50px; font-family: Rockwell,serif; color: white; text-align: center">Gestor</h2>
+                                <h2 style="font-size: 50px; font-family: Rockwell,serif; color: white; text-align: center">de</h2>
+                                <h2 style="font-size: 50px; font-family: Rockwell,serif; color: white; text-align: center">Referencias Bibliográficas</h2>
+                                <h2 style="font-size: 75px; font-family: Forte,serif; color: black; text-align: center">Bienvenido!!!</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-                <input type="hidden"
-                       name="${_csrf.parameterName}"
-                       value="${_csrf.token}"/>
-
+            <input type="hidden"
+                   name="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
         </ui:define>
     </ui:composition>
 </h:body>

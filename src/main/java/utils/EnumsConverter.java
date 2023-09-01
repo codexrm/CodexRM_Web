@@ -5,8 +5,7 @@ import io.github.codexrm.EILibrary.enums.*;
 
 public class EnumsConverter {
 
-    public EnumsConverter() {
-    }
+    public EnumsConverter() {}
 
     public MonthsLibrary getMonthLibrary(String months) {
 
@@ -167,7 +166,6 @@ public class EnumsConverter {
             return null;
         }
     }
-
 
     public ThesisTypeLibrary getThesisTypeLibrary(String type) {
 

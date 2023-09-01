@@ -1,6 +1,5 @@
 package beans;
 
-
 import entity.*;
 import enums.Format;
 import model.ExportR;
@@ -8,6 +7,7 @@ import model.ImportR;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import org.primefaces.PrimeFaces;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.File;
@@ -19,14 +19,14 @@ import java.util.List;
 @SessionScoped
 public class ReferenceBean {
 
-    private static List<Reference> referenceList = new ArrayList<Reference>();
+    private static List<Reference> referenceList = new ArrayList<>();
     private static Reference reference = new Reference();
-    private static List<Reference> selectReferenceList = new ArrayList<Reference>();
+    private static List<Reference> selectReferenceList = new ArrayList<>();
 
     private static ArticleReferenceBean articleReferenceBean = new ArticleReferenceBean();
     private static BookReferenceBean bookReferenceBean = new BookReferenceBean();
     private static BookSectionReferenceBean bookSectionReferenceBean = new BookSectionReferenceBean();
-    private static BookLetReferenceBean bookLetReferenceBean  = new BookLetReferenceBean();
+    private static BookLetReferenceBean bookLetReferenceBean = new BookLetReferenceBean();
     private static ConferenceProceedingsReferenceBean conferenceProceedingsReferenceBean = new ConferenceProceedingsReferenceBean();
     private static ThesisReferenceBean thesisReferenceBean = new ThesisReferenceBean();
     private static ConferencePaperReferenceBean conferencePaperReferenceBean = new ConferencePaperReferenceBean();
@@ -35,35 +35,53 @@ public class ReferenceBean {
     private static ExportR exportR = new ExportR();
     private static ImportR importR = new ImportR();
 
-    private static File exportFile = new File(System.getProperty("user.home") + File. separator +"Downloads" + File. separator + "exported References.txt" );
+    private static File exportFile = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "exported References.txt");
     private static String path = "";
     private static String format = "";
 
-    public List<Reference> getReferenceList() { return referenceList; }
+    public List<Reference> getReferenceList() {
+        return referenceList;
+    }
 
-    public void setReferenceList(List<Reference> referenceList) { ReferenceBean.referenceList = referenceList; }
+    public void setReferenceList(List<Reference> referenceList) {
+        ReferenceBean.referenceList = referenceList;
+    }
 
-    public Reference getReference() { return reference; }
+    public Reference getReference() {
+        return reference;
+    }
 
-    public void setReference(Reference reference) { ReferenceBean.reference = reference; }
+    public void setReference(Reference reference) {
+        ReferenceBean.reference = reference;
+    }
 
-    public List<Reference> getSelectReferenceList() { return selectReferenceList; }
+    public List<Reference> getSelectReferenceList() {
+        return selectReferenceList;
+    }
 
     public void setSelectReferenceList(List<Reference> selectReferenceList) { ReferenceBean.selectReferenceList = selectReferenceList; }
 
-    public ArticleReferenceBean getArticleReferenceBean() { return articleReferenceBean; }
+    public ArticleReferenceBean getArticleReferenceBean() {
+        return articleReferenceBean;
+    }
 
     public void setArticleReferenceBean(ArticleReferenceBean articleReferenceBean) { ReferenceBean.articleReferenceBean = articleReferenceBean; }
 
-    public BookReferenceBean getBookReferenceBean() { return bookReferenceBean; }
+    public BookReferenceBean getBookReferenceBean() {
+        return bookReferenceBean;
+    }
 
     public void setBookReferenceBean(BookReferenceBean bookReferenceBean) { ReferenceBean.bookReferenceBean = bookReferenceBean; }
 
-    public BookSectionReferenceBean getBookSectionReferenceBean() { return bookSectionReferenceBean; }
+    public BookSectionReferenceBean getBookSectionReferenceBean() {
+        return bookSectionReferenceBean;
+    }
 
     public void setBookSectionReferenceBean(BookSectionReferenceBean bookSectionReferenceBean) { ReferenceBean.bookSectionReferenceBean = bookSectionReferenceBean; }
 
-    public BookLetReferenceBean getBookLetReferenceBean() { return bookLetReferenceBean; }
+    public BookLetReferenceBean getBookLetReferenceBean() {
+        return bookLetReferenceBean;
+    }
 
     public void setBookLetReferenceBean(BookLetReferenceBean bookLetReferenceBean) { ReferenceBean.bookLetReferenceBean = bookLetReferenceBean; }
 
@@ -71,59 +89,101 @@ public class ReferenceBean {
 
     public void setConferenceProceedingsReferenceBean(ConferenceProceedingsReferenceBean conferenceProceedingsReferenceBean) { ReferenceBean.conferenceProceedingsReferenceBean = conferenceProceedingsReferenceBean; }
 
-    public ThesisReferenceBean getThesisReferenceBean() { return thesisReferenceBean; }
+    public ThesisReferenceBean getThesisReferenceBean() {
+        return thesisReferenceBean;
+    }
 
     public void setThesisReferenceBean(ThesisReferenceBean thesisReferenceBean) { ReferenceBean.thesisReferenceBean = thesisReferenceBean; }
 
-    public ConferencePaperReferenceBean getConferencePaperReferenceBean() { return conferencePaperReferenceBean; }
+    public ConferencePaperReferenceBean getConferencePaperReferenceBean() {
+        return conferencePaperReferenceBean;
+    }
 
     public void setConferencePaperReferenceBean(ConferencePaperReferenceBean conferencePaperReferenceBean) { ReferenceBean.conferencePaperReferenceBean = conferencePaperReferenceBean; }
 
-    public WebPageReferenceBean getWebPageReferenceBean() { return webPageReferenceBean; }
+    public WebPageReferenceBean getWebPageReferenceBean() {
+        return webPageReferenceBean;
+    }
 
     public void setWebPageReferenceBean(WebPageReferenceBean webPageReferenceBean) { ReferenceBean.webPageReferenceBean = webPageReferenceBean; }
 
-    public ExportR getExportR() { return exportR; }
+    public ExportR getExportR() {
+        return exportR;
+    }
 
-    public void setExportR(ExportR exportR) { ReferenceBean.exportR = exportR; }
+    public void setExportR(ExportR exportR) {
+        ReferenceBean.exportR = exportR;
+    }
 
-    public ImportR getImportR() { return importR; }
+    public ImportR getImportR() {
+        return importR;
+    }
 
-    public void setImportR(ImportR importR) { ReferenceBean.importR = importR; }
+    public void setImportR(ImportR importR) {
+        ReferenceBean.importR = importR;
+    }
 
-    public File getExportFile() { return exportFile; }
+    public File getExportFile() {
+        return exportFile;
+    }
 
-    public void setExportFile(File exportFile) { ReferenceBean.exportFile = exportFile; }
+    public void setExportFile(File exportFile) {
+        ReferenceBean.exportFile = exportFile;
+    }
 
-    public String getPath() { return path; }
+    public String getPath() {
+        return path;
+    }
 
-    public void setPath(String path) { ReferenceBean.path = path; }
+    public void setPath(String path) {
+        ReferenceBean.path = path;
+    }
 
-    public String getFormat() { return format; }
+    public String getFormat() {
+        return format;
+    }
 
-    public void setFormat(String format) { ReferenceBean.format = format; }
+    public void setFormat(String format) {
+        ReferenceBean.format = format;
+    }
 
-    public void cleanVariables(){
+    public void cleanVariables() {
         path = "";
         format = "";
     }
 
     // Create
-    public Reference createArticleReference() { return articleReferenceBean.create(); }
+    public Reference createArticleReference() {
+        return articleReferenceBean.create();
+    }
 
-    public Reference createBookReference() { return bookReferenceBean.create(); }
+    public Reference createBookReference() {
+        return bookReferenceBean.create();
+    }
 
-    public Reference createBookSectionReference() { return bookSectionReferenceBean.create(); }
+    public Reference createBookSectionReference() {
+        return bookSectionReferenceBean.create();
+    }
 
-    public Reference createBookLetReference() { return bookLetReferenceBean.create(); }
+    public Reference createBookLetReference() {
+        return bookLetReferenceBean.create();
+    }
 
-    public Reference createThesisReference() { return thesisReferenceBean.create(); }
+    public Reference createThesisReference() {
+        return thesisReferenceBean.create();
+    }
 
-    public Reference createConferenceProceedingsReference() { return conferenceProceedingsReferenceBean.create(); }
+    public Reference createConferenceProceedingsReference() {
+        return conferenceProceedingsReferenceBean.create();
+    }
 
-    public Reference createConferencePaperReference() { return conferencePaperReferenceBean.create(); }
+    public Reference createConferencePaperReference() {
+        return conferencePaperReferenceBean.create();
+    }
 
-    public Reference createWebPageReference() { return webPageReferenceBean.create(); }
+    public Reference createWebPageReference() {
+        return webPageReferenceBean.create();
+    }
 
     //Info
     public void info(Reference selectReference) {
@@ -149,26 +209,22 @@ public class ReferenceBean {
                             PrimeFaces.current().ajax().update("form:info-bookLetReference-content");
                             bookLetReferenceBean.copyEdit((BookLetReference) selectReference);
                             PrimeFaces.current().executeScript("PF('infoBookLetReferenceDialog').show()");
-
                         } else {
                             if (selectReference.getClass() == ConferenceProceedingReference.class) {
                                 PrimeFaces.current().ajax().update("form:info-conferenceProceedingsReference-content");
                                 conferenceProceedingsReferenceBean.copyEdit((ConferenceProceedingReference) selectReference);
                                 PrimeFaces.current().executeScript("PF('infoConferenceProceedingsReferenceDialog').show()");
-
                             } else {
                                 if (selectReference.getClass() == ThesisReference.class) {
                                     PrimeFaces.current().ajax().update("form:info-thesisReference-content");
                                     thesisReferenceBean.copyEdit((ThesisReference) selectReference);
                                     PrimeFaces.current().executeScript("PF('infoThesisReferenceDialog').show()");
-                                }
-                                else {
+                                } else {
                                     if (selectReference.getClass() == ConferencePaperReference.class) {
                                         PrimeFaces.current().ajax().update("form:info-conferencePaperReference-content");
                                         conferencePaperReferenceBean.copyEdit((ConferencePaperReference) selectReference);
                                         PrimeFaces.current().executeScript("PF('infoConferencePaperReferenceDialog').show()");
-                                    }
-                                    else {
+                                    } else {
                                         if (selectReference.getClass() == WebPageReference.class) {
                                             PrimeFaces.current().ajax().update("form:info-webPageReference-content");
                                             webPageReferenceBean.copyEdit((WebPageReference) selectReference);
@@ -186,7 +242,7 @@ public class ReferenceBean {
     }
 
     public String infoMonth(String mth) {
-        switch (mth){
+        switch (mth) {
             case "jan":
                 return "Enero";
             case "feb":
@@ -239,27 +295,23 @@ public class ReferenceBean {
                             PrimeFaces.current().ajax().update("form:edit-bookLetReference-content");
                             bookLetReferenceBean.copyEdit((BookLetReference) selectReference);
                             PrimeFaces.current().executeScript("PF('editBookLetReferenceDialog').show()");
-
                         } else {
                             if (selectReference.getClass() == ConferenceProceedingReference.class) {
                                 PrimeFaces.current().ajax().update("form:edit-conferenceProceedingsReference-content");
                                 conferenceProceedingsReferenceBean.copyEdit((ConferenceProceedingReference) selectReference);
                                 PrimeFaces.current().executeScript("PF('editConferenceProceedingsReferenceDialog').show()");
-
                             } else {
                                 if (selectReference.getClass() == ThesisReference.class) {
                                     PrimeFaces.current().ajax().update("form:edit-thesisReference-content");
                                     thesisReferenceBean.copyEdit((ThesisReference) selectReference);
                                     PrimeFaces.current().executeScript("PF('editThesisReferenceDialog').show()");
-
-                                }else{
-                                    if(selectReference.getClass() == ConferencePaperReference.class){
+                                } else {
+                                    if (selectReference.getClass() == ConferencePaperReference.class) {
                                         PrimeFaces.current().ajax().update("form:edit-conferencePaperReference-content");
                                         conferencePaperReferenceBean.copyEdit((ConferencePaperReference) selectReference);
                                         PrimeFaces.current().executeScript("PF('editConferencePaperReferenceDialog').show()");
-
-                                    } else{
-                                        if(selectReference.getClass() == WebPageReference.class){
+                                    } else {
+                                        if (selectReference.getClass() == WebPageReference.class) {
                                             PrimeFaces.current().ajax().update("form:edit-webPageReference-content");
                                             webPageReferenceBean.copyEdit((WebPageReference) selectReference);
                                             PrimeFaces.current().executeScript("PF('editWebPageReferenceDialog').show()");
@@ -279,11 +331,11 @@ public class ReferenceBean {
 
     //Import
     public ArrayList<Reference> importReferences() throws IOException, TokenMgrException, ParseException {
-
         File importFile = new File(path);
         if (importFile.exists() && importFile.isFile()) {
             return importR.importReferences(path, format);
+        } else {
+            return null;
         }
-        else{return null;}
     }
 }

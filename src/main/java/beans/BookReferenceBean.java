@@ -1,6 +1,7 @@
 package beans;
 
 import entity.BookReference;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -96,12 +97,14 @@ public class BookReferenceBean {
 
     }
 
-    public void copyEdit(BookReference book){
-        if(book != null)
-            bookReference = new BookReference(book.getId(),  book.getTitle(), book.getYear(), book.getMonth(), book.getNote(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
+    public void copyEdit(BookReference book) {
+        if (book != null)
+            bookReference = new BookReference(book.getId(), book.getTitle(), book.getYear(), book.getMonth(), book.getNote(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
                     book.getEdition(), book.getIsbn());
     }
 
-    public BookReference create(){ return new BookReference(title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn); }
+    public BookReference create() {
+        return new BookReference(title, year, month, note, author, editor, publisher, volume, number, series, address, edition, isbn);
+    }
 }
 

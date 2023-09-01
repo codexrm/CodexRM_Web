@@ -73,7 +73,7 @@ public class ConferencePaperReferenceBean {
 
     public void setMonth(String month) { ConferencePaperReferenceBean.month = month; }
 
-    public String getOrganization() { return organization;}
+    public String getOrganization() { return organization; }
 
     public void setOrganization(String organization) { ConferencePaperReferenceBean.organization = organization; }
 
@@ -85,7 +85,7 @@ public class ConferencePaperReferenceBean {
 
     public void setNote(String note) { ConferencePaperReferenceBean.note = note; }
 
-    public void cleanVariables(){
+    public void cleanVariables() {
         author = "";
         title = "";
         bookTitle = "";
@@ -103,11 +103,13 @@ public class ConferencePaperReferenceBean {
 
     }
 
-    public void copyEdit(ConferencePaperReference paper){
-        if(paper != null)
+    public void copyEdit(ConferencePaperReference paper) {
+        if (paper != null)
             conferencePaperReference = new ConferencePaperReference(paper.getId(), paper.getTitle(), paper.getYear(), paper.getMonth(), paper.getNote(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(), paper.getNumber(), paper.getSeries(),
                     paper.getPublisher(), paper.getVolume(), paper.getAddress(), paper.getPages(), paper.getOrganization());
     }
 
-    public ConferencePaperReference create(){ return new ConferencePaperReference(title, year, month, note, author, bookTitle, editor, number, series, publisher, volume, address, pages, organization); }
+    public ConferencePaperReference create() {
+        return new ConferencePaperReference(title, year, month, note, author, bookTitle, editor, number, series, publisher, volume, address, pages, organization);
+    }
 }

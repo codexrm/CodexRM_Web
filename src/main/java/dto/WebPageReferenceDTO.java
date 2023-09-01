@@ -19,11 +19,19 @@ public class WebPageReferenceDTO extends ReferenceDTO {
         this.url = url;
     }
 
-    public String getAuthor() { return author; }
+    public String getAuthor() {
+        return author;
+    }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-    public String getUrl() { return url; }
+    public String getUrl() {
+        return url;
+    }
 
-    public void setUrl(String url) { this.url = url; }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

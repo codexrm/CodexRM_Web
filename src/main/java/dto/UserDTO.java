@@ -18,8 +18,7 @@ public class UserDTO {
     private boolean enabled;
     private List<String> roles;
 
-
-    public UserDTO(){ }
+    public UserDTO() {}
 
     public UserDTO(String accessToken, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate, Integer id, String username, String email, String name, String lastName,
                    boolean enabled, List<String> roles) {
@@ -36,51 +35,97 @@ public class UserDTO {
         this.roles = roles;
     }
 
-    public String getAccessToken() { return token; }
+    public String getAccessToken() {
+        return token;
+    }
 
-    public void setAccessToken(String accessToken) { this.token = accessToken; }
+    public void setAccessToken(String accessToken) {
+        this.token = accessToken;
+    }
 
-    public String getTokenType() { return type; }
+    public String getTokenType() {
+        return type;
+    }
 
-    public void setTokenType(String tokenType) { this.type = tokenType; }
+    public void setTokenType(String tokenType) {
+        this.type = tokenType;
+    }
 
-    public String getRefreshToken() { return refreshToken; }
+    public String getRefreshToken() {
+        return refreshToken;
+    }
 
-    public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 
-    public Date getTokenExpirationDate() { return tokenExpirationDate; }
+    public Date getTokenExpirationDate() {
+        return tokenExpirationDate;
+    }
 
-    public void setTokenExpirationDate(Date tokenExpirationDate) { this.tokenExpirationDate = tokenExpirationDate; }
+    public void setTokenExpirationDate(Date tokenExpirationDate) {
+        this.tokenExpirationDate = tokenExpirationDate;
+    }
 
-    public Date getRefreshTokenExpirationDate() { return refreshTokenExpirationDate; }
+    public Date getRefreshTokenExpirationDate() {
+        return refreshTokenExpirationDate;
+    }
 
     public void setRefreshTokenExpirationDate(Date refreshTokenExpirationDate) { this.refreshTokenExpirationDate = refreshTokenExpirationDate; }
 
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
-    public void setId(Integer id) { this.id = id; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
-    public void setUsername(String username) { this.username = username; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getLastName() { return lastName; }
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public boolean isEnabled() { return enabled; }
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-    public void setEnabled(boolean enabled) { this.enabled = enabled; }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-    public List<String> getRoles() { return roles; }
+    public List<String> getRoles() {
+        return roles;
+    }
 
-    public void setRoles(List<String> roles) { this.roles = roles; }
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }

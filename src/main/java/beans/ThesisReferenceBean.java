@@ -43,7 +43,7 @@ public class ThesisReferenceBean {
 
     public void setType(String type) { ThesisReferenceBean.type = type; }
 
-    public  String getAddress() { return address; }
+    public String getAddress() { return address; }
 
     public void setAddress(String address) { ThesisReferenceBean.address = address; }
 
@@ -55,7 +55,7 @@ public class ThesisReferenceBean {
 
     public void setNote(String note) { ThesisReferenceBean.note = note; }
 
-    public void cleanVariables(){
+    public void cleanVariables() {
         author = "";
         title = "";
         school = "";
@@ -66,16 +66,18 @@ public class ThesisReferenceBean {
         note = "";
     }
 
-    public void copyEdit(ThesisReference thesis){
-        if(thesis != null)
+    public void copyEdit(ThesisReference thesis) {
+        if (thesis != null)
             thesisReference = new ThesisReference(thesis.getId(), thesis.getTitle(), thesis.getYear(), thesis.getMonth(), thesis.getNote(), thesis.getAuthor(), thesis.getSchool(), thesis.getType(), thesis.getAddress());
     }
 
-    public ThesisReference create(){ return new ThesisReference(title, year, month, note, author, school, type, address); }
+    public ThesisReference create() {
+        return new ThesisReference(title, year, month, note, author, school, type, address);
+    }
 
 
     public String infoThesisType(String type) {
-        switch (type){
+        switch (type) {
             case "MASTERS":
                 return "Maestría";
             case "PHD":
