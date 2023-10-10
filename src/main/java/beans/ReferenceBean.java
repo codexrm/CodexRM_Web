@@ -4,6 +4,7 @@ import entity.*;
 import enums.Format;
 import model.ExportR;
 import model.ImportR;
+import model.ImportRis;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import org.primefaces.PrimeFaces;
@@ -34,6 +35,7 @@ public class ReferenceBean {
 
     private static ExportR exportR = new ExportR();
     private static ImportR importR = new ImportR();
+    private static ImportRis importRis = new ImportRis();
 
     private static File exportFile = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "exported References.txt");
     private static String path = "";
@@ -122,6 +124,10 @@ public class ReferenceBean {
     public void setImportR(ImportR importR) {
         ReferenceBean.importR = importR;
     }
+
+    public ImportRis getImportRis() { return importRis; }
+
+    public void setImportRis(ImportRis importRis) { ReferenceBean.importRis = importRis; }
 
     public File getExportFile() {
         return exportFile;
@@ -333,6 +339,10 @@ public class ReferenceBean {
     public ArrayList<Reference> importReferences() throws IOException, TokenMgrException, ParseException {
         File importFile = new File(path);
         if (importFile.exists() && importFile.isFile()) {
+
+            if(format.equals("Ris")){
+                return importRis.readFile(path);
+            }
             return importR.importReferences(path, format);
         } else {
             return null;

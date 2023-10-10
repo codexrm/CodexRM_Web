@@ -50,7 +50,7 @@
                             <h:outputText value="#{user.username}"/>
                         </p:column>
 
-                        <p:column headerText="E-mail" filterBy="#{user.email}" sortBy="#{user.email}">
+                        <p:column headerText="Correo electrónico" filterBy="#{user.email}" sortBy="#{user.email}">
                             <h:outputText value="#{user.email}"/>
                         </p:column>
 
@@ -105,7 +105,7 @@
                             </div>
 
                             <div class="p-field">
-                                <p:outputLabel for="email">E-mail</p:outputLabel>
+                                <p:outputLabel for="email">Correo electrónico</p:outputLabel>
                                 <p:inputText id="email" value="#{managerBean.userBean.email}" maxlength="50"
                                              required="true">
                                     <f:validateRegex
@@ -153,7 +153,7 @@
                                                   value="#{managerBean.userBean.roles}">
                                     <f:selectItem itemLabel="Administrador" itemValue="ROLE_ADMIN"/>
                                     <f:selectItem itemLabel="Usuario" itemValue="ROLE_USER"/>
-                                    <f:selectItem itemLabel="Gerente" itemValue="ROLE_MANAGER"/>
+                                    <f:selectItem itemLabel="Directivo" itemValue="ROLE_MANAGER"/>
                                     <f:selectItem itemLabel="Auditor" itemValue="ROLE_AUDITOR"/>
                                 </p:selectManyMenu>
                             </div>
@@ -213,7 +213,7 @@
                             </div>
 
                             <div class="p-field">
-                                <strong>E-mail: </strong>
+                                <strong>Correo electrónico: </strong>
                                 <p:outputLabel>#{managerBean.userBean.user.email}</p:outputLabel>
                             </div>
 
@@ -264,7 +264,7 @@
                             </div>
 
                             <div class="p-field">
-                                <p:outputLabel for="emailE">E-mail</p:outputLabel>
+                                <p:outputLabel for="emailE">Correo electrónico</p:outputLabel>
                                 <p:inputText id="emailE" value="#{managerBean.userBean.user.email}" maxlength="50"
                                              required="true">
                                     <f:validateRegex
@@ -304,7 +304,7 @@
                                                   value="#{managerBean.userBean.user.roles}">
                                     <f:selectItem itemLabel="Administrador" itemValue="ROLE_ADMIN"/>
                                     <f:selectItem itemLabel="Usuario" itemValue="ROLE_USER"/>
-                                    <f:selectItem itemLabel="Gerente" itemValue="ROLE_MANAGER"/>
+                                    <f:selectItem itemLabel="Directivo" itemValue="ROLE_MANAGER"/>
                                     <f:selectItem itemLabel="Auditor" itemValue="ROLE_AUDITOR"/>
                                 </p:selectManyMenu>
                             </div>

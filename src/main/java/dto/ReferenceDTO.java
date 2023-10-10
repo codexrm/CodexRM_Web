@@ -3,15 +3,16 @@ package dto;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({@JsonSubTypes.Type(value = ArticleReferenceDTO.class, name = "articleDTO"),
-        @JsonSubTypes.Type(value = BookReferenceDTO.class, name = "bookDTO"),
-        @JsonSubTypes.Type(value = BookSectionReferenceDTO.class, name = "bookSectionDTO"),
-        @JsonSubTypes.Type(value = ThesisReferenceDTO.class, name = "thesisDTO"),
-        @JsonSubTypes.Type(value = BookLetReferenceDTO.class, name = "bookLetDTO"),
-        @JsonSubTypes.Type(value = ConferencePaperReferenceDTO.class, name = "paperDTO"),
-        @JsonSubTypes.Type(value = WebPageReferenceDTO.class, name = "webPageDTO"),
-        @JsonSubTypes.Type(value = ConferenceProceedingsReferenceDTO.class, name = "proceedingsDTO")})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "referenceType")
+@JsonSubTypes({@JsonSubTypes.Type(value = ArticleReferenceDTO.class, name = "ArticleReferenceDTO"),
+        @JsonSubTypes.Type(value = BookReferenceDTO.class, name = "BookReferenceDTO"),
+        @JsonSubTypes.Type(value = BookSectionReferenceDTO.class, name = "BookSectionReferenceDTO"),
+        @JsonSubTypes.Type(value = ThesisReferenceDTO.class, name = "ThesisReferenceDTO"),
+        @JsonSubTypes.Type(value = BookLetReferenceDTO.class, name = "BookLetReferenceDTO"),
+        @JsonSubTypes.Type(value = ConferencePaperReferenceDTO.class, name = "ConferencePaperReferenceDTO"),
+        @JsonSubTypes.Type(value = WebPageReferenceDTO.class, name = "WebPageReferenceDTO"),
+        @JsonSubTypes.Type(value = ConferenceProceedingsReferenceDTO.class, name = "ConferenceProceedingsReferenceDTO")})
+
 public class ReferenceDTO {
 
     protected String title;

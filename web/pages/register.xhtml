@@ -47,8 +47,8 @@
                                     <div class="form-group">
                                         <p:inputText class="form-control text-left" id="e-mail"
                                                      value="#{managerBean.userBean.email}" maxlength="50"
-                                                     placeholder="E-mail"
-                                                     required="true" requiredMessage="Campo e-mail requerido"
+                                                     placeholder="Correo electrónico"
+                                                     required="true" requiredMessage="Campo cooreo electrónico requerido"
                                                      validatorMessage="Dirección de correo erronea">
                                             <f:validateRegex
                                                     pattern="[\w\.-]*[a-zA-Z8-9_]@[\w\.-]*[a-zA-Z8-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]+$"/>
@@ -88,7 +88,7 @@
                                                          ajax="" actionListener="#{managerBean.singup}"/>
                                     </div>
                                     <div class="text-center mt-4 font-weight-light">
-                                        Ya tienes una cuenta? <p:link outcome="/pages/login.faces" value="Log in"/>
+                                        Ya tienes una cuenta? <p:link outcome="/pages/login.faces" value="Iniciar Sesión"/>
                                     </div>
                                 </h:form>
                             </div>

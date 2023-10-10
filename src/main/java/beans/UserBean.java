@@ -113,7 +113,7 @@ public class UserBean {
                     break;
 
                 case "ROLE_MANAGER":
-                    roleList.add("Gerente");
+                    roleList.add("Directivo");
                     break;
 
                 case "ROLE_AUDITOR":
