@@ -1,1 +1,3 @@
 # CodexRM_Web
+Gestor de Referencias Bibliograficas web. Encargado de gestionar los siguientes tipos de referencias bibliográficas: artículo, libro, sección de libro, folleto, actas de congreso, tesis, documento de sesión y páginas web. Brinda, además, las funcionalidades de exportar/importar dichas referencias en los formatos RIS y BibTeX. Almacena toda la información manejada por el usuario de manera remota. Permite el filtrar, paginar y ordenar el listado de referencias bibliográficas bajo determinados criterios.
+Cuenta con un módulo de administración, donde se autoriza a un usuario con rol administrador gestionar la informcación referente a los usuarios registrados en el sistema. 
