@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>6.2.2</version>
+            <version>6.2.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
@@ -124,7 +124,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>6.1.4</version>
+            <version>6.1.5</version>
         </dependency>
 
         <dependency>
